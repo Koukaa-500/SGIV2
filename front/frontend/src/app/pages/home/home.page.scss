@@ -1,10 +1,14 @@
 ion-content {
-  --background: #121212; /* Adjust background color as needed */
+  
+  --background: url(../../../assets/images/backgroundimage.png);
+    --background: no-repeat;
+    --background: 100%; 
+    width: 100%;/* Adjust background color as needed */
 }
-.stock-list {
+.product-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  padding : 10px;
 }
 .header-card {
   background-color: #1c1c1c;
@@ -26,14 +30,13 @@ ion-content {
   justify-content: space-between;
   position: relative;
   background-color: #00bfa5;
+  margin-left: 10px;
 }
-h1, h2, h3 {
+h1, h2, h3,h6 {
   margin: 0;
 }
 
-p {
-  margin: 4px 0;
-}
+
 
 
 
@@ -45,6 +48,7 @@ p {
   margin: 0;
   padding: 0;
   width: 5rem;
+  margin-left: 4rem;
 }
 
 
@@ -69,10 +73,62 @@ p {
 }
 
 .stock-card {
-  width: 200px;
+  width: 3500px;
   margin: 10px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  width: max-content; /* Ensure the container fits all the cards in a single line */
+  animation: scroll 10s linear infinite; /* Increase the speed by shortening the duration */
+}
+
+.stock-cardd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 200px;
+  height: 100px; /* Set the height to 100px */
+  margin: 10px;
+  
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #00bfa5;
+}
+
+.col {
+  flex: 1;
+  text-align: left;
+}
+
+.symbol, .price, .change {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.symbol{
+  width: 1rem;
+}
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-200px * 6));
+  }
+}
+
+

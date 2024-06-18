@@ -1,3 +1,4 @@
+
 <ion-header>
   <ion-toolbar>
     <ion-title>Marché</ion-title>
@@ -8,20 +9,38 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div class="header-card">
+  <!-- <div class="header-card">
     <div class="ion-text-center">
       <img src="assets/avatar.png" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%;"/>
-      <h2>Welcome, [display_name]</h2>
-      <p>Your account Details are below.</p>
+      <h2>Welcome {{name}}</h2>
+      <h4>Your account Details are below.</h4>
       <h1>$25,202</h1>
     </div>
+  </div> -->
+  <div class="carousel-container">
+    <div class="carousel">
+      <div *ngFor="let stock of stocks" class="row stock-cardd" [ngStyle]="{'color': stock.color}">
+        <div class="col symbol">
+          <p>{{ stock.symbol }}</p>
+        </div>
+        <div class="col price">
+          <h6>{{ stock.price | currency }}</h6>
+        </div>
+        <div class="col change">
+          <h6> {{ stock.change | number:'1.2-2' }}%</h6>
+        </div>
+        
+        
+      </div>
+    </div>
   </div>
-
+  
+  
   <div class="product-list">
     <div *ngFor="let stock of stocks" class="stock-card" [ngStyle]="{'color': stock.color}">
-      <h3>{{ stock.symbol }}</h3>
-      <h1>{{ stock.price | currency }}</h1>
-      <p>Change: {{ stock.change | number:'1.2-2' }}%</p>
+      <h2>{{ stock.symbol }}</h2>
+      <h3>{{ stock.price | currency }}</h3>
+      <h4>Change: {{ stock.change | number:'1.2-2' }}%</h4>
       <div class="button-container">
         <button (click)="buyProduct(stock)" class="buy-button">
           <img src="../../../assets/images/buy.png" alt="Buy">
