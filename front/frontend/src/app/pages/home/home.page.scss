@@ -1,0 +1,78 @@
+ion-content {
+  --background: #121212; /* Adjust background color as needed */
+}
+.stock-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.header-card {
+  background-color: #1c1c1c;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  color: white;
+}
+
+
+.stock-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 400px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  background-color: #00bfa5;
+}
+h1, h2, h3 {
+  margin: 0;
+}
+
+p {
+  margin: 4px 0;
+}
+
+
+
+.buy-button,
+.sell-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  width: 5rem;
+}
+
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 8rem;
+  top: 3rem;
+}
+.button-container button {
+  margin-bottom: 0.4rem;
+}
+
+.button-container button:last-child {
+  margin-bottom: 0;
+}
+
+.stock-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stock-card {
+  width: 200px;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

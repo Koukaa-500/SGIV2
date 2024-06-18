@@ -1,0 +1,124 @@
+.login-bg {
+    background-image: url(../../../../assets/images/backgroundimage.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    top:0;
+    padding:16px;
+  }
+  
+  .logo-container {
+    margin-top: 16px; /* Adjust this value to reduce or increase the top margin */
+  }
+  .logo {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .login-content {
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+  
+    .welcome-text {
+      font-size: 2em;
+      color: white;
+    }
+  
+    .login-description {
+      color: #bbbbbb;
+      margin-bottom: 20px;
+    }
+  
+    .input-field {
+      --background: #373A40;
+      --color: white;
+      margin-bottom: 20px;
+      border-radius: 10px;
+  
+      ion-label {
+        color: #bbbbbb;
+      }
+  
+      ion-input {
+        color: white;
+        --placeholder-color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+  
+      .forgetPassword {
+        color: #bbbbbb;
+        padding: 0;
+        text-decoration: none;
+        --background: none;
+        --border: none;
+       
+      }
+  
+      .login-button {
+        width: 120px;
+        height: 50px;
+        --border-radius: 30px;
+        --background: #00bfa5;
+        text-transform:capitalize; /* Ensure text is lowercase */
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 1rem;
+      }
+    }
+  
+    .register {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+  
+      p {
+        color: white;
+        margin: 0 8px 0 0;
+      }
+  
+      .create-button {
+        color: #00bfa5;
+        --background: none;
+        --border: none;
+      }
+  
+      ion-icon {
+        color: #00bfa5;
+        font-size: 1.2em;
+      }
+    }
+  
+    .guest-button {
+      width: 100%;
+      --border-radius: 30px;
+      --background: #333;
+      --color: #00bfa5;
+    }
+  }
+  
+  .hide-password {
+    position: relative;
+  }
+  
+  .hide-password::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 2px;
+    background-color: #000;
+    /* Adjust the slash style as needed */
+  }

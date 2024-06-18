@@ -1,0 +1,31 @@
+<ion-content>
+  <div class="edit-profile-card">
+    <ion-card-content>
+      <ion-avatar class="profile-avatar">
+        <!-- <img [src]="editProfileUsersRecord?.photoUrl || 'assets/default-avatar.png'" /> -->
+      </ion-avatar>
+      <ion-button expand="block" fill="clear" type="file" class="change-photo-button">
+        Change Photo
+      </ion-button>
+
+      <ion-item class="input-field">
+        <ion-label position="floating" >Your Name</ion-label>
+        <ion-input type="text" [(ngModel)]="name"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-field">
+        <ion-label position="floating" >Email Address</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-field">
+        <ion-label position="floating" >Your Phone Number</ion-label>
+        <ion-input type="string" [(ngModel)]="phoneNumber"></ion-input>
+      </ion-item>
+
+      
+
+      <ion-button class="register-button" (click)="saveProfileChanges()">Save Changes</ion-button>
+    </ion-card-content>
+  </div>
+</ion-content>

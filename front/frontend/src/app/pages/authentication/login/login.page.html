@@ -1,0 +1,36 @@
+<ion-content [fullscreen]="true">
+  <div class="login-bg">
+    <div class="logo-container">
+      <img src="../../../../assets/images/logo.png" class="logo" />
+      
+    </div>
+    <div class="login-content">
+      <h1 class="welcome-text">Welcome back</h1>
+      <p class="login-description">Login to access your account below.</p>
+
+      <ion-item class="input-field">
+        <ion-label position="floating" >Email Address</ion-label>
+        <ion-input type="email" placeholder="Enter your email..." [(ngModel)]="email"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-field">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="{{ showPassword ? 'password' : 'text'}}" placeholder="Enter your password..." [(ngModel)]="password"></ion-input>
+        <ion-icon name="{{ showPassword ? 'eye-off-outline' : 'eye-outline' }}" slot="end" class="eye-icon" style="margin-top: 15px;" (click)="toggleShowPassword()"></ion-icon>
+      </ion-item>
+      
+
+      <div class="button-group">
+        <ion-button fill="clear" class="forgetPassword" (click)="navigateToForgotPassword()" style="font-weight: 2rem;">Forgot Password?</ion-button>
+        <ion-button class="login-button" (click)="login()">Login</ion-button>
+      </div>
+
+      <div class="register">
+        <p>Don't have an account?</p>
+        <ion-button fill="clear" routerLink="/signup" style="color: #00bfa5;">Create</ion-button>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </div>
+
+    </div>
+  </div>
+</ion-content>
