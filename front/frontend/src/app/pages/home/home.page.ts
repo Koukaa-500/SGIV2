@@ -14,11 +14,17 @@ export class HomePage{
   // stocks: any[] = [];
   stockSymbols: string[] = ['AAPL', 'GOOGL', 'MSFT'];
   stocks = [
-    { symbol: 'AAPL', price: 150, change: 1.5, color: 'green' },
+    { symbol: 'AAPL', price: 150, change: +1.5, color: 'green' },
     { symbol: 'GOOGL', price: 2700, change: -0.5, color: 'red' },
-    { symbol: 'AMZN', price: 3300, change: 2.1, color: 'green' },
+    { symbol: 'AMZN', price: 3300, change: +2.1, color: 'green' },
     { symbol: 'MSFT', price: 290, change: -1.2, color: 'red' },
-    { symbol: 'TSLA', price: 620, change: 3.0, color: 'green' },
+    { symbol: 'TSLA', price: 620, change: +3.0, color: 'green' },
+    { symbol: 'FB', price: 340, change: -0.7, color: 'red' },
+    { symbol: 'AAPL', price: 150, change: +1.5, color: 'green' },
+    { symbol: 'GOOGL', price: 2700, change: -0.5, color: 'red' },
+    { symbol: 'AMZN', price: 3300, change: +2.1, color: 'green' },
+    { symbol: 'MSFT', price: 290, change: -1.2, color: 'red' },
+    { symbol: 'TSLA', price: 620, change: +3.0, color: 'green' },
     { symbol: 'FB', price: 340, change: -0.7, color: 'red' }
   ];
   newStocks = [...this.stocks, ...this.stocks]; // Duplicate stocks for infinite scroll
@@ -28,7 +34,7 @@ export class HomePage{
   ngOnInit(): void {
     this.intervalId = setInterval(() => {
       this.updateStockPrices();
-    }, 2000);
+    }, 1000);
     // this.loadStockData();
     // setInterval(() => {
     //   this.loadStockData();
@@ -81,8 +87,11 @@ export class HomePage{
 
       if (stock.change > 0) {
         stock.color = 'green';
-      } else {
+      } else if(stock.change< 0){
         stock.color = 'red';
+      }
+      else{
+        stock.color = 'yellow'
       }
     });
   }

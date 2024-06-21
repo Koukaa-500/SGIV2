@@ -1,14 +1,15 @@
 ion-content {
-  
-  --background: url(../../../assets/images/backgroundimage.png);
-    --background: no-repeat;
-    --background: 100%; 
+  --background: black;
+  // --background: url(../../../assets/images/backgroundimage.png);
+  //   --background: no-repeat;
+  //   --background: 100%; 
     width: 100%;/* Adjust background color as needed */
 }
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  padding : 10px;
+  
+  width: 100%;
 }
 .header-card {
   background-color: #1c1c1c;
@@ -29,14 +30,16 @@ ion-content {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  background-color: #00bfa5;
+  background-color: #D0E7DA;
   margin-left: 10px;
 }
 h1, h2, h3,h6 {
   margin: 0;
 }
 
-
+p{
+  width: 50px;
+}
 
 
 
@@ -73,8 +76,8 @@ h1, h2, h3,h6 {
 }
 
 .stock-card {
-  width: 3500px;
-  margin: 10px;
+  width: 100vw;
+  margin: 10px 0px 0px 0px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -91,7 +94,7 @@ h1, h2, h3,h6 {
 .carousel {
   display: flex;
   width: max-content; /* Ensure the container fits all the cards in a single line */
-  animation: scroll 10s linear infinite; /* Increase the speed by shortening the duration */
+  // animation: scroll 10s linear infinite; /* Increase the speed by shortening the duration */
 }
 
 .stock-cardd {
@@ -105,7 +108,7 @@ h1, h2, h3,h6 {
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #00bfa5;
+  background-color: #D0E7DA;
 }
 
 .col {
@@ -119,8 +122,8 @@ h1, h2, h3,h6 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.symbol{
-  width: 1rem;
+.col .symbol{
+  width: 50px;
 }
 @keyframes scroll {
   0% {

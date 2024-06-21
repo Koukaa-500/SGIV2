@@ -20,14 +20,14 @@
   <div class="carousel-container">
     <div class="carousel">
       <div *ngFor="let stock of stocks" class="row stock-cardd" [ngStyle]="{'color': stock.color}">
-        <div class="col symbol">
-          <p>{{ stock.symbol }}</p>
+        <div class="col-md-10 symbol">
+          {{ stock.symbol }}
         </div>
-        <div class="col price">
-          <h6>{{ stock.price | currency }}</h6>
+        <div class="col-md-3 price">
+          {{ stock.price | currency }}
         </div>
-        <div class="col change">
-          <h6> {{ stock.change | number:'1.2-2' }}%</h6>
+        <div class="col-md-3 change">
+          {{ stock.change | number:'1.2-2' }}%
         </div>
         
         

@@ -31,7 +31,7 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.loadUserProfile();
   }
-
+ 
   showEditProfile(){
     this.router.navigate(['/edit-profile'])
     
