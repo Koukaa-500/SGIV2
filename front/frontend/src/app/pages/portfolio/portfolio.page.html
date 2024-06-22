@@ -1,8 +1,32 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{title}}</ion-title>
+    <ion-title>{{ title }}</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Stock</th>
+            <th>Solde</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts">
+            <td>{{ account.name }}</td>
+            <td>{{ account.stock }}</td>
+            <td>{{ account.solde }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

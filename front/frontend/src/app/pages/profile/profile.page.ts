@@ -13,7 +13,7 @@ export class ProfilePage implements OnInit {
   name: string | undefined;
   email: string | undefined;
   phoneNumber: string | undefined;
-  image: any | undefined;
+  image: string | undefined;
   isLightModeEnabled = true;
   edit : boolean = false
   constructor(
@@ -40,7 +40,9 @@ export class ProfilePage implements OnInit {
   changePassword() {
     this.router.navigate(['/forgetpassword'])
   }
-
+  addAccount(){
+    this.router.navigate(['/add-account'])
+  }
   onSubmit() {
     // Handle opening notification settings
   }
@@ -65,7 +67,7 @@ export class ProfilePage implements OnInit {
         this.name = data.name;
         this.email = data.email;
         this.phoneNumber = data.phoneNumber;
-        this.image = this.authService.getUserProfileImageUrl(data.id)
+        this.image = data.image;
         console.log(this.image);
          // Assuming the backend returns the image URL
         console.log('User profile loaded successfully:', data);

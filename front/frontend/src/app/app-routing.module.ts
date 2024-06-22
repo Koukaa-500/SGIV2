@@ -49,10 +49,16 @@ const routes: Routes = [
   {
     path :'edit-profile',
     loadChildren: () => import('./pages/profile/edit-profile/edit-profile.module').then(m =>m.EditProfilePageModule)
-  },
+  }
+  ,
   { path: 'buy/:symbol', loadChildren: () => import('./pages/home/buy/buy.module').then(m => m.BuyPageModule) },
   { path: 'sell/:symbol', loadChildren: () => import('./pages/home/sell/sell.module').then(m => m.SellPageModule) },
   { path: 'intraday/:symbol', loadChildren: () => import('./pages/home/intraday/intraday.module').then(m => m.IntradayPageModule) },
+  
+  {
+    path: 'add-account',
+    loadChildren: () => import('./pages/profile/add-account/add-account.module').then( m => m.AddAccountPageModule)
+  }
 ];
 @NgModule({
   imports: [
