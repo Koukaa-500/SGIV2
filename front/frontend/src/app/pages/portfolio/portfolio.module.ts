@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { PortfolioPageRoutingModule } from './portfolio-routing.module';
 
 import { PortfolioPage } from './portfolio.page';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    HttpClientModule,
     PortfolioPageRoutingModule
   ],
   declarations: [PortfolioPage]

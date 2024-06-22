@@ -28,6 +28,7 @@ export class AuthenticationService {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
       map((response: any) => {
         this.storage.set('token', response.mytoken);
+        console.log(response.mytoken);
         return response;
       })
     );

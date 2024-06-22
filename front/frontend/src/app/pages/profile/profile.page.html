@@ -12,7 +12,7 @@
       <div class="profile-info-container">
         <div class="profile-info">
           <div class="profile-image">
-            <img src="../../../assets/images/userimage.png" alt="Profile Image" *ngIf="image" />
+            <img [src]="'http://localhost:3000/uploads/' + image" alt="Profile Image" *ngIf="image"/>
           </div>
           <h2>{{name}}</h2>
           <p>{{email}}</p>
