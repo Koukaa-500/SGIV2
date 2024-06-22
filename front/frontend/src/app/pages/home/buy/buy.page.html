@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar class="bar">
+    <ion-title>{{ stockData?.symbol }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="custom-content">
+  <!-- Balance Card -->
+  <ion-card class="balance-card">
+    <ion-card-header>
+      <ion-card-title>Stock: {{stock }}</ion-card-title>
+      <ion-card-subtitle>{{stockData?.price}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row class="card-content-row">
+        <ion-col>Balance : {{balance}}$</ion-col>
+        <ion-col text-right>05/25</ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Choose an Account Select -->
+  <div class="custom-select-container">
+    <label for="account-select" class="custom-select-label">Choose an Account</label>
+    <select id="account-select" class="custom-select" [(ngModel)]="selectedAccount">
+      <option value="account1">Account ****2010</option>
+      <option value="account2">Account ****2011</option>
+      <option value="account3">Account ****2012</option>
+    </select>
+  </div>
+
+  <!-- Type Select -->
+  <div class="custom-select-container">
+    <label for="type-select" class="custom-select-label">Type</label>
+    <select id="type-select" class="custom-select" [(ngModel)]="stockData.type">
+      <option value="Tech">Tech</option>
+      <option value="E-Commerce">E-Commerce</option>
+      <option value="Automotive">Automotive</option>
+      <option value="Social Media">Social Media</option>
+      <!-- Add more options as needed -->
+    </select>
+  </div>
+
+  <!-- Validity Controls -->
+  <ion-item class="custom-item">
+    <ion-label class="custom-select-label">Validity</ion-label>
+    <ion-label>{{ validity }} days</ion-label>
+    <ion-button (click)="decrementValidity()">-</ion-button>
+    <ion-button (click)="incrementValidity()">+</ion-button>
+  </ion-item>
+
+  <!-- Quantity Controls -->
+  <ion-item class="custom-item">
+    <ion-label class="custom-select-label">Quantity</ion-label>
+    <ion-label>{{ quantity }}</ion-label>
+    <ion-button (click)="decrementQuantity()">-</ion-button>
+    <ion-button (click)="incrementQuantity()">+</ion-button>
+  </ion-item>
+
+  <!-- Display updated account balance after transaction -->
+  <ion-row class="balance-row">
+    <ion-col>Your new balance is:</ion-col>
+    <ion-col text-right>{{cost}}$</ion-col>
+  </ion-row>
+
+  <!-- Buy button -->
+  <ion-button class="send-transfer-btn" (click)="buy(stockData, quantity)">Buy</ion-button>
+
+  <!-- Information text -->
+  <p class="info-text">Tap above to complete transfer</p>
+</ion-content>

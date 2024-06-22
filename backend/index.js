@@ -9,8 +9,9 @@ app.use(bodyParser.json()); // Parse JSON bodies
 
 // Your routes go here
 const userRoute = require('./routes/user');
+const productRoute = require('./routes/product')
 app.use('/user', userRoute);
-
+app.use('/product',productRoute)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

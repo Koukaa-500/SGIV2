@@ -5,6 +5,9 @@ ion-content {
   //   --background: 100%; 
     width: 100%;/* Adjust background color as needed */
 }
+.bar{
+  --background: #D0E7DA;;
+}
 .product-list {
   display: flex;
   flex-wrap: wrap;
@@ -33,7 +36,7 @@ ion-content {
   background-color: #D0E7DA;
   margin-left: 10px;
 }
-h1, h2, h3,h6 {
+h1, h2, h3,h6,h4 {
   margin: 0;
 }
 
@@ -51,7 +54,7 @@ p{
   margin: 0;
   padding: 0;
   width: 5rem;
-  margin-left: 4rem;
+  margin-left: 7rem;
 }
 
 
@@ -94,7 +97,7 @@ p{
 .carousel {
   display: flex;
   width: max-content; /* Ensure the container fits all the cards in a single line */
-  // animation: scroll 10s linear infinite; /* Increase the speed by shortening the duration */
+  animation: scroll 10s linear infinite; /* Increase the speed by shortening the duration */
 }
 
 .stock-cardd {

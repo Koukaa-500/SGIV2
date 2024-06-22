@@ -1,0 +1,110 @@
+.custom-toolbar {
+    --background: #1e1e1e;
+    
+  }
+  .sell-header {
+    --ion-color-base: red; /* Set to your desired green color */
+  }
+  .bar{
+    --background : #C80036;
+  }
+  .custom-content {
+    
+    color: #ffffff;
+    padding: 16px;
+    --background: #1e1e1e;
+    
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .balance-card {
+    background: linear-gradient(to right, #ed9078, #00bfa5);
+    color: #ffffff;
+    border-radius: 12px;
+    margin: 16px 0 0 16px;
+    width: 20rem;
+  }
+  
+  .card-content-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .change-account-btn {
+    --background: #333333;
+    --background-focused: #444444;
+    --background-hover: #444444;
+    --background-activated: #555555;
+    color: #ffffff;
+    margin: 16px 0;
+  }
+  
+  .custom-item {
+    --background: #333333;
+    --color: #ffffff;
+    margin: 16px 0 0 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px; border-radius: 8px;
+    
+    width: 20rem;
+  }
+  
+  .balance-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0 0 16px;
+    color: white;
+  }
+  
+  .send-transfer-btn {
+    width: 20rem;
+    height: 50px;
+    --border-radius: 12px;
+    --background: #C80036;
+    text-transform:capitalize; /* Ensure text is lowercase */
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 16px 0 0 16px;
+    font-size: 1rem;
+  }
+  
+  .info-text {
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    margin-top: 8px;
+  }
+
+
+  .custom-select-container {
+    margin: 16px 0 0 16px;
+  }
+  
+  .custom-select-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-size: 16px;
+  }
+  
+  .custom-select {
+    width: 20rem;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #333333;
+    color: #ffffff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2 5l6 6 6-6"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px 12px;
+  }
+  
+  .custom-select:focus {
+    border-color: #888888;
+    outline: none;
+  }
+  

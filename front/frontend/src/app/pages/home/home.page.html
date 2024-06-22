@@ -1,6 +1,6 @@
 
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="bar">
     <ion-title>Marché</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
@@ -37,15 +37,16 @@
   
   
   <div class="product-list">
-    <div *ngFor="let stock of stocks" class="stock-card" [ngStyle]="{'color': stock.color}">
+    <div *ngFor="let stock of stocks" class="stock-card" [ngStyle]="{'color': stock.color}" (click)="goToIntraday(stock.symbol)" >
       <h2>{{ stock.symbol }}</h2>
       <h3>{{ stock.price | currency }}</h3>
       <h4>Change: {{ stock.change | number:'1.2-2' }}%</h4>
+      <h2>{{ stock.quantity }}</h2>
       <div class="button-container">
-        <button (click)="buyProduct(stock)" class="buy-button">
+        <button (click)="buy(stock)" class="buy-button">
           <img src="../../../assets/images/buy.png" alt="Buy">
         </button>
-        <button (click)="sellProduct(stock)" class="sell-button">
+        <button (click)="sell(stock)" class="sell-button">
           <img src="../../../assets/images/sell.png" alt="Sell">
         </button>
       </div>
