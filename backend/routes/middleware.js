@@ -11,7 +11,6 @@ function auth(req, res, next) {
   try {
     // Verify token
     const decoded = jwt.verify(token, '1234567'); // Replace '1234567' with your actual secret key
-
     req.user = decoded; // Set user object in request
     next(); // Move to next middleware
   } catch (error) {

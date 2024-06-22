@@ -84,6 +84,7 @@ router.get('/get', auth, async (req, res) => {
         name: user.name,
         email: user.email,
         phoneNumber: user.phoneNumber,
+        image: user.image
 
       });
     } catch (error) {
