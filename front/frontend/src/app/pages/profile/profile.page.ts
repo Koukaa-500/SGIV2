@@ -40,7 +40,9 @@ export class ProfilePage implements OnInit {
   changePassword() {
     this.router.navigate(['/forgetpassword'])
   }
-
+  addAccount(){
+    this.router.navigate(['/add-account'])
+  }
   onSubmit() {
     // Handle opening notification settings
   }
