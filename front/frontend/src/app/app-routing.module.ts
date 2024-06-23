@@ -73,7 +73,16 @@ const routes: Routes = [
   {
     path: 'add-account',
     loadChildren: () => import('./pages/profile/add-account/add-account.module').then( m => m.AddAccountPageModule)
-  }
+  },
+  
+  {
+    path: 'transaction/:symbol',
+    loadChildren: () => import('./pages/home/transaction/transaction.module').then( m => m.TransactionPageModule)
+  },
+  {
+    path: 'profondeur/:symbol',
+    loadChildren: () => import('./pages/home/profondeur/profondeur.module').then( m => m.ProfondeurPageModule)
+  },
 ];
 @NgModule({
   imports: [
