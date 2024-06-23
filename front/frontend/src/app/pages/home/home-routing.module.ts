@@ -21,7 +21,16 @@ const routes: Routes = [
     path: 'sell',
     loadChildren: () => import('./sell/sell.module').then( m => m.SellPageModule)
   },
-  { path: 'buy/:symbol', component: BuyPage },
+  
+  {
+    path: 'profondeur',
+    loadChildren: () => import('./profondeur/profondeur.module').then( m => m.ProfondeurPageModule)
+  },
+  {
+    path: 'transaction',
+    loadChildren: () => import('./transaction/transaction.module').then( m => m.TransactionPageModule)
+  },
+
 
 ];
 

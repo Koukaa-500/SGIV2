@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const ProductSchema = new mongoose.Schema({
   symbol: String,
   price: Number,
+  change:Number,
   timestamp: { type: Date, default: Date.now }
 });
 

@@ -12,7 +12,7 @@
   <ion-card class="balance-card">
     <ion-card-header>
       <ion-card-title>Stock: {{stock }}</ion-card-title>
-      <ion-card-subtitle>{{stockData?.price}}</ion-card-subtitle>
+      <ion-card-subtitle>{{stockData?.price | number:'1.2-2' }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-row class="card-content-row">
