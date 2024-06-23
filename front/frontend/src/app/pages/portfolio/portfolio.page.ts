@@ -9,6 +9,8 @@ import { AccountsService } from '../../services/accounts.service'; // Adjust the
 export class PortfolioPage implements OnInit {
   title: string = 'portefeuille';
   accounts: any[] = [];
+  selectedAccount: any = null;
+  selectedStocks: any[] = [];
 
   constructor(private accountsService: AccountsService) { }
 
@@ -30,5 +32,10 @@ export class PortfolioPage implements OnInit {
     } catch (error) {
       console.error('Error:', error);
     }
+  }
+
+  selectAccount(account: any) {
+    this.selectedAccount = account;
+    this.selectedStocks = account.stock;
   }
 }

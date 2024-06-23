@@ -37,6 +37,22 @@ export class AccountsService {
       return throwError('Failed to get token');
     }
   }
+  async buyStock(payload: any): Promise<any> {
+    const token = await this.storage.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': `${token}`
+    });
+    return this.http.post('http://localhost:3000/account/buy-stock', payload, {headers}).toPromise();
+  }
+  async sellStock(payload: any): Promise<any> {
+    const token = await this.storage.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': `${token}`
+    });
+    return this.http.post('http://localhost:3000/account//sell-stock', payload, {headers}).toPromise();
+  }
   async getAccounts(): Promise<Observable<any>> {
     try {
       const token = await this.storage.get('token');

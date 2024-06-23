@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 })
 export class AddAccountPage implements OnInit {
   name: string = '';
-  stock: string ='';
   solde: number=0.0;
 
   constructor(private accountsService: AccountsService, private router: Router) { }
@@ -20,7 +19,6 @@ export class AddAccountPage implements OnInit {
   async addAccount() {
     const accountData = {
       name: this.name,
-      stock: this.stock,
       solde: this.solde
     };
 
