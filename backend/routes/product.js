@@ -5,8 +5,8 @@ const Product = require('../models/product'); // Adjust path as needed
 // POST /product/stocks - Create a new stock product
 router.post('/stocks', async (req, res) => {
   try {
-    const { symbol, price } = req.body;
-    const newStockPrice = new Product({ symbol, price });
+    const { symbol, price,change } = req.body;
+    const newStockPrice = new Product({ symbol, price,change });
     await newStockPrice.save();
     res.status(201).json({ message: 'Stock price saved successfully' });
   } catch (err) {

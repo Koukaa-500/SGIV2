@@ -12,9 +12,9 @@ import { ProductService } from 'src/app/services/product.service';
 export class HomePage implements OnInit, OnDestroy {
   name: string | undefined;
   stocks: any[] = [];
-  stockSymbols: string[] = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'FB','AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'FB'];
+  stockSymbols: string[] = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'FB'];
   intervalId: any;
-  lastSavedTime:any;
+  lastSavedTime: any;
   newStocks: any[] = [];
 
   constructor(
@@ -22,9 +22,7 @@ export class HomePage implements OnInit, OnDestroy {
     private authService: AuthenticationService,
     private router: Router,
     private navCtrl: NavController
-  ) {
-   
-  }
+  ) {}
 
   ngOnInit(): void {
     this.lastSavedTime = 0;
@@ -33,11 +31,6 @@ export class HomePage implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.updateStockPrices();
     }, 1000);
-    // this.loadStockData();
-    // setInterval(() => {
-    //   this.loadStockData();
-    // }, 300000); // Refresh every 5 minutes
-    // this.loadUserProfile();
   }
 
   ngOnDestroy() {
@@ -53,7 +46,6 @@ export class HomePage implements OnInit, OnDestroy {
       },
       (error) => {
         console.error('Error fetching user profile:', error);
-        // Handle error as needed
       }
     );
   }
@@ -69,13 +61,14 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   buy(stock: any) {
-    // Navigate to the "Product" page and pass the stock data
+    // Navigate to the "Buy" page and pass the stock data
     this.navCtrl.navigateForward(`/buy/${stock.symbol}`, {
       state: { stockData: stock }
     });
   }
 
-  sell(stock:any) {
+  sell(stock: any) {
+    // Navigate to the "Sell" page and pass the stock data
     this.navCtrl.navigateForward(`/sell/${stock.symbol}`, {
       state: { stockData: stock }
     });
@@ -84,14 +77,14 @@ export class HomePage implements OnInit, OnDestroy {
   updateStockPrices() {
     const currentTime = Date.now();
     const tenSeconds = 10000;
-  
+
     if (!this.lastSavedTime || currentTime - this.lastSavedTime >= tenSeconds) {
       this.stocks.forEach(stock => {
-        const change = (Math.random() - 0.5) * 2; // Random change between -1 and 1
+        const change = (Math.random() - 0.5) * 10; // Random change between -5 and 5
         stock.price = Math.max(0, stock.price + change); // Ensure price doesn't go negative
-  
-        // Save to database via backend API
-        this.productService.saveStockPrice(stock.symbol, stock.price).subscribe(
+
+        // Save to database via backend API (mocked here)
+        this.productService.saveStockPrice(stock.symbol, stock.price,stock.change).subscribe(
           response => {
             console.log(`Price saved successfully for ${stock.symbol}`);
           },
@@ -99,38 +92,28 @@ export class HomePage implements OnInit, OnDestroy {
             console.error(`Failed to save price for ${stock.symbol}:`, error);
           }
         );
-  
-        // Update color logic as before
+
+        // Update color logic
         stock.change = (change / stock.price) * 100;
-        if (stock.change > 0) {
-          stock.color = 'green';
-        } else if (stock.change < 0) {
-          stock.color = 'red';
-        } else {
-          stock.color = 'yellow';
-        }
+        stock.color = stock.change > 0 ? 'green' : (stock.change < 0 ? 'red' : 'yellow');
       });
-  
+
       this.lastSavedTime = currentTime;
     } else {
       this.stocks.forEach(stock => {
-        const change = (Math.random() - 0.5) * 2; // Random change between -1 and 1
+        const change = (Math.random() - 0.5) * 10; // Random change between -1 and 1
         stock.price = Math.max(0, stock.price + change); // Ensure price doesn't go negative
-  
-        // Update color logic as before
+
+        // Update color logic
         stock.change = (change / stock.price) * 100;
-        if (stock.change > 0) {
-          stock.color = 'green';
-        } else if (stock.change < 0) {
-          stock.color = 'red';
-        } else {
-          stock.color = 'yellow';
-        }
+        stock.color = stock.change > 0 ? 'green' : (stock.change < 0 ? 'red' : 'yellow');
       });
     }
   }
-  
+
   goToIntraday(symbol: string) {
-    this.router.navigate(['/intraday', symbol]);
+    this.navCtrl.navigateForward(`/intraday/${symbol}`, {
+      state: { stockData: symbol }
+    });
   }
 }

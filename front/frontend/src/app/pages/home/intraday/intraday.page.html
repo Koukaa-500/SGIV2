@@ -1,12 +1,41 @@
-<!-- stock-detail.component.html -->
 <ion-header>
-  <ion-toolbar color="success">
-    <ion-title>{{ symbol }} Stock Detail</ion-title>
+  <ion-toolbar class="bar">
+    <ion-title>{{ stock.symbol }} Stock Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div style="display: block;">
-    <canvas id="canvas"></canvas>
-  </div>
+<ion-content [fullscreen]="true" class="container" style="background-color:#1e1e1e" >
+<div>
+  <ion-card class="budget-card">
+    <ion-card-header class="budget-header">
+      <ion-card-title>{{ stock.symbol }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <h2 class="budget-amount">{{ stock.price | currency }}<span class="per-month"></span></h2>
+      <p class="budget-time"></p>
+      <p class="total-spent"><span class="spent-amount"></span></p>
+      
+      <div class="chart-container">
+        <canvas id="canvas"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <div>
+  <ion-button class="send-transfer-btnn" (click)="buy(stock)" >Buy</ion-button>
+  <ion-button class="send-transfer-btn" (click)="sell(stock)" >Sell</ion-button>
+</div>
+</div>
 </ion-content>
+
+<ion-footer class="bar">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>Intraday</ion-button>
+      <ion-button (click)="goToTransaction(stock.symbol)">Transaction</ion-button>
+      <ion-button (click)="gotToProfond()">Profond</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+

@@ -60,8 +60,8 @@ private baseUrl = 'http://127.0.0.1:3000/product/stocks'
 
     return false; // Return false if stock symbol was not found
   }
-  saveStockPrice(symbol: string, price: number) {
-    return this.http.post<any>(this.baseUrl, { symbol, price });
+  saveStockPrice(symbol: string, price: number,change:number) {
+    return this.http.post<any>(this.baseUrl, { symbol, price,change });
   }
 
 }
