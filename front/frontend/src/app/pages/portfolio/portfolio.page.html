@@ -1,63 +1,60 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>{{ title }}</ion-title>
+  <ion-toolbar class="bar">
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
-    <ion-card-content>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Stock</th>
-            <th>Solde</th>
-            <th>Select</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let account of accounts">
-            <td>{{ account.name }}</td>
-            <td>{{ account.stock.length }}</td>
-            <td>{{ account.solde }}</td>
-            <td><ion-button (click)="selectAccount(account)">View Stocks</ion-button></td>
-          </tr>
-        </tbody>
-      </table>
-    </ion-card-content>
-  </ion-card>
+<ion-content class="ion-padding" fullscreen="true">
+  <!-- Accounts Section -->
+  <div class="section">
+    <h2 class="section-title">Accounts</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Stock</th>
+          <th>Solde</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accounts">
+          <td>{{ account.name }}</td>
+          <td>{{ account.stock.length }}</td>
+          <td>{{ account.solde | currency }}</td>
+          <br>
+          <ion-button fill="outline" color="primary" (click)="selectAccount(account)">View Stocks</ion-button>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
 
-  <ion-card *ngIf="selectedAccount">
-    <ion-card-header>
-      <ion-card-title>Stocks for {{ selectedAccount.name }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Symbol</th>
-            <th>Type</th>
-            <th>Validity</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let stock of selectedStocks">
-            <td>{{ stock.name }}</td>
-            <td>{{ stock.quantity }}</td>
-            <td>{{ stock.price }}</td>
-            <td>{{ stock.symbol }}</td>
-            <td>{{ stock.type }}</td>
-            <td>{{ stock.validity }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </ion-card-content>
-  </ion-card>
+  <!-- Stock Details Section -->
+  <div *ngIf="selectedAccount" class="section">
+    <h2 class="section-title">Stocks for {{ selectedAccount.name }}</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Syb</th>
+          <th>Qte</th>
+          <th>Price</th>
+          <th>Type</th>
+          <th>Val</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of selectedStocks">
+          <td>{{ stock.symbol }}</td>
+          <td>{{ stock.quantity }}</td>
+          <td>{{ stock.price | currency }}</td>
+          <td>{{ stock.type }}</td>
+          <td>{{ stock.validity }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </ion-content>

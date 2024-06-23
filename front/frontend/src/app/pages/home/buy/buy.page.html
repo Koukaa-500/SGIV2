@@ -60,7 +60,7 @@
   <!-- Display updated account balance after transaction -->
   <ion-row class="balance-row">
     <ion-col>Your new balance is:</ion-col>
-    <ion-col text-right>{{ cost }}$</ion-col>
+    <ion-col text-right>{{ cost|number:'1.2-2' }}$</ion-col>
   </ion-row>
 
   <!-- Buy button -->

@@ -1,0 +1,42 @@
+.ion-padding {
+    padding: 24px;
+  }
+
+  .section {
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .table th,
+  .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+
+  .table td {
+    vertical-align: middle;
+  }
+
+  ion-button {
+    margin: 0 auto;
+  }
+  .bar{
+    --background : #00bfa5;
+  }
