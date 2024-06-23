@@ -16,14 +16,45 @@
             <th>Name</th>
             <th>Stock</th>
             <th>Solde</th>
-            
+            <th>Select</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let account of accounts">
             <td>{{ account.name }}</td>
-            <td>{{ account.stock }}</td>
+            <td>{{ account.stock.length }}</td>
             <td>{{ account.solde }}</td>
+            <td><ion-button (click)="selectAccount(account)">View Stocks</ion-button></td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="selectedAccount">
+    <ion-card-header>
+      <ion-card-title>Stocks for {{ selectedAccount.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Symbol</th>
+            <th>Type</th>
+            <th>Validity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stock of selectedStocks">
+            <td>{{ stock.name }}</td>
+            <td>{{ stock.quantity }}</td>
+            <td>{{ stock.price }}</td>
+            <td>{{ stock.symbol }}</td>
+            <td>{{ stock.type }}</td>
+            <td>{{ stock.validity }}</td>
           </tr>
         </tbody>
       </table>

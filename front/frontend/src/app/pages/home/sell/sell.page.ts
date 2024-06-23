@@ -2,25 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/product.service';
+import { AccountsService } from 'src/app/services/accounts.service';
 
 @Component({
   selector: 'app-sell',
   templateUrl: './sell.page.html',
   styleUrls: ['./sell.page.scss'],
 })
-export class SellPage {
+export class SellPage implements OnInit {
 
-  stock:any
+  stock: any;
   transferType: any;
   selectedAccount: any;
   quantity: any;
   stockSymbol: any;
   stockData: any;
-  validity:any;
+  validity: any;
   cost: number = 0;
-  balance : any;
-  constructor(private navCtrl: NavController,private route: ActivatedRoute , private productService: ProductService) {
-    
+  balance: any;
+  accounts: any[] = [];
+
+  constructor(
+    private navCtrl: NavController,
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private accountsService: AccountsService
+  ) {
     this.route.paramMap.subscribe(params => {
       if (params.has('symbol')) {
         const symbol = params.get('symbol');
@@ -28,6 +35,7 @@ export class SellPage {
       }
     });
   }
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.stockSymbol = params.get('symbol');
@@ -37,63 +45,72 @@ export class SellPage {
       this.stock = 100;
       this.balance = 1000;
     });
-  }
-  closePage() {
-    this.navCtrl.pop();
+    this.getAccounts();
   }
 
-  changeAccount() {
-    console.log('Change Account');
-  }
-
-  sell(stock: any, quantity: number) {
-    const updatedQuantity = stock.quantity + quantity; // Assuming you're deducting the bought quantity
-    this.stock = this.stock - quantity;
-    this.balance = this.balance + this.stockData.price*quantity;
-    if (updatedQuantity >= 0) {
-      const success = this.productService.updateStockQuantity(stock.symbol, updatedQuantity);
-      if (success) {
-        // Successfully updated quantity
-        console.log(`Quantity updated for ${stock.symbol}. New quantity: ${updatedQuantity}`);
-        console.log(stock);
-        
-        // Optionally, navigate to another page or perform other actions
-      } else {
-        console.error(`Failed to update quantity for ${stock.symbol}`);
-        // Handle failure scenario
-      }
-    } else {
-      console.error(`Not enough quantity available for ${stock.symbol}`);
-      // Handle insufficient quantity scenario
+  async getAccounts() {
+    try {
+      const accountsObservable = await this.accountsService.getAccounts();
+      accountsObservable.subscribe(
+        response => {
+          this.accounts = response.accounts;
+          console.log('Accounts:', this.accounts);
+        },
+        error => {
+          console.error('Error fetching accounts:', error);
+        }
+      );
+    } catch (error) {
+      console.error('Error:', error);
     }
   }
+
+  async sell(stock: any, quantity: number) {
+    if (!this.selectedAccount) {
+      console.error('No account selected');
+      return;
+    }
+
+    const payload = {
+      accountId: this.selectedAccount,
+      stockData: stock,
+      quantity
+    };
+
+    try {
+      const response = await this.accountsService.sellStock(payload);
+      console.log('Stock sold successfully:', response);
+      this.balance += stock.price * quantity; // Update balance locally
+    } catch (error) {
+      console.error('Error selling stock:', error);
+    }
+  }
+
   incrementQuantity() {
-    // Increment quantity
     this.quantity++;
     this.updateCost();
   }
 
   decrementQuantity() {
-    // Decrement quantity, ensure it doesn't go below 1
     if (this.quantity > 1) {
       this.quantity--;
       this.updateCost();
     }
   }
+
   incrementValidity() {
-    // Increment Validity
     this.validity++;
   }
 
   decrementValidity() {
-    // Decrement Validity, ensure it doesn't go below 1
     if (this.validity > 1) {
       this.validity--;
-    }
   }
-  updateCost() {
-    if (this.stockData && this.stockData.price) {
-      this.cost = this.quantity * this.stockData.price;
-    }
+}
+
+updateCost() {
+  if (this.stockData && this.stockData.price) {
+    this.cost = this.quantity * this.stockData.price;
   }
+}
 }
