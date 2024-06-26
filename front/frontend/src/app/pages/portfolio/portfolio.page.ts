@@ -38,4 +38,13 @@ export class PortfolioPage implements OnInit {
     this.selectedAccount = account;
     this.selectedStocks = account.stock;
   }
+  onAccountChange(event: Event) {
+    const accountId = (event.target as HTMLSelectElement).value;
+    this.selectedAccount = this.accounts.find(account => account._id === accountId);
+    if (this.selectedAccount) {
+      this.selectedStocks = this.selectedAccount.stock;
+    } else {
+      this.selectedStocks = [];
+    }
+  }
 }

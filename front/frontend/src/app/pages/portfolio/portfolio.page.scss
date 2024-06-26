@@ -1,42 +1,143 @@
-.ion-padding {
-    padding: 24px;
+.custom-toolbar {
+  --background: #1e1e1e;
+  --color : white;
+}
+.bar{
+  --background : #00bfa5;
+}
+.custom-content {
+  
+  color: #ffffff;
+  padding: 16px;
+  --background: #1e1e1e;
+  width: 100vw;
+  height: 100vh;
+}
+
+.wallet-balance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #2c2c2e;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+
+  .wallet-info {
+    h2 {
+      margin: 0;
+    }
+
+    .balance-amount {
+      font-size: 2em;
+      margin: 10px 0;
+    }
+
+    .currencies {
+      color: #00bfa5;
+    }
   }
 
-  .section {
-    margin-bottom: 24px;
+  .profile-pic {
+    ion-avatar {
+      width: 50px;
+      height: 50px;
+    }
   }
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+
+  ion-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+
+    ion-icon {
+      font-size: 1.5em;
+      margin-bottom: 5px;
+    }
+
+    span {
+      font-size: 0.8em;
+    }
+  }
+}
+
+.section {
+  
 
   .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 12px;
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 10px;
   }
 
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  .stock-card {
+    background: #1e1e1f;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
 
-  .table th,
-  .table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ccc;
-  }
+    ion-card-header {
+      background: linear-gradient(135deg, #00bfa5, #38b2ac);
+      color: white;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
 
-  .table th {
-    background-color: #f0f0f0;
+    ion-card-title,
+    ion-card-subtitle {
+      color: white;
+    }
+  }
+}
+
+.custom-select-container {
+  margin-bottom: 20px;
+  background-color: #000;
+  padding: 10px;
+  border-radius: 8px;
+  width: 20rem;
+
+  .custom-select-label {
+    color: white;
+    font-size: 1em;
     font-weight: bold;
   }
 
-  .table td {
-    vertical-align: middle;
+  .custom-select {
+    width: 20rem;
+    padding: 10px;
+    font-size: 1em;
+    border: 2px solid;
+    border-radius: 5px;
+    background-color: #1e1e1f; /* Dark background for select */
+    color: white; /* Text color */
+    appearance: none; /* Remove default arrow in Chrome/Safari */
+    -webkit-appearance: none; /* Remove default arrow in Firefox */
+    -moz-appearance: none; /* Remove default arrow in Firefox */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Cursor on hover */
   }
 
-  ion-button {
-    margin: 0 auto;
+  .custom-select:focus {
+    border-color: #67e8f9; /* Border color on focus */
   }
-  .bar{
-    --background : #00bfa5;
+
+  /* Adjust width of dropdown options */
+  .custom-select option {
+    width: 20rem;
   }
+}
+
+.ion-padding{
+  --background : black;
+}
+
+

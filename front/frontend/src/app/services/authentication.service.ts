@@ -86,4 +86,28 @@ async updateUserProfile(data: any){
   );
 }
 
+async changePassword(oldPassword: string, newPassword: string, confirmPassword: string) {
+  const token = await this.getToken(); // Assuming getToken() retrieves the token from storage
+
+   // Set headers with resolved token
+   const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'token': token,
+  });
+  if (newPassword !== confirmPassword) {
+    console.error('New passwords do not match');
+    return throwError('New passwords do not match');
+  }
+
+  return this.http.post<any>(`${this.apiUrl}/forget`,  {
+    oldPassword,
+    newPassword,
+    confirmPassword
+  },{ headers }).pipe(
+    catchError((error) => {
+      console.error('Error changing password:', error);
+      return throwError('Failed to change password');
+    })
+  );
+}
 }

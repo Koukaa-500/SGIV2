@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="custom-content">
+<ion-content [fullscreen]="true">
   <!-- Balance Card -->
   <ion-card class="balance-card">
     <ion-card-header>
@@ -26,7 +26,7 @@
   <div class="custom-select-container">
     <label for="account-select" class="custom-select-label">Choose an Account</label>
     <select id="account-select" class="custom-select" [(ngModel)]="selectedAccount">
-      <option *ngFor="let account of accounts" [value]="account._id">{{ account.name }} **** {{ account.solde }}</option>
+      <option *ngFor="let account of accounts" [value]="account._id">{{ account.name }}</option>
     </select>
   </div>
 

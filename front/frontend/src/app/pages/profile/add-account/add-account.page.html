@@ -1,6 +1,16 @@
 <ion-content>
   <div class="add-account-card">
+    <ion-header translucent style="height:50px">
+      <ion-toolbar>
+        <ion-title>{{ title }}</ion-title>
+        <ion-buttons slot="start">
+          <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
     <ion-card-content>
+      <h1 style="font-size: 1.5rem;margin-left: 7%;margin-top: 10%;">Create a new account!</h1>
+      <div class="container">
       <ion-item class="input-field">
         <ion-label position="floating">Account Name</ion-label>
         <ion-input type="text" [(ngModel)]="name"></ion-input>
@@ -11,7 +21,8 @@
         <ion-input type="number" [(ngModel)]="solde"></ion-input>
       </ion-item>
 
-      <ion-button expand="block" (click)="addAccount()">Add Account</ion-button>
+      <ion-button class="add-button" (click)="addAccount()">Add Account</ion-button>
+    </div>
     </ion-card-content>
   </div>
 </ion-content>

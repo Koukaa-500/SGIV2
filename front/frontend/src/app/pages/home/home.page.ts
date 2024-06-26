@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class HomePage implements OnInit, OnDestroy {
   name: string | undefined;
   stocks: any[] = [];
-  stockSymbols: string[] = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'FB'];
+  stockSymbols: string[] = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'FB','AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'FB'];
   intervalId: any;
   lastSavedTime: any;
   newStocks: any[] = [];
@@ -76,15 +76,27 @@ export class HomePage implements OnInit, OnDestroy {
 
   updateStockPrices() {
     const currentTime = Date.now();
-    const tenSeconds = 10000;
+    const tenSeconds = 20000;
 
     if (!this.lastSavedTime || currentTime - this.lastSavedTime >= tenSeconds) {
       this.stocks.forEach(stock => {
-        const change = (Math.random() - 0.5) * 10; // Random change between -5 and 5
-        stock.price = Math.max(0, stock.price + change); // Ensure price doesn't go negative
-
+        let change;
+      
+        // Increase the range of change and add more probability to have a zero change
+        const random = Math.random();
+        if (random < 0.3) {
+          // 30% chance to have zero change
+          change = 0;
+        } else {
+          // 70% chance to have a random change between -10 and 10
+          change = (Math.random() - 0.5) * 20;
+        }
+      
+        // Ensure price doesn't go negative
+        stock.price = Math.max(0, stock.price + change);
+      
         // Save to database via backend API (mocked here)
-        this.productService.saveStockPrice(stock.symbol, stock.price,stock.change).subscribe(
+        this.productService.saveStockPrice(stock.symbol, stock.price, stock.change).subscribe(
           response => {
             console.log(`Price saved successfully for ${stock.symbol}`);
           },
@@ -92,10 +104,10 @@ export class HomePage implements OnInit, OnDestroy {
             console.error(`Failed to save price for ${stock.symbol}:`, error);
           }
         );
-
+      
         // Update color logic
-        stock.change = (change / stock.price) * 100;
-        stock.color = stock.change > 0 ? 'green' : (stock.change < 0 ? 'red' : 'yellow');
+        stock.change = (change / (stock.price - change)) * 100; // Adjusted change percentage calculation
+        stock.color = stock.change > 0 ? 'green' : (stock.change < 0 ? 'red' : '#E1A624');
       });
 
       this.lastSavedTime = currentTime;

@@ -1,5 +1,13 @@
 <ion-content>
   <div class="edit-profile-card">
+    <ion-header translucent style="height:50px">
+      <ion-toolbar>
+        <ion-title>{{ title }}</ion-title>
+        <ion-buttons slot="start">
+          <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
     <ion-card-content>
       <ion-avatar class="profile-avatar">
         <!-- <img [src]="editProfileUsersRecord?.photoUrl || 'assets/default-avatar.png'" /> -->

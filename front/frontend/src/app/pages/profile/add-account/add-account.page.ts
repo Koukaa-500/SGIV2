@@ -9,9 +9,11 @@ import { Router } from '@angular/router';
 })
 export class AddAccountPage implements OnInit {
   name: string = '';
-  solde: number=0.0;
-
-  constructor(private accountsService: AccountsService, private router: Router) { }
+  solde: any
+  title :string = 'Edit Profile'
+  constructor(private accountsService: AccountsService, private router: Router) { 
+    
+  }
 
   ngOnInit() {
   }

@@ -11,9 +11,8 @@
   }
   
   .profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    align-self: left;
     margin-bottom: 20px;
     margin-top: 20px;
   }
@@ -70,7 +69,7 @@
   
   .profile-info-container {
     display: flex;
-    align-items: meft;
+    align-items: left;
     justify-content: space-between;
   }
   

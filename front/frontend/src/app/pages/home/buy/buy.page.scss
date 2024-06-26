@@ -1,18 +1,19 @@
 .custom-toolbar {
-    --background: #1e1e1e;
-    --color : white;
-  }
-  .bar{
-    --background : #00bfa5;
-  }
-  .custom-content {
-    
-    color: #ffffff;
-    padding: 16px;
-    --background: #1e1e1e;
-    width: 100vw;
-    height: 100vh;
-  }
+  --background: #1e1e1e;
+  --color : white;
+}
+.bar{
+  --background : #00bfa5;
+}
+.custom-content {
+  
+  color: #ffffff;
+  padding: 16px;
+  --background: #1e1e1e;
+  width: 100vw;
+  height: 100vh;
+}
+
   
   .balance-card {
     background: linear-gradient(to right, #ed9078, #00bfa5);
@@ -102,5 +103,6 @@
   .custom-select:focus {
     border-color: #888888;
     outline: none;
+    width: 20rem;
   }
   

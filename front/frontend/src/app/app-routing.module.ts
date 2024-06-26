@@ -83,6 +83,7 @@ const routes: Routes = [
     path: 'profondeur/:symbol',
     loadChildren: () => import('./pages/home/profondeur/profondeur.module').then( m => m.ProfondeurPageModule)
   },
+
 ];
 @NgModule({
   imports: [
