@@ -71,7 +71,7 @@ export class IntradayPage implements OnInit {
           x: {
             type: 'time',
             time: {
-              unit: 'minute'
+              unit: 'hour'
             }
           },
           y: {
