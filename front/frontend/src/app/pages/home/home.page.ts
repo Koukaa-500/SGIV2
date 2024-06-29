@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class HomePage implements OnInit, OnDestroy {
   name: string | undefined;
   stocks: any[] = [];
-  stockSymbols: string[] = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'FB','AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'FB'];
+  stockSymbols: string[] = ['AAPL', 'GOOGL', 'AMZN', 'MSFT', 'TSLA', 'FB', 'NFLX', 'NVDA', 'BABA', 'INTC', 'PYPL', 'UBER', 'DIS', 'ORCL', 'CSCO', 'ADBE', 'CRM'];
   intervalId: any;
   lastSavedTime: any;
   newStocks: any[] = [];
