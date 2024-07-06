@@ -40,6 +40,7 @@ router.post('/register', upload.single('image'), async (req, res) => {
         filename = '';
         res.status(200).send(savedUser);
     } catch (err) {
+      console.log("erreur")
         res.status(400).send(err);
     }
 });
@@ -63,7 +64,8 @@ router.post('/login', async (req, res) => {
             name: user.name
         };
         const token = jwt.sign(payload, '1234567'); // Payload contains data and '1234567' is the secret key to verify if token is valid or not
-        res.status(200).send({ mytoken: token });
+        res.status(200).send({ "mytoken": token });
+        console.log("success");
     } catch (err) {
         res.status(500).send(err);
     }

@@ -4,7 +4,8 @@ const app = express();
 const bodyParser = require('body-parser');
 require('./config/connect');
 const nodemailer = require('nodemailer');
-app.use(cors()); // Enable CORS for all routes
+
+app.use(cors());
 app.use(bodyParser.json()); // Parse JSON bodies
 
 // Your routes go here
