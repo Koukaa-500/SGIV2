@@ -33,7 +33,7 @@ export class IntradayPage implements OnInit {
   }
 
   fetchStockPriceHistory() {
-    const apiUrl = `http://10.1.1.68:3000/product/history/${this.symbol}`;
+    const apiUrl = `http://localhost:3000/product/history/${this.symbol}`;
     this.http.get<any[]>(apiUrl).subscribe(
       data => {
         const labels = data.map(entry => new Date(entry.timestamp));

@@ -1,33 +1,39 @@
-<ion-header>
-  <ion-toolbar class="bar">
-    <ion-buttons slot="start">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
-    </ion-buttons>
-    <ion-title>{{ title }}</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content class="ion-padding" fullscreen="true" style="--background-color: black;">
-  <div class="custom-select-container">
+
+<ion-content fullscreen="true" style="--background-color: black;">
+  <div class="profile-card">
+    <ion-header translucent>
+      <ion-toolbar>
+        <ion-title>{{ title }}</ion-title>
+        <ion-buttons slot="start">
+          <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  <div class="custom-select-container" style="margin-top: 2rem;">
     <label for="account-select" class="custom-select-label">Choose an Account</label>
     <select id="account-select" class="custom-select" style="width:20rem;" (change)="onAccountChange($event)">
       <option value="" disabled selected>Select an account</option>
       <option *ngFor="let account of accounts" [value]="account._id">{{ account.name }}</option>
     </select>
   </div>
-  <!-- Wallet Balance Section -->
-  <!-- <div class="wallet-balance">
+  Wallet Balance Section
+ <div class="wallet-balance">
+  <div class="profile-pic">
+    <ion-avatar>
+      <img src="../../../assets/images/portfeuille.jpg">
+    </ion-avatar>
+  </div>
     <div class="wallet-info">
-      <h2>Wallet Balance</h2>
-      <p class="balance-amount">$23,000</p>
-      <p class="currencies">3 currencies</p>
+      <h2>Totale Portfeuille</h2>
+      <p class="currencies">Date : </p>
+      <p class="currencies">Solde : </p>
+      <p class="currencies">Espèce : </p>
+      <p class="currencies">Portfeuille Titre : </p>
+
     </div>
-    <div class="profile-pic">
-      <ion-avatar>
-        <img src="path/to/profile-pic.jpg">
-      </ion-avatar>
-    </div>
-  </div> -->
+    
+  </div>
 
   
   
@@ -46,5 +52,6 @@
         <p>Validity: {{ stock.validity }}</p>
       </ion-card-content>
     </ion-card>
+  </div>
   </div>
 </ion-content>

@@ -16,7 +16,8 @@ export class HomePage implements OnInit, OnDestroy {
   intervalId: any;
   lastSavedTime: any;
   newStocks: any[] = [];
-
+  status : any;
+  title: string = 'Marché'
   constructor(
     private productService: ProductService,
     private authService: AuthenticationService,
@@ -48,6 +49,10 @@ export class HomePage implements OnInit, OnDestroy {
         console.error('Error fetching user profile:', error);
       }
     );
+  }
+
+  getStatus(){
+    return this.productService.getStatus(this.status)
   }
 
   loadStockData() {

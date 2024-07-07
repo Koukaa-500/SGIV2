@@ -1,4 +1,4 @@
-<ion-app>
+<!-- <ion-app>
   <ion-menu menuId="main-menu" contentId="main">
     <ion-header>
       <ion-toolbar>
@@ -66,6 +66,58 @@
           <ion-icon slot="icon-only" name="log-out-outline" ></ion-icon>
         </ion-button>
       </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app> -->
+
+<ion-app>
+  <ion-menu menuId="main-menu" contentId="main">
+    <ion-content>
+      <div class="menu-header-bg"></div>
+      <div class="header-content">
+        <img [src]="'http://localhost:3000/uploads/' + image" alt="Profile Image"/>
+        <ion-label>
+          <h1>{{name}}</h1>
+        </ion-label>
+      </div>
+      
+      <ion-list class="menu-items" lines="none">
+        <ion-item routerLink="/home" (click)="closeMenu()" [class.active]="activeRoute === '/home'">
+          <ion-icon name="trending-up-outline" fill="clear"></ion-icon>
+          Marché
+        </ion-item>
+        <ion-item routerLink="/portfolio" (click)="closeMenu()" [class.active]="activeRoute === '/portfolio'">
+          <ion-icon name="folder-outline"></ion-icon>
+          Portfeuille
+        </ion-item>
+        <ion-item routerLink="/profile" (click)="closeMenu()" [class.active]="activeRoute === '/profile'">
+          <ion-icon name="person-outline"></ion-icon>
+          Profile
+        </ion-item>
+        <ion-item routerLink="/ordor" (click)="closeMenu()" [class.active]="activeRoute === '/ordor'">
+          <ion-icon name="document-outline"></ion-icon>
+          Carnet d'ordre
+        </ion-item>
+        <ion-item routerLink="/notification" (click)="closeMenu()" [class.active]="activeRoute === '/notification'">
+          <ion-icon name="notifications-outline"></ion-icon>
+          Notification
+        </ion-item>
+        <ion-item routerLink="/guide" (click)="closeMenu()" [class.active]="activeRoute === '/guide'">
+          <ion-icon name="book-outline"></ion-icon>
+          Guide
+        </ion-item>
+        <ion-item routerLink="/reglementation" (click)="closeMenu()" [class.active]="activeRoute === '/reglementation'">
+          <ion-icon name="document-text-outline
+          "></ion-icon>
+          Reglementation
+        </ion-item>
+        <ion-item routerLink="/sign-out" (click)="closeMenu(); logout()" [class.active]="activeRoute === '/sign-out'">
+          <ion-icon name="exit-outline"></ion-icon>
+          Sign out
+        </ion-item>
+      </ion-list>
+      
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>

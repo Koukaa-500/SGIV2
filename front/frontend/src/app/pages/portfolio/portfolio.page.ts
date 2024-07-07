@@ -7,7 +7,7 @@ import { AccountsService } from '../../services/accounts.service'; // Adjust the
   styleUrls: ['./portfolio.page.scss'],
 })
 export class PortfolioPage implements OnInit {
-  title: string = 'portefeuille';
+  title: string = 'Portefeuille';
   accounts: any[] = [];
   selectedAccount: any = null;
   selectedStocks: any[] = [];

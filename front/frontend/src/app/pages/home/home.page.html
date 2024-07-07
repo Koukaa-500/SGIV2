@@ -1,14 +1,16 @@
 
-<ion-header>
-  <ion-toolbar class="bar">
-    <ion-title>Marché</ion-title>
-    <ion-buttons slot="start">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+
+<ion-content [fullscreen]="true">
+  <div class="profile-card">
+  <ion-header translucent>
+    <ion-toolbar>
+      <ion-title>{{ title }}</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
   <!-- <div class="header-card">
     <div class="ion-text-center">
       <img src="assets/avatar.png" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%;"/>
@@ -39,21 +41,25 @@
   <div class="product-list">
     <div *ngFor="let stock of stocks" class="stock-card" [ngStyle]="{'color': stock.color}"  >
      <div (click)="goToIntraday(stock.symbol)" >
-      <h2>{{ stock.symbol }}</h2>
-      <h3>{{ stock.price | currency }}</h3>
-      <h4>Change: {{ stock.change | number:'1.2-2' }}%</h4>
-      <h2>{{ stock.quantity }}</h2>
+      <h4>{{ stock.symbol }}</h4>
+      <h4>SA : {{ stock.price | currency }}</h4>
+      <h4>SP : {{ stock.price | currency }}</h4>
+      <h4>+B {{ stock.change | number:'1.2-2' }}%</h4>
+      <h4>Qte : {{ stock.quantity }}</h4>
+      
      </div>
       <div class="button-container">
+        
         <button (click)="buy(stock)" class="buy-button">
           <img src="../../../assets/images/buy.png" alt="Buy">
         </button>
         <button (click)="sell(stock)" class="sell-button">
           <img src="../../../assets/images/sell.png" alt="Sell">
         </button>
+        <h4>{{ stock.status }}</h4>
       </div>
     </div>
   </div>
   
-  
+</div>
 </ion-content>

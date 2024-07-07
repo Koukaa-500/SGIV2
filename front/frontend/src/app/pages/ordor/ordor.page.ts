@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ordor.page.scss'],
 })
 export class OrdorPage implements OnInit {
-
+  title: string = "Carnet d'ordre";
   constructor() { }
 
   ngOnInit() {

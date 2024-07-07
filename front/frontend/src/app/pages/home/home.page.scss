@@ -1,9 +1,30 @@
-ion-content {
-  --background: black;
-  // --background: url(../../../assets/images/backgroundimage.png);
-  //   --background: no-repeat;
-  //   --background: 100%; 
-    width: 100%;/* Adjust background color as needed */
+.profile-card {
+  background-color: #201c24;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  color: white;
+  padding: 20px;
+  
+  
+  height: 450vh;
+  width: 100vw;
+}
+.theme-toggle {
+  margin-top: 20px;
+}
+
+
+.theme-toggle ion-button {
+  --background: #ff7f50;
+  --color: white;
+}
+ion-header {
+  ion-toolbar {
+    --background: transparent; /* Set toolbar background to transparent */
+    --ion-color-base: transparent; /* Set base color to transparent */
+    --border-color: transparent; /* Set border color to transparent */
+    --color: var(--ion-color-light); /* Set text color, adjust as needed */
+  }
 }
 .bar{
   --background: #D0E7DA;;
@@ -54,7 +75,7 @@ p{
   margin: 0;
   padding: 0;
   width: 5rem;
-  margin-left: 7rem;
+  margin-left: 5rem;
 }
 
 
@@ -62,8 +83,8 @@ p{
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: 8rem;
-  top: 3rem;
+  left: 10rem;
+  
 }
 .button-container button {
   margin-bottom: 0.4rem;
@@ -92,12 +113,14 @@ p{
   width: 100%;
   overflow: hidden;
   position: relative;
+  
 }
 
 .carousel {
   display: flex;
   width: max-content; /* Ensure the container fits all the cards in a single line */
   animation: scroll 10s linear infinite; /* Increase the speed by shortening the duration */
+  
 }
 
 .stock-cardd {
@@ -105,7 +128,7 @@ p{
   align-items: center;
   justify-content: space-between;
   min-width: 200px;
-  height: 100px; /* Set the height to 100px */
+  height: 3rem;/* Set the height to 100px */
   margin: 10px;
   
   border: 1px solid #ccc;
