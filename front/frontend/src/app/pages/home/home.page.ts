@@ -17,7 +17,9 @@ export class HomePage implements OnInit, OnDestroy {
   lastSavedTime: any;
   status: any;
   title: string = 'Marché';
-  
+  activeFilter: string = '';
+  filteredStocks: any[] = [];
+
   constructor(
     private productService: ProductService,
     private authService: AuthenticationService,
@@ -60,7 +62,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
 
-  toggleFavorite(stock: any) {
+  async toggleFavorite(stock: any) {
     try {
       this.productService.toggleFavorite(stock.symbol,!stock.favorite);
 
@@ -85,6 +87,8 @@ export class HomePage implements OnInit, OnDestroy {
         this.stocks.push(stock);
       }
     });
+    this.filteredStocks = [...this.stocks]; // Initialize filtered stocks with all stocks
+
   }
 
   buy(stock: any) {
@@ -165,4 +169,28 @@ export class HomePage implements OnInit, OnDestroy {
       state: { stockData: symbol }
     });
   }
+
+  filterStocks(option: string): void {
+    switch (option) {
+      case 'priceHighToLow':
+        this.filteredStocks = [...this.stocks.sort((a, b) => b.price - a.price)];
+        break;
+      case 'alphabetical':
+        this.filteredStocks = [...this.stocks.sort((a, b) => a.symbol.localeCompare(b.symbol))];
+        break;
+      case 'favorites':
+        this.filteredStocks = this.stocks.filter(stock => stock.favorite);
+        break;
+      default:
+        this.filteredStocks = [...this.stocks];
+        break;
+    }
+    
+    this.activeFilter = option; // Set active filter
+  }
+  clearFilters(): void {
+    this.filteredStocks = [...this.stocks]; // Reset filtered stocks to all stocks
+    this.activeFilter = ''; // Clear active filter
+  }
+
 }

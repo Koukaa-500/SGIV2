@@ -41,7 +41,7 @@ export class ProductService {
     }
   
     try {
-      const token = await this.storage['get']('token');
+      const token = await this.storage.get('token');
       if (!token) {
         console.error('Token not found');
         return throwError(() => new Error('Token not found'));
@@ -51,29 +51,19 @@ export class ProductService {
         'Content-Type': 'application/json',
         'token': `${token}`
       });
-  
+    
       const requestPayload = {
         stockId: stock.symbol,
         isFavorite
       };
       console.log('Request payload:', requestPayload);
-  
-      return this.http.post<any>(`http://localhost:3000/user/favorite1`, requestPayload, { headers }).pipe(
-        tap(() => {
-          stock.favorite = isFavorite;
-          console.log("Favorite status updated successfully.");
-        }),
-        catchError((error) => {
-          console.error('Failed to update favorite status:', error);
-          // Rollback UI state if needed
-          return throwError(() => new Error('Failed to update favorite status'));
-        })
-      );
+    
+      return this.http.post<any>(`http://localhost:3000/user/favorite1`, requestPayload, { headers }).toPromise();
     } catch (error) {
-      console.error('Error retrieving token:', error);
-      return throwError(() => new Error('Error retrieving token'));
+      console.error('An error occurred:', error);
+      return throwError(() => new Error('An error occurred'));
     }
-  }
+}
   
   
   // async getFavoriteStocks(): Promise<Observable<void>> {
@@ -128,9 +118,9 @@ export class ProductService {
     const currentHour = currentTime.getHours();
 
     this.stocks.forEach(stock => {
-      // if (currentHour >= 20 || currentHour < 6) {
-      //   stock.status = 'Non-Disponible';
-      // }
+      if (currentHour >= 20 || currentHour < 6) {
+        stock.status = 'Non-Disponible';
+      }
     });
   }
 

@@ -149,6 +149,24 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.filter-options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+
+  button {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: #000;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+}
 
 .col .symbol {
   width: 50px;

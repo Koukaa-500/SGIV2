@@ -192,10 +192,8 @@ router.get('/favorite', auth, async (req, res) => {
 });
 router.post('/favorite1', auth, async (req, res) => {
   try {
-    console.log("Request received:", req.body);
     const { stockId, isFavorite } = req.body;
     const user = await User.findById(req.user._id);
-    console.log("User found:", user);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -216,6 +214,7 @@ router.post('/favorite1', auth, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 
   
