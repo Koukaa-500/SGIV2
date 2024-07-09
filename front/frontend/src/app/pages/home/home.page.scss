@@ -4,37 +4,32 @@
   background-size: 100%;
   color: white;
   padding: 20px;
-  
-  
   height: 450vh;
   width: 100vw;
 }
+
 .theme-toggle {
   margin-top: 20px;
 }
-
 
 .theme-toggle ion-button {
   --background: #ff7f50;
   --color: white;
 }
-ion-header {
-  ion-toolbar {
-    --background: transparent; /* Set toolbar background to transparent */
-    --ion-color-base: transparent; /* Set base color to transparent */
-    --border-color: transparent; /* Set border color to transparent */
-    --color: var(--ion-color-light); /* Set text color, adjust as needed */
-  }
+
+ion-header ion-toolbar {
+  --background: transparent;
+  --ion-color-base: transparent;
+  --border-color: transparent;
+  --color: var(--ion-color-light);
 }
-.bar{
-  --background: #D0E7DA;;
-}
+
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  
   width: 100%;
 }
+
 .header-card {
   background-color: #1c1c1c;
   border-radius: 16px;
@@ -43,29 +38,27 @@ ion-header {
   color: white;
 }
 
-
 .stock-card {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1rem;
   width: 400px;
-  height: 150px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  background-color: #D0E7DA;
+  background-color: #d0e7da;
   margin-left: 10px;
 }
-h1, h2, h3,h6,h4 {
+
+h1, h2, h3, h6, h4 {
   margin: 0;
 }
 
-p{
+p {
   width: 50px;
 }
-
-
 
 .buy-button,
 .sell-button {
@@ -76,16 +69,23 @@ p{
   padding: 0;
   width: 5rem;
   margin-left: 5rem;
+  opacity: 1; /* Ensure buttons are fully visible by default */
+  transition: opacity 0.3s ease; /* Smooth transition for opacity change */
 }
-
+.stock-card.disabled,
+.buy-button:disabled,
+.sell-button:disabled {
+  opacity: 0.6; /* Reduce opacity for disabled state */
+  cursor: not-allowed; /* Change cursor to indicate non-interactivity */
+}
 
 .button-container {
   display: flex;
   flex-direction: column;
   position: absolute;
   left: 10rem;
-  
 }
+
 .button-container button {
   margin-bottom: 0.4rem;
 }
@@ -108,19 +108,18 @@ p{
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-
 .carousel-container {
   width: 100%;
   overflow: hidden;
   position: relative;
-  
 }
 
 .carousel {
   display: flex;
-  width: max-content; /* Ensure the container fits all the cards in a single line */
-  animation: scroll 10s linear infinite; /* Increase the speed by shortening the duration */
-  
+  width: max-content;
+  /* Ensure the container fits all the cards in a single line */
+  animation: scroll 10s linear infinite;
+  /* Increase the speed by shortening the duration */
 }
 
 .stock-cardd {
@@ -128,13 +127,13 @@ p{
   align-items: center;
   justify-content: space-between;
   min-width: 200px;
-  height: 3rem;/* Set the height to 100px */
+  height: 3rem;
+  /* Set the height to 100px */
   margin: 10px;
-  
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #D0E7DA;
+  background-color: #d0e7da;
 }
 
 .col {
@@ -142,15 +141,37 @@ p{
   text-align: left;
 }
 
-.symbol, .price, .change {
+.symbol,
+.price,
+.change {
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.col .symbol{
+.filter-options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+
+  button {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: #000;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+}
+
+.col .symbol {
   width: 50px;
 }
+
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -160,4 +181,19 @@ p{
   }
 }
 
+.button-container ion-icon {
+  font-size: 50px;
+  color: #ccc;
+  /* Set initial color for unfilled */
+  cursor: pointer;
+}
 
+.button-container ion-icon.favorite {
+  color: gold;
+  /* Set the color to gold when filled */
+}
+
+.button-container ion-icon:hover {
+  transform: scale(1.2);
+  /* Optional: Add a hover effect */
+}
