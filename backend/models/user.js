@@ -57,7 +57,9 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String
     },
-    accounts: [accountSchema]
+    accounts: [accountSchema],
+    favoriteStocks: [String] // Store symbols instead of ObjectId references
+
 });
 
 const User = mongoose.model('User', userSchema);

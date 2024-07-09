@@ -178,6 +178,46 @@ router.post('/forget', auth, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+router.get('/favorite', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).populate('favoriteStocks');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user.favoriteStocks);
+  } catch (error) {
+    console.error('Error fetching favorite stocks:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+router.post('/favorite1', auth, async (req, res) => {
+  try {
+    console.log("Request received:", req.body);
+    const { stockId, isFavorite } = req.body;
+    const user = await User.findById(req.user._id);
+    console.log("User found:", user);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (isFavorite) {
+      if (!user.favoriteStocks.includes(stockId)) {
+        user.favoriteStocks.push(stockId);
+      }
+    } else {
+      user.favoriteStocks = user.favoriteStocks.filter(id => id !== stockId);
+    }
+
+    await user.save();
+    res.status(200).json({ message: 'Favorite stocks updated successfully' });
+  } catch (error) {
+    console.error('Error updating favorite stocks:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
   
 
 module.exports = router;
