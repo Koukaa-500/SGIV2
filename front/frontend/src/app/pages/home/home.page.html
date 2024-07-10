@@ -44,10 +44,10 @@
         <div class="button-container">
           <ion-icon name="star-outline" style="margin-left: 50%;" [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite($event, stock)"></ion-icon>
           
-          <button (click)="buy(stock) ; $event.stopPropagation()" [disabled]="stock.status === 'Non-Disponible'" class="buy-button">
+          <button (click)="buy($event, stock)" [disabled]="stock.status === 'Non-Disponible'" class="buy-button">
             <img src="../../../assets/images/buy.png" alt="Buy">
           </button>
-          <button (click)="sell(stock) ; $event.stopPropagation()" [disabled]="stock.status === 'Non-Disponible'" class="sell-button">
+          <button (click)="sell($event, stock)" [disabled]="stock.status === 'Non-Disponible'" class="sell-button">
             <img src="../../../assets/images/sell.png" alt="Sell">
           </button>
           

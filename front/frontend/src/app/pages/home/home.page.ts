@@ -94,15 +94,15 @@ export class HomePage implements OnInit, OnDestroy {
 
   } 
 
-  buy(stock: any) {
-    // Navigate to the "Buy" page and pass the stock data
+  buy(event: Event,stock: any) {
+    event.stopPropagation(); // Stops event propagation
     this.navCtrl.navigateForward(`/buy/${stock.symbol}`, {
       state: { stockData: stock }
     });
   }
 
-  sell(stock: any) {
-    // Navigate to the "Sell" page and pass the stock data
+  sell(event: Event,stock: any) {
+    event.stopPropagation(); // Stops event propagation
     this.navCtrl.navigateForward(`/sell/${stock.symbol}`, {
       state: { stockData: stock }
     });

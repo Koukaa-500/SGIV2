@@ -36,6 +36,16 @@ const accountSchema = new mongoose.Schema({
     }
 });
 
+const notificationSchema = new mongoose.Schema({
+    message: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+    }
+});
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -59,7 +69,7 @@ const userSchema = new mongoose.Schema({
     },
     accounts: [accountSchema],
     favoriteStocks: [String], // Store symbols instead of ObjectId references
-    notifications: [String]  // Adding notifications field as an array of strings
+    notifications: [notificationSchema]  // Updating notifications field to use the notificationSchema
 
 });
 
