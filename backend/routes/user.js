@@ -6,6 +6,8 @@ const bcrypt = require('bcryptjs'); // Changed from 'bcrypt' to 'bcryptjs'
 const nodemailer = require('nodemailer');
 const auth = require('./middleware');
 const multer = require('multer');
+const cron = require('node-cron');
+
 ///// User authentication 
 
 //// Register
@@ -43,6 +45,39 @@ router.post('/register', upload.single('image'), async (req, res) => {
       console.log("erreur")
         res.status(400).send(err);
     }
+});
+// Add this in your existing router file
+router.get('/notifications', auth, async (req, res) => {
+  try {
+      const user = await User.findById(req.user._id).select('notifications');
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+      res.status(200).json(user.notifications);
+  } catch (error) {
+      console.error('Error fetching notifications:', error);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.post('/notifications1', auth, async (req, res) => {
+  try {
+    const userId = req.user._id; // Extract user ID from the token
+    const { message } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.notifications.push(message);
+    await user.save();
+
+    res.status(200).json({ message: 'Notification added successfully' });
+  } catch (error) {
+    console.error('Error adding notification:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 
 
@@ -216,7 +251,28 @@ router.post('/favorite1', auth, async (req, res) => {
 });
 
 
+const addNotification = async (message) => {
+  try {
+    const users = await User.find({});
+    users.forEach(async (user) => {
+      user.notifications.push(message);
+      await user.save();
+    });
+  } catch (error) {
+    console.error('Error adding notification:', error);
+  }
+};
 
+// Schedule tasks
+cron.schedule('0 20 * * *', () => {
+  // Runs every day at 8 PM
+  addNotification("Stocks are closed.");
+});
+
+cron.schedule('0 6 * * *', () => {
+  // Runs every day at 6 AM
+  addNotification("Stocks are opened.");
+});
   
 
 module.exports = router;

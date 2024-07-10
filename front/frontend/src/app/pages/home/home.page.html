@@ -52,7 +52,7 @@
           <button (click)="sell(stock); $event.stopPropagation()" [disabled]="stock.status === 'Non-Disponible'" class="sell-button">
             <img src="../../../assets/images/sell.png" alt="Sell">
           </button>
-          <ion-icon name="star-outline" [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite(stock); $event.stopPropagation()"></ion-icon>
+          <ion-icon name="star-outline" [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite($event, stock)"></ion-icon>
           
         </div>
       </div>

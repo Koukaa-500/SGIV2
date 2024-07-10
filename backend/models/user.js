@@ -58,7 +58,8 @@ const userSchema = new mongoose.Schema({
         type: String
     },
     accounts: [accountSchema],
-    favoriteStocks: [String] // Store symbols instead of ObjectId references
+    favoriteStocks: [String], // Store symbols instead of ObjectId references
+    notifications: [String]  // Adding notifications field as an array of strings
 
 });
 
