@@ -36,12 +36,8 @@
 
     
     <div class="product-list">
-      <div *ngFor="let stock of filteredStocks" 
-           class="stock-card" 
-           [ngStyle]="{'color': stock.color}" 
-           [class.disabled]="stock.status === 'Non-Disponible'" 
-           (click)="stock.status !== 'Non-Disponible' && goToIntraday(stock.symbol)">        <div>
-      
+      <div *ngFor="let stock of filteredStocks" class="stock-card" [ngStyle]="{'color': stock.color}" [class.disabled]="stock.status === 'Non-Disponible'">
+        <div (click)="stock.status !== 'Non-Disponible' && goToIntraday(stock.symbol)">
           <h4>{{ stock.symbol }}</h4>
           <h4>SA : {{ stock.price | currency }}</h4>
           <h4>SP : {{ stock.price | currency }}</h4>
@@ -49,21 +45,18 @@
           <h4>Qte : {{ stock.quantity }}</h4>
         </div>
         <div class="button-container">
-          <button (click)="buy(stock)" [disabled]="stock.status === 'Non-Disponible'" class="buy-button">
+          <h4>{{ stock.status }}</h4>
+          <button (click)="buy(stock); $event.stopPropagation()" [disabled]="stock.status === 'Non-Disponible'" class="buy-button">
             <img src="../../../assets/images/buy.png" alt="Buy">
           </button>
-          <button (click)="sell(stock)" [disabled]="stock.status === 'Non-Disponible'" class="sell-button">
+          <button (click)="sell(stock); $event.stopPropagation()" [disabled]="stock.status === 'Non-Disponible'" class="sell-button">
             <img src="../../../assets/images/sell.png" alt="Sell">
           </button>
-          <ion-icon name="star-outline" [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite(stock)"></ion-icon>
+          <ion-icon name="star-outline" [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite(stock); $event.stopPropagation()"></ion-icon>
           
-          <h4>{{ stock.status }}</h4>
-         
-          <div >
-          </div>
         </div>
-        
       </div>
     </div>
+    
   </div>
 </ion-content>
