@@ -34,6 +34,8 @@ export class HomePage implements OnInit, OnDestroy {
     (await this.productService.getFavoriteStocks()).subscribe(
       () => {
         this.stocks = this.productService.stocks; // Update local stocks array with the latest data
+        this.filteredStocks = [...this.stocks]; // Initialize filtered stocks with all stocks
+
       },
       error => {
         console.error('Error fetching favorite stocks:', error);
@@ -62,8 +64,9 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
 
-  async toggleFavorite(stock: any) {
+  toggleFavorite(event: Event, stock: any) {
     try {
+      event.stopPropagation(); // Stops event propagation
       this.productService.toggleFavorite(stock.symbol,!stock.favorite);
 
       // Update stocks array to reflect the change
@@ -89,7 +92,7 @@ export class HomePage implements OnInit, OnDestroy {
     });
     this.filteredStocks = [...this.stocks]; // Initialize filtered stocks with all stocks
 
-  }
+  } 
 
   buy(stock: any) {
     // Navigate to the "Buy" page and pass the stock data
@@ -164,7 +167,6 @@ export class HomePage implements OnInit, OnDestroy {
         }
       });
     }
-    this.filteredStocks = [...this.stocks];
   }
 
   goToIntraday(symbol: string) {

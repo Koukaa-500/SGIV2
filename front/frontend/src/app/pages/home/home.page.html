@@ -34,7 +34,7 @@
           <button (click)="sell(stock)" [disabled]="stock.status === 'Non-Disponible'" class="sell-button">
             <img src="../../../assets/images/sell.png" alt="Sell">
           </button>
-          <ion-icon name="star-outline" [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite(stock)"></ion-icon>
+          <ion-icon name="star-outline" [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite($event, stock)"></ion-icon>
           
           <h4>{{ stock.status }}</h4>
           <div *ngIf="stock.status !== 'Non-Disponible'" class="clickable-area" (click)="goToIntraday(stock.symbol)">

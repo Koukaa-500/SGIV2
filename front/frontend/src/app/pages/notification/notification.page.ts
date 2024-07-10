@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -9,25 +10,20 @@ export class NotificationPage implements OnInit {
   title: string = "Notification";
   notificationMessages: string[] = [];
 
-  constructor() { }
+  constructor(private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.checkStockMarketStatus(); // Check initially
-    setInterval(() => {
-      this.checkStockMarketStatus();
-    }, 500); // Check every half second (adjust as needed)
+    this.loadNotifications();
   }
 
-  checkStockMarketStatus() {
-    const currentHour = new Date().getHours();
-    let message: string;
-    if (currentHour >= 6 && currentHour < 20) {
-      message = "Stock market is open.";
-    } else {
-      message = "Stock market is closed.";
-    }
-    
-    // Append the message to the array
-    // this.notificationMessages.push(message);
+  async loadNotifications() {
+    (await this.notificationService.getNotifications()).subscribe(
+      (notifications) => {
+        this.notificationMessages = notifications;
+      },
+      (error) => {
+        console.error('Error fetching notifications:', error);
+      }
+    );
   }
 }
