@@ -129,8 +129,10 @@ export class HomePage implements OnInit, OnDestroy {
         // Save to database via backend API (mocked here)
         this.productService.saveStockPrice(stock.symbol, stock.price, stock.change).subscribe(
           response => {
+            console.log("succsuss")
           },
           error => {
+            console.log("fail");
           }
         );
   
@@ -162,6 +164,7 @@ export class HomePage implements OnInit, OnDestroy {
         }
       });
     }
+    this.filteredStocks = [...this.stocks];
   }
 
   goToIntraday(symbol: string) {

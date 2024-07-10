@@ -16,8 +16,11 @@
       <button (click)="loadStockData()">Clear Filters</button>
     </div>
     <div class="product-list">
-      <div *ngFor="let stock of filteredStocks" class="stock-card" [ngStyle]="{'color': stock.color}">
-        <div>
+      <div *ngFor="let stock of filteredStocks" 
+           class="stock-card" 
+           [ngStyle]="{'color': stock.color}" 
+           [class.disabled]="stock.status === 'Non-Disponible'" 
+           (click)="stock.status !== 'Non-Disponible' && goToIntraday(stock.symbol)">        <div>
           <h4>{{ stock.symbol }}</h4>
           <h4>SA : {{ stock.price | currency }}</h4>
           <h4>SP : {{ stock.price | currency }}</h4>
@@ -32,13 +35,12 @@
             <img src="../../../assets/images/sell.png" alt="Sell">
           </button>
           <ion-icon name="star-outline" [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite(stock)"></ion-icon>
-
+          
           <h4>{{ stock.status }}</h4>
+          <div *ngIf="stock.status !== 'Non-Disponible'" class="clickable-area" (click)="goToIntraday(stock.symbol)">
         </div>
-        <div *ngIf="stock.status !== 'Non-Disponible'" class="clickable-area" (click)="goToIntraday(stock.symbol)">
         </div>
       </div>
     </div>
-
   </div>
 </ion-content>
