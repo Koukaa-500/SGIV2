@@ -2,22 +2,42 @@
   <div class="profile-card">
     <ion-header translucent>
       <ion-toolbar>
-        <ion-title>{{ title }}</ion-title>
+        <div class="title-and-icons">
+          <div class="title">
+            <ion-title>{{ title }}</ion-title>
+          </div>
+          <div class="filter-buttons">
+            <button (click)="filterStocks('priceHighToLow')" class="filter-button">
+              <ion-icon name="trending-up-outline" fill="clear"></ion-icon>
+            </button>
+            <button (click)="filterStocks('alphabetical')" class="filter-button">
+              <ion-icon name="text-outline" fill="clear"></ion-icon>
+            </button>
+            <button (click)="filterStocks('favorites')" class="filter-button">
+              <ion-icon name="star-outline" fill="clear"></ion-icon>
+            </button>
+            <button (click)="clearFilters()" class="filter-button">
+              <ion-icon name="close-outline" fill="clear"></ion-icon>
+            </button>
+          </div>
+        </div>
         <ion-buttons slot="start">
           <ion-menu-button menu="main-menu"></ion-menu-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
-    <div class="filter-options">
+    <!-- <div class="filter-options">
       <button (click)="filterStocks('priceHighToLow')">Price (High to Low)</button>
       <button (click)="filterStocks('alphabetical')">Alphabetical</button>
       <button (click)="filterStocks('favorites')">Favorites</button>
       <button (click)="loadStockData()">Clear Filters</button>
-    </div>
+    </div> -->
+
+    
     <div class="product-list">
       <div *ngFor="let stock of filteredStocks" class="stock-card" [ngStyle]="{'color': stock.color}">
-        <div>
+        <div (click)="goToIntraday(stock.symbol)">
           <h4>{{ stock.symbol }}</h4>
           <h4>SA : {{ stock.price | currency }}</h4>
           <h4>SP : {{ stock.price | currency }}</h4>
@@ -34,9 +54,10 @@
           <ion-icon name="star-outline" [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite(stock)"></ion-icon>
 
           <h4>{{ stock.status }}</h4>
+          <div >
+          </div>
         </div>
-        <div *ngIf="stock.status !== 'Non-Disponible'" class="clickable-area" (click)="goToIntraday(stock.symbol)">
-        </div>
+        
       </div>
     </div>
 

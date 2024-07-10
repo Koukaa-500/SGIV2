@@ -197,3 +197,37 @@ p {
   transform: scale(1.2);
   /* Optional: Add a hover effect */
 }
+
+
+.title-and-icons {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  flex: 1; /* Take up remaining space */
+}
+
+.filter-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.filter-button {
+  padding: 0 0 0 10px; /* Adjust padding as needed */
+  background: none; /* Remove any background */
+  border: none; /* Remove border if present */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-button ion-icon {
+  font-size: 24px;
+}
+
+.filter-button:hover {
+  color: red;
+}

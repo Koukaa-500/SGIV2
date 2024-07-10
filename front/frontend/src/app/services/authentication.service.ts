@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
 
-  private apiUrl = 'http://10.1.1.68:3000/user'; // Replace with your backend URL
+  private apiUrl = 'http://localhost:3000/user'; // Replace with your backend URL
 
   constructor(private http: HttpClient, private storage: Storage , private router : Router) {
     this.init();
