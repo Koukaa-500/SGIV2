@@ -84,6 +84,9 @@ p {
   flex-direction: column;
   position: absolute;
   left: 10rem;
+  h{
+    left:50%;
+  }
 }
 
 .button-container button {

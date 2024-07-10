@@ -10,13 +10,24 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-  <div class="custom-select-container" style="margin-top: 2rem;">
+  <!-- <div class="custom-select-container" style="margin-top: 2rem;">
     <label for="account-select" class="custom-select-label">Choose an Account</label>
     <select id="account-select" class="custom-select" style="width:20rem;" (change)="onAccountChange($event)">
       <option value="" disabled selected>Select an account</option>
       <option *ngFor="let account of accounts" [value]="account._id">{{ account.name }}</option>
     </select>
-  </div>
+  </div> -->
+
+  <ion-list class="black-theme">
+    <ion-item>
+      <ion-label>Choose an Account</ion-label>
+      <ion-select placeholder="Select an account" (ionChange)="onAccountChange($event)">
+        <ion-select-option value="" disabled>Select an account</ion-select-option>
+        <ion-select-option *ngFor="let account of accounts" [value]="account._id">{{ account.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
   Wallet Balance Section
  <div class="wallet-balance">
   <div class="profile-pic">

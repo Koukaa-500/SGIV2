@@ -274,5 +274,7 @@ cron.schedule('0 6 * * *', () => {
   addNotification("Stocks are opened.");
 });
   
+router.get('/portfolioData')
+
 
 module.exports = router;

@@ -1,3 +1,9 @@
+
+ion-content {
+  --background: #121212; /* Dark background color */
+  color: #ffffff; /* White text color */
+}
+
 .custom-toolbar {
   --background: #201c24;
   --color : white;
@@ -11,17 +17,18 @@
   padding: 16px;
   --background: #201c24;
   width: 100vw;
-  height: 100vh;
+  height: 200vh;
 }
 .profile-card {
-  background-image: url(../../../assets/images/backgroundimage.png);
+  background:#201c24;
   background-repeat: no-repeat;
-  background-size: 100%;
+  // background-size: 100%;
+  background-size: cover;
   color: white;
   padding: 20px;
   
   
-  height: 100vh;
+  height: 200vh;
   width: 100vw;
 }
 .theme-toggle {
@@ -172,3 +179,31 @@ ion-header {
 }
 
 
+.black-theme {
+  --ion-background-color: #1e1e1e; /* Dark gray background color */
+  --ion-text-color: #ffffff; /* White text color */
+
+  ion-item {
+    background-color: var(--ion-background-color);
+    color: var(--ion-text-color);
+
+    ion-label {
+      color: var(--ion-text-color);
+    }
+
+    ion-select {
+      --background: var(--ion-background-color);
+      --color: var(--ion-text-color);
+
+      ion-select-option {
+        --background: var(--ion-background-color);
+        --color: var(--ion-text-color);
+      }
+    }
+  }
+}
+
+
+ion-select{
+  --background-color: black;
+}
