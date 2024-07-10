@@ -49,16 +49,17 @@ router.post('/register', upload.single('image'), async (req, res) => {
 // Add this in your existing router file
 router.get('/notifications', auth, async (req, res) => {
   try {
-      const user = await User.findById(req.user._id).select('notifications');
-      if (!user) {
-          return res.status(404).json({ message: 'User not found' });
-      }
-      res.status(200).json(user.notifications);
+    const user = await User.findById(req.user._id).select('notifications');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user.notifications);
   } catch (error) {
-      console.error('Error fetching notifications:', error);
-      res.status(500).json({ message: 'Server error' });
+    console.error('Error fetching notifications:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 router.post('/notifications1', auth, async (req, res) => {
   try {
@@ -70,7 +71,12 @@ router.post('/notifications1', auth, async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    user.notifications.push(message);
+    const notification = {
+      message,
+      date: new Date()
+    };
+
+    user.notifications.push(notification);
     await user.save();
 
     res.status(200).json({ message: 'Notification added successfully' });
