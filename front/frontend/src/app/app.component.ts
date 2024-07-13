@@ -56,9 +56,7 @@ export class AppComponent {
         this.name = data.name;
         this.email = data.email;
         this.phoneNumber = data.phoneNumber;
-        this.image = data.image;
-        console.log(this.image);
-         // Assuming the backend returns the image URL
+        this.image = data.image;         // Assuming the backend returns the image URL
         console.log('User profile loaded successfully:', data);
       },
       (error) => {

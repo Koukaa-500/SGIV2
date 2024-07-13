@@ -11,11 +11,13 @@ export class PortfolioPage implements OnInit {
   accounts: any[] = [];
   selectedAccount: any = null;
   selectedStocks: any[] = [];
-
+  user: any;
   constructor(private accountsService: AccountsService) { }
 
   ngOnInit() {
     this.getAccounts();
+    this.user=this.accountsService.getUserData()
+   console.log(this.user);
   }
 
   async getAccounts() {
