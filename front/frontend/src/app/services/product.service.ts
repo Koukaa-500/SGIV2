@@ -142,7 +142,7 @@ export class ProductService {
     return false;
   }
 
-  saveStockPrice(symbol: string, price: number, change: number) {
-    return this.http.post<any>(this.baseUrl, { symbol, price, change });
+  saveStockPrice(symbol: string, price: number, change: number, quantity: number) {
+    return this.http.post<any>(this.baseUrl, { symbol, price, change,quantity });
   }
 }

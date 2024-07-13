@@ -1,16 +1,22 @@
-<ion-toolbar class="bar">
-  <ion-title></ion-title>
-  <ion-buttons slot="start">
-    <ion-menu-button menu="main-menu"></ion-menu-button>
-  </ion-buttons>
-</ion-toolbar>
-
-<ion-footer>
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar class="bar">
+    <ion-title>{{ stock.symbol }} Depth</ion-title>
     <ion-buttons slot="start">
-      <ion-button>Intraday</ion-button>
-      <ion-button (click)="gotToTransaction()">Transaction</ion-button>
-      <ion-button (click)="gotToProfond()">Profond</ion-button>
+      <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="container">
+  azeaze
+  </ion-content>
+
+
+<ion-footer style="background-color: #00bfa5;">
+  
+  <ion-buttons slot="start" style="background-color: #00bfa5;">
+    <ion-button (click)="goToIntraday(stock.symbol)">Intraday</ion-button>
+    <ion-button (click)="goToTransaction(stock.symbol)">Transaction</ion-button>
+    <ion-button >Profondeur</ion-button>
+  </ion-buttons>
+
 </ion-footer>

@@ -1,5 +1,5 @@
 .container {
-  --background: #1e1e1e;
+  --background: #d0e7da;
   
 }
 
@@ -83,12 +83,13 @@ canvas {
 }
 
 ion-footer {
-  padding: 10px;
-  background-color: #f8f8f8; /* Light gray background for footer */
+  padding: 10px 0 10px 0;
+  font-size: 1rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .footer-toolbar {
-  --background: #ffffff; /* White background for the toolbar */
+   /* White background for the toolbar */
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -97,7 +98,7 @@ ion-button {
   --border-radius: 20px;
   
  
-  --background: #f1f1f1; /* Light background for buttons */
+   /* Light background for buttons */
   --color: #333; /* Dark text color for buttons */
 }
 
@@ -128,4 +129,45 @@ ion-button {
   margin: 16px 0 0 16px;
   font-size: 2rem;
   color: white;
+}
+
+.button-container ion-icon.favorite {
+  color: gold;
+  /* Set the color to gold when filled */
+}
+
+.button-container ion-icon:hover {
+  transform: scale(1.2);
+  /* Optional: Add a hover effect */
+}
+
+.title-and-icons {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  flex: 1; /* Take up remaining space */
+}
+
+.filter-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.icon1  {
+   /* Adjust padding as needed */
+  background: none; /* Remove any background */
+  border: none; /* Remove border if present */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+ion-icon.favorite {
+  color: gold;
+  /* Set the color to gold when filled */
 }

@@ -44,6 +44,9 @@ export class HomePage implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.updateStockPrices();
     }, 1000);
+    setInterval(() => {
+      this.updateStockStatus();
+    }, 20000);
   }
 
   ngOnDestroy() {
@@ -110,7 +113,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   updateStockPrices() {
     const currentTime = Date.now();
-    const tenSeconds = 20000;
+    const tenSeconds = 50000;
   
     if (!this.lastSavedTime || currentTime - this.lastSavedTime >= tenSeconds) {
       this.stocks.forEach(stock => {
@@ -130,7 +133,7 @@ export class HomePage implements OnInit, OnDestroy {
         stock.price = Math.max(0, stock.price + change);
   
         // Save to database via backend API (mocked here)
-        this.productService.saveStockPrice(stock.symbol, stock.price, stock.change).subscribe(
+        this.productService.saveStockPrice(stock.symbol, stock.price, stock.change ,stock.quantity).subscribe(
           response => {
             console.log("succsuss")
           },
@@ -196,6 +199,15 @@ export class HomePage implements OnInit, OnDestroy {
   clearFilters(): void {
     this.filteredStocks = [...this.stocks]; // Reset filtered stocks to all stocks
     this.activeFilter = ''; // Clear active filter
+  }
+
+  updateStockStatus() {
+    this.stocks.forEach(stock => {
+      // Randomly decide whether to change the status
+      if (Math.random() > 0.5) {
+        stock.status = stock.status === "Disponible" ? "Non-Disponible" : "Disponible";
+      }
+    });
   }
 
 }

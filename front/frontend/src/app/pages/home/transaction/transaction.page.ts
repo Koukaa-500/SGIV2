@@ -15,12 +15,16 @@ export class TransactionPage implements OnInit {
   quantity: any;
   validity:any;
   stockData:any;
+  stock:any;
   constructor(private route: ActivatedRoute, private http: HttpClient , private router:Router,private navCtrl: NavController,private productService : ProductService ) {
-    this.symbol = this.route.snapshot.paramMap.get('symbol')!;
+    this.symbol = '';
     this.stockData = this.productService.getStockBySymbol(this.symbol);
+    this.stock={};
   }
 
   ngOnInit() {
+    this.symbol = this.route.snapshot.paramMap.get('symbol')!;
+    this.stock = this.productService.getStockBySymbol(this.symbol);
     this.fetchTransactionData();
   }
 
@@ -36,12 +40,12 @@ export class TransactionPage implements OnInit {
     );
   }
 
-  goToTransaction() {
-    this.router.navigate(['transaction']);
-  }
+  
 
-  goToProfond() {
-    this.router.navigate(['profondeur']);
+  goToProfond(symbol: string) {
+    this.navCtrl.navigateForward(`/profondeur/${symbol}`, {
+      state: { stockData: symbol }
+    });
   }
 
   goToIntraday(symbol: string) {
@@ -49,4 +53,6 @@ export class TransactionPage implements OnInit {
       state: { stockData: symbol }
     });
   }
+
+  
 }

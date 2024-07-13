@@ -18,6 +18,7 @@ export class IntradayPage implements OnInit {
   symbol: string;
   chart: Chart | undefined;
   stock: any;
+  stocks: any[] = [];
 
   constructor(private navCtrl: NavController,private route: ActivatedRoute, private http: HttpClient,private productService : ProductService,private router : Router) {
     this.symbol = '';
@@ -86,8 +87,11 @@ export class IntradayPage implements OnInit {
       state: { stockData: symbol }
     });
   }
-  gotToProfond(){
-    this.router.navigate(['profondeur'])
+  
+  goToProfond(symbol: string) {
+    this.navCtrl.navigateForward(`/profondeur/${symbol}`, {
+      state: { stockData: symbol }
+    });
   }
   buy(stock: any) {
     // Navigate to the "Buy" page and pass the stock data
@@ -101,5 +105,21 @@ export class IntradayPage implements OnInit {
     this.navCtrl.navigateForward(`/sell/${stock.symbol}`, {
       state: { stockData: stock }
     });
+  }
+
+  toggleFavorite(event: Event, stock: any) {
+    try {
+      event.stopPropagation(); // Stops event propagation
+      this.productService.toggleFavorite(stock.symbol,!stock.favorite);
+
+      // Update stocks array to reflect the change
+      const index = this.stocks.findIndex(s => s.symbol === stock.symbol);
+      if (index !== -1) {
+        this.stocks[index].favorite = !this.stocks[index].favorite;
+      }
+    } catch (error) {
+      console.error(`Failed to update favorite status for ${stock.symbol}:`, error);
+      // Rollback UI state if needed
+    }
   }
 }

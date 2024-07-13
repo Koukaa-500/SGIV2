@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar class="bar">
     <ion-title>{{ symbol }}</ion-title>
+
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
@@ -29,7 +30,7 @@
           <tbody>
             <tr *ngFor="let stock of stocks">
               <td>{{ stock.timestamp | date:'short' }}</td>
-              <td>{{ stockData?.quantity }}</td>
+              <td>{{ stock.quantity }}</td>
               <td>{{stock.change | number:'1.2-2' }}</td>
               <td>{{ stock.price | currency }}</td>
               
@@ -46,12 +47,14 @@
 
 
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click) ="goToIntraday(symbol)">Intraday</ion-button>
-      <ion-button >Transaction</ion-button>
-      <ion-button (click)="goToProfond()">Profond</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+
+
+<ion-footer style="background-color: #00bfa5;">
+  
+  <ion-buttons slot="start" style="background-color: #00bfa5;">
+    <ion-button (click)="goToIntraday(stock.symbol)">Intraday</ion-button>
+    <ion-button >Transaction</ion-button>
+    <ion-button (click)="goToProfond(stock.symbol)">Profondeur</ion-button>
+  </ion-buttons>
+
 </ion-footer>

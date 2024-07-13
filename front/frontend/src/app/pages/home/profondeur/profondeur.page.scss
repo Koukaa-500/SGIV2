@@ -1,0 +1,45 @@
+.bar{
+    --background : #00bfa5;
+  }
+
+.container {
+    --background: #d0e7da;
+    
+  }
+  
+  
+
+  ion-footer {
+    padding: 10px 0 10px 0;
+    font-size: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .footer-toolbar {
+    /* White background for the toolbar */
+   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+ }
+ 
+ ion-button {
+   margin:5px; /* Margin between buttons */
+   --border-radius: 20px;
+   
+  
+    /* Light background for buttons */
+   --color: #333; /* Dark text color for buttons */
+ }
+ 
+ .button-active {
+   --background: #4CAF50; /* Active button background color */
+   --color: #ffffff; /* Active button text color */
+ }
+
+
+ ion-header {
+    ion-toolbar {
+      --background: transparent; /* Set toolbar background to transparent */
+      --ion-color-base: transparent; /* Set base color to transparent */
+      --border-color: transparent; /* Set border color to transparent */
+      --color: var(--ion-color-light); /* Set text color, adjust as needed */
+    }
+  }
