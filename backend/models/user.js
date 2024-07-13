@@ -11,13 +11,13 @@ const productSchema = new mongoose.Schema({
         type: Number,
     },
     symbol: {
-        type: String, // Adding symbol field
+        type: String,
     },
     type: {
-        type: String, // Adding type field
+        type: String,
     },
     validity: {
-        type: String, // Adding validity field
+        type: String,
     }
 });
 

@@ -78,4 +78,7 @@ export class AccountsService {
       return throwError('Failed to get token');
     }
   }
+  getUserData(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/user-data`);
+  }
 }
