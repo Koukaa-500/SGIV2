@@ -45,28 +45,7 @@ export class AuthenticationService {
     await this.storage.remove('token');
     this.router.navigate(['/login']);
   }
-  async getUserProfile() {
-    try {
-      const token = await this.getToken(); // Await the Promise
 
-      // Set headers with resolved token
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'token': token,
-      });
-
-      return this.http.get<any>(`${this.apiUrl}/get`, { headers })
-        .pipe(
-          catchError((error) => {
-            console.error('Error fetching user profile:', error);
-            return throwError('Something went wrong');
-          })
-        );
-    } catch (error) {
-      console.error('Error fetching user token:', error);
-      return throwError('Failed to get token');
-    }
-  }
   
 // Method to update user profile
 async updateUserProfile(data: any){
@@ -109,5 +88,78 @@ async changePassword(oldPassword: string, newPassword: string, confirmPassword: 
       return throwError('Failed to change password');
     })
   );
+}
+
+async getUserProfile() {
+  try {
+    const token = await this.getToken(); // Await the Promise
+
+    // Set headers with resolved token
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': token,
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/get`, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching user profile:', error);
+          return throwError('Something went wrong');
+        })
+      );
+  } catch (error) {
+    console.error('Error fetching user token:', error);
+    return throwError('Failed to get token');
+  }
+}
+
+async getUserHistory(): Promise<any> {
+  try {
+    const token = await this.getToken(); // Await the Promise
+
+    // Set headers with resolved token
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': token || ''
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/history`, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching user history:', error);
+          return throwError('Failed to fetch user history');
+        })
+      )
+  } catch (error) {
+    console.error('Error fetching user token:', error);
+    return throwError('Failed to get token');
+  }
+}
+
+// Method to add user history
+async addUserHistory(message: string): Promise<any> {
+  try {
+    const token = await this.getToken(); // Await the Promise
+
+    // Set headers with resolved token
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': token || ''
+    });
+
+    const data = { message }; // Only send the message
+
+    return this.http.post<any>(`${this.apiUrl}/history1`, data, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Error adding user history:', error);
+          return throwError('Failed to add user history');
+        })
+      )
+      .toPromise(); // Convert Observable to Promise
+  } catch (error) {
+    console.error('Error fetching user token:', error);
+    return Promise.reject('Failed to get token');
+  }
 }
 }

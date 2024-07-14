@@ -1,0 +1,19 @@
+<ion-content>
+  <div class="profile-card">
+    <ion-header translucent>
+      <ion-toolbar>
+        <ion-title>history</ion-title>
+        <ion-buttons slot="start">
+          <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <div class="notification-list">
+      <div *ngFor="let historyy of history" class="notification">
+        <div class="message">{{ historyy.message }}</div>
+        <div class="date">{{ historyy.date | date: 'yyyy-MM-dd' }}</div>
+      </div>
+    </div>
+  </div>
+</ion-content>

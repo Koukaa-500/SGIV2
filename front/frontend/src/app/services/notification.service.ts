@@ -22,6 +22,22 @@ export class NotificationService {
       'Content-Type': 'application/json',
       'token': `${token}`
     });
-    return this.http.get<string[]>(`${this.apiUrl}/notifications`, { headers });
+    return this.http.get<any[]>(`${this.apiUrl}/notifications`, { headers });
+  }
+  async addNotification(message: string): Promise<any> {
+    try {
+      const token = await this.storage.get('token');
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'token': `${token}`
+      });
+
+      return this.http.post<any>(`${this.apiUrl}/notifications1`, { message }, { headers })
+        .toPromise();
+    } catch (error) {
+      console.error('Error adding notification:', error);
+      throw new Error('Failed to add notification');
+    }
   }
 }

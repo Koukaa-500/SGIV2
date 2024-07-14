@@ -116,6 +116,10 @@
           <ion-icon name="exit-outline"></ion-icon>
           Sign out
         </ion-item>
+        <ion-item routerLink="/history" (click)="closeMenu();" [class.active]="activeRoute === '/history'">
+          <ion-icon name="document-text-outline"></ion-icon>
+          history
+        </ion-item>
       </ion-list>
       
     </ion-content>

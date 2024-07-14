@@ -54,7 +54,7 @@ export class AccountsService {
       'Content-Type': 'application/json',
       'token': `${token}`
     });
-    return this.http.post('http://localhost:3000/account//sell-stock', payload, {headers}).toPromise();
+    return this.http.post('http://localhost:3000/account/sell-stock', payload, {headers}).toPromise();
   }
 
 

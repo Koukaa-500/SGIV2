@@ -1,5 +1,3 @@
-
-
 <ion-content fullscreen="true" style="--background-color: black;">
   <div class="profile-card">
     <ion-header translucent>
@@ -10,59 +8,48 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-  <!-- <div class="custom-select-container" style="margin-top: 2rem;">
-    <label for="account-select" class="custom-select-label">Choose an Account</label>
-    <select id="account-select" class="custom-select" style="width:20rem;" (change)="onAccountChange($event)">
-      <option value="" disabled selected>Select an account</option>
-      <option *ngFor="let account of accounts" [value]="account._id">{{ account.name }}</option>
-    </select>
-  </div> -->
+  
+    <ion-list class="black-theme">
+      <ion-item>
+        <ion-label>Choose an Account</ion-label>
+        <ion-select placeholder="Select an account" (ionChange)="onAccountChange($event)">
+          <ion-select-option value="" disabled>Select an account</ion-select-option>
+          <ion-select-option *ngFor="let account of accounts" [value]="account._id">{{ account.name }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
-  <ion-list class="black-theme">
-    <ion-item>
-      <ion-label>Choose an Account</ion-label>
-      <ion-select placeholder="Select an account" (ionChange)="onAccountChange($event)">
-        <ion-select-option value="" disabled>Select an account</ion-select-option>
-        <ion-select-option *ngFor="let account of accounts" [value]="account._id">{{ account.name }}</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-
-  Wallet Balance Section
- <div class="wallet-balance">
-  <div class="profile-pic">
-    <ion-avatar>
-      <img src="../../../assets/images/portfeuille.jpg">
-    </ion-avatar>
-  </div>
-    <div class="wallet-info">
-      <h2>Totale Portfeuille</h2>
-      <p class="currencies">Date : </p>
-      <p class="currencies">Solde : </p>
-      <p class="currencies">Espèce : </p>
-      <p class="currencies">Portfeuille Titre : </p>
-
+    <!-- Wallet Balance Section -->
+    <div *ngIf="selectedAccount" class="wallet-balance">
+      <div class="profile-pic">
+        <ion-avatar>
+          <img src="../../../assets/images/portfeuille.jpg">
+        </ion-avatar>
+      </div>
+      <div class="wallet-info">
+        <h2>Totale Portfeuille</h2>
+        <p class="currencies">Date: {{ currentDate }}</p>
+        <p class="currencies">Solde: {{ selectedAccount.solde }}</p>
+        <p class="currencies">Espèce: {{ espece }}</p>
+        <p class="currencies">Portfeuille Titre: {{ titre }}</p>
+      </div>
     </div>
-    
+  
+    <!-- Stock Details Section -->
+    <div *ngIf="selectedAccount" class="section">
+      <h2 class="section-title">Stocks for {{ selectedAccount.name }}</h2>
+      <ion-card *ngFor="let stock of selectedStocks" class="stock-card">
+        <ion-card-header>
+          <ion-card-title>{{ stock.symbol }}</ion-card-title>
+          <ion-card-subtitle>{{ stock.quantity }} Units</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Price: {{ stock.price | currency }}</p>
+          <p>Type: {{ stock.type }}</p>
+          <p>Validity: {{ stock.validity }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 
-  
-  
-
-  <!-- Stock Details Section -->
-  <div *ngIf="selectedAccount" class="section">
-    <h2 class="section-title">Stocks for {{ selectedAccount.name }}</h2>
-    <ion-card *ngFor="let stock of selectedStocks" class="stock-card">
-      <ion-card-header>
-        <ion-card-title>{{ stock.symbol }}</ion-card-title>
-        <ion-card-subtitle>{{ stock.quantity }} Units</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Price: {{ stock.price | currency }}</p>
-        <p>Type: {{ stock.type }}</p>
-        <p>Validity: {{ stock.validity }}</p>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  </div>
 </ion-content>

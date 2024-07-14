@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/product.service';
 import { AccountsService } from 'src/app/services/accounts.service';
-
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { NotificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'app-buy',
   templateUrl: './buy.page.html',
@@ -25,7 +26,9 @@ export class BuyPage implements OnInit {
     private navCtrl: NavController,
     private route: ActivatedRoute,
     private productService: ProductService,
-    private accountsService: AccountsService
+    private accountsService: AccountsService,
+    private authService: AuthenticationService,
+    private notificationService: NotificationService
   ) {
     this.route.paramMap.subscribe(params => {
       if (params.has('symbol')) {
@@ -83,7 +86,11 @@ export class BuyPage implements OnInit {
 
     try {
       const response = await this.accountsService.buyStock(payload);
-      console.log('Stock purchased successfully:', response);
+      const message = `Bought ${quantity} shares of ${stock.symbol} for a total cost of ${totalCost}`;
+      this.authService.addUserHistory(message);
+      const mess = `you're bought of the ${stock.symbol} stock is successful`;
+      this.notificationService.addNotification(mess);
+            console.log('Stock purchased successfully:', response);
       this.balance -= totalCost; // Update balance locally
     } catch (error) {
       console.error('Error buying stock:', error);
