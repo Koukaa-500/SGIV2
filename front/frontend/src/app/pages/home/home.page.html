@@ -56,14 +56,13 @@
       </div>
     </div>
   </div>
-</ion-content>
 
+</ion-content>
 <ion-footer>
-  <ion-toolbar class="footer-toolbar">
-    <ion-buttons slot="start">
-      <ion-button>Date</ion-button>
-      <ion-button>Moyenne</ion-button>
-      <ion-button>Up&Down</ion-button>
-    </ion-buttons>
+  <ion-toolbar>
+    <div class="footer-content">
+      <span>{{ today | date: 'fullDate' }}</span>
+      <span>{{ availabilityStatus }}</span>
+    </div>
   </ion-toolbar>
 </ion-footer>

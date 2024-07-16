@@ -19,7 +19,7 @@ export class NotificationPage implements OnInit {
   async loadNotifications() {
     (await this.notificationService.getNotifications()).subscribe(
       (notifications) => {
-        this.notificationMessages = notifications.map(this.getNotificationString);
+        this.notificationMessages = notifications;
         console.log(this.notificationMessages);
       },
       (error) => {

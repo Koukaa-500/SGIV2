@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/product.service';
 import { AccountsService } from 'src/app/services/accounts.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -27,6 +29,9 @@ export class SellPage implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     private accountsService: AccountsService,
+    private authService: AuthenticationService,
+    private notificationService: NotificationService,
+    
     private toastController: ToastController
   ) {
     this.route.paramMap.subscribe(params => {
@@ -81,6 +86,10 @@ export class SellPage implements OnInit {
 
     try {
       const response = await this.accountsService.sellStock(payload);
+      const message = `Sold ${quantity} shares of ${stock.symbol} for a total cost of ${stock.price * quantity}`;
+      this.authService.addUserHistory(message);
+      const mess = `you're sold of the ${stock.symbol} stock is successful`;
+      this.notificationService.addNotification(mess);
       console.log('Stock sold successfully:', response);
       this.balance += stock.price * quantity; // Update balance locally
       this.presentToast('Stock sold successfully!', 'success');

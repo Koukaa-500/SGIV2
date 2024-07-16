@@ -19,6 +19,8 @@ export class HomePage implements OnInit, OnDestroy {
   title: string = 'Marché';
   activeFilter: string = '';
   filteredStocks: any[] = [];
+  today: Date = new Date();
+  availabilityStatus: string = '';
 
   constructor(
     private productService: ProductService,
@@ -35,7 +37,6 @@ export class HomePage implements OnInit, OnDestroy {
       () => {
         this.stocks = this.productService.stocks; // Update local stocks array with the latest data
         this.filteredStocks = [...this.stocks]; // Initialize filtered stocks with all stocks
-
       },
       error => {
         console.error('Error fetching favorite stocks:', error);
@@ -43,10 +44,14 @@ export class HomePage implements OnInit, OnDestroy {
     );
     this.intervalId = setInterval(() => {
       this.updateStockPrices();
+      this.updateAvailabilityStatus();
     }, 1000);
     setInterval(() => {
       this.updateStockStatus();
     }, 20000);
+
+    // Initial status update
+    this.updateAvailabilityStatus();
   }
 
   ngOnDestroy() {
@@ -66,7 +71,6 @@ export class HomePage implements OnInit, OnDestroy {
     );
   }
 
-
   toggleFavorite(event: Event, stock: any) {
     try {
       event.stopPropagation(); // Stops event propagation
@@ -83,8 +87,6 @@ export class HomePage implements OnInit, OnDestroy {
     }
   }
 
-  
-
   loadStockData() {
     this.stocks = [];
     this.stockSymbols.forEach(symbol => {
@@ -94,7 +96,6 @@ export class HomePage implements OnInit, OnDestroy {
       }
     });
     this.filteredStocks = [...this.stocks]; // Initialize filtered stocks with all stocks
-
   } 
 
   buy(event: Event,stock: any) {
@@ -196,6 +197,7 @@ export class HomePage implements OnInit, OnDestroy {
     
     this.activeFilter = option; // Set active filter
   }
+
   clearFilters(): void {
     this.filteredStocks = [...this.stocks]; // Reset filtered stocks to all stocks
     this.activeFilter = ''; // Clear active filter
@@ -210,7 +212,8 @@ export class HomePage implements OnInit, OnDestroy {
     });
   }
 
-
-  
-
+  updateAvailabilityStatus(): void {
+    const currentHour = new Date().getHours();
+    this.availabilityStatus = (currentHour >= 6 && currentHour < 20) ? 'Disponible' : 'Non-Disponible';
+  }
 }

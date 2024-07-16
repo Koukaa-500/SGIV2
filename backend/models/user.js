@@ -1,5 +1,14 @@
 const mongoose = require('mongoose');
 
+const historySchema = new mongoose.Schema({
+    message: {
+        type: String,
+    },
+    date: {
+        type: Date,
+    }
+});
+
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -28,7 +37,7 @@ const accountSchema = new mongoose.Schema({
     },
     stock: {
         type: [productSchema],
-        default: () => []  // Initialize an empty array by default
+        default: () => []
     },
     solde: {
         type: Number,
@@ -39,7 +48,6 @@ const accountSchema = new mongoose.Schema({
 const notificationSchema = new mongoose.Schema({
     message: {
         type: String,
-        required: true
     },
     date: {
         type: Date,
@@ -68,9 +76,9 @@ const userSchema = new mongoose.Schema({
         type: String
     },
     accounts: [accountSchema],
-    favoriteStocks: [String], // Store symbols instead of ObjectId references
-    notifications: [notificationSchema]  // Updating notifications field to use the notificationSchema
-
+    favoriteStocks: [String],
+    notifications: [notificationSchema],
+    history: [historySchema]
 });
 
 const User = mongoose.model('User', userSchema);

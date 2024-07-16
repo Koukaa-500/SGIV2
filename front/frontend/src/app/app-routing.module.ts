@@ -82,14 +82,19 @@ const routes: Routes = [
   {
     path: 'profondeur/:symbol',
     loadChildren: () => import('./pages/home/profondeur/profondeur.module').then( m => m.ProfondeurPageModule)
-  },  {
+  },
+  {
     path: 'guide',
     loadChildren: () => import('./pages/guide/guide.module').then( m => m.GuidePageModule)
   },
   {
     path: 'reglementation',
     loadChildren: () => import('./pages/reglementation/reglementation.module').then( m => m.ReglementationPageModule)
+  },  {
+    path: 'history',
+    loadChildren: () => import('./pages/history/history.module').then( m => m.HistoryPageModule)
   },
+
 
 
 ];

@@ -256,18 +256,33 @@ router.post('/favorite1', auth, async (req, res) => {
   }
 });
 
-
 const addNotification = async (message) => {
   try {
     const users = await User.find({});
     users.forEach(async (user) => {
-      user.notifications.push(message);
+      const notification = {
+        message,
+        date: new Date()
+      };
+      user.notifications.push(notification);
       await user.save();
     });
   } catch (error) {
     console.error('Error adding notification:', error);
   }
 };
+
+// const addNotification = async (message) => {
+//   try {
+//     const users = await User.find({});
+//     users.forEach(async (user) => {
+//       user.notifications.push(message);
+//       await user.save();
+//     });
+//   } catch (error) {
+//     console.error('Error adding notification:', error);
+//   }
+// };
 
 // Schedule tasks
 cron.schedule('0 20 * * *', () => {
@@ -296,6 +311,48 @@ router.get('/user-data', auth, async (req, res) => {
   } catch (error) {
       console.error('Error fetching user data:', error);
       res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Route to post user history
+router.post('/history1', auth, async (req, res) => {
+  try {
+    const userId = req.user._id; // Extract user ID from the token
+    const { message } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const historyEntry = {
+      message,
+      date: new Date() // Initialize date server-side
+    };
+
+    user.history.push(historyEntry);
+    await user.save();
+
+    res.status(200).json({ message: 'History entry added successfully' });
+  } catch (error) {
+    console.error('Error adding history entry:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+// Route to get user history
+router.get('/history', auth, async (req, res) => {
+  try {
+    const userId = req.user._id; // Extract user ID from the token
+    const user = await User.findById(userId).select('history');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user.history);
+  } catch (error) {
+    console.error('Error fetching user history:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
