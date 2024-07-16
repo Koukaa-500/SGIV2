@@ -4,7 +4,7 @@
   background-size: 100%;
   color: white;
   padding: 20px;
-  height: 550vh;
+  min-height: calc(100vh - 56px); /* 56px is the height of the footer */
   width: 100vw;
 }
 
@@ -18,9 +18,9 @@
 }
 
 ion-header ion-toolbar {
-  --background: transparent;
-  --ion-color-base: transparent;
-  --border-color: transparent;
+  --background: #1c1c1c; /* Set a solid background color */
+  --ion-color-base: #1c1c1c;
+  --border-color: #1c1c1c;
   --color: var(--ion-color-light);
 }
 
@@ -69,14 +69,15 @@ p {
   padding: 0;
   width: 5rem;
   margin-left: 5rem;
-  opacity: 1; /* Ensure buttons are fully visible by default */
-  transition: opacity 0.3s ease; /* Smooth transition for opacity change */
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
+
 .stock-card.disabled,
 .buy-button:disabled,
 .sell-button:disabled {
-  opacity: 0.6; /* Reduce opacity for disabled state */
-  cursor: not-allowed; /* Change cursor to indicate non-interactivity */
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .button-container {
@@ -84,9 +85,6 @@ p {
   flex-direction: column;
   position: absolute;
   left: 10rem;
-  h{
-    left:50%;
-  }
 }
 
 .button-container button {
@@ -120,9 +118,7 @@ p {
 .carousel {
   display: flex;
   width: max-content;
-  /* Ensure the container fits all the cards in a single line */
   animation: scroll 10s linear infinite;
-  /* Increase the speed by shortening the duration */
 }
 
 .stock-cardd {
@@ -131,8 +127,6 @@ p {
   justify-content: space-between;
   min-width: 200px;
   height: 3rem;
-
-  /* Set the height to 100px */
   margin: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -153,23 +147,24 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .filter-options {
   display: flex;
   justify-content: space-around;
   margin-bottom: 10px;
+}
 
-  button {
-    padding: 10px;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    color: #000;
-    transition: background-color 0.3s ease;
+.filter-options button {
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: #000;
+  transition: background-color 0.3s ease;
+}
 
-    &:hover {
-      background-color: #e0e0e0;
-    }
-  }
+.filter-options button:hover {
+  background-color: #e0e0e0;
 }
 
 .col .symbol {
@@ -188,20 +183,16 @@ p {
 .button-container ion-icon {
   font-size: 50px;
   color: #ccc;
-  /* Set initial color for unfilled */
   cursor: pointer;
 }
 
 .button-container ion-icon.favorite {
   color: gold;
-  /* Set the color to gold when filled */
 }
 
 .button-container ion-icon:hover {
   transform: scale(1.2);
-  /* Optional: Add a hover effect */
 }
-
 
 .title-and-icons {
   display: flex;
@@ -209,7 +200,7 @@ p {
 }
 
 .title {
-  flex: 1; /* Take up remaining space */
+  flex: 1;
 }
 
 .filter-buttons {
@@ -218,9 +209,9 @@ p {
 }
 
 .filter-button {
-  padding: 0 0 0 10px; /* Adjust padding as needed */
-  background: none; /* Remove any background */
-  border: none; /* Remove border if present */
+  padding: 0 0 0 10px;
+  background: none;
+  border: none;
   cursor: pointer;
   transition: background-color 0.3s;
   display: flex;
@@ -234,4 +225,18 @@ p {
 
 .filter-button:hover {
   color: red;
+}
+
+ion-footer {
+  padding: 0;
+  font-size: 1rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #00bfa5; /* Set a solid background color */
+  ion-button{
+    margin:0 0 0 25px;
+  }
+}
+
+.footer-toolbar {
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/product.service';
 import { AccountsService } from 'src/app/services/accounts.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sell',
@@ -10,7 +11,6 @@ import { AccountsService } from 'src/app/services/accounts.service';
   styleUrls: ['./sell.page.scss'],
 })
 export class SellPage implements OnInit {
-
   stock: any;
   transferType: any;
   selectedAccount: any;
@@ -26,7 +26,8 @@ export class SellPage implements OnInit {
     private navCtrl: NavController,
     private route: ActivatedRoute,
     private productService: ProductService,
-    private accountsService: AccountsService
+    private accountsService: AccountsService,
+    private toastController: ToastController
   ) {
     this.route.paramMap.subscribe(params => {
       if (params.has('symbol')) {
@@ -37,15 +38,16 @@ export class SellPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getAccounts();
     this.route.paramMap.subscribe(params => {
       this.stockSymbol = params.get('symbol');
       this.stockData = this.productService.getStockBySymbol(this.stockSymbol);
       this.quantity = 0;
       this.validity = 1;
       this.stock = 100;
-      this.balance = 1000;
+      this.balance = '';
     });
-    this.getAccounts();
+    
   }
 
   async getAccounts() {
@@ -67,7 +69,7 @@ export class SellPage implements OnInit {
 
   async sell(stock: any, quantity: number) {
     if (!this.selectedAccount) {
-      console.error('No account selected');
+      this.presentToast('No account selected', 'danger');
       return;
     }
 
@@ -81,9 +83,21 @@ export class SellPage implements OnInit {
       const response = await this.accountsService.sellStock(payload);
       console.log('Stock sold successfully:', response);
       this.balance += stock.price * quantity; // Update balance locally
+      this.presentToast('Stock sold successfully!', 'success');
     } catch (error) {
       console.error('Error selling stock:', error);
+      this.presentToast('Error selling stock', 'danger');
     }
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+      color: color
+    });
+    toast.present();
   }
 
   incrementQuantity() {
@@ -105,12 +119,19 @@ export class SellPage implements OnInit {
   decrementValidity() {
     if (this.validity > 1) {
       this.validity--;
+    }
   }
-}
 
-updateCost() {
-  if (this.stockData && this.stockData.price) {
-    this.cost = this.quantity * this.stockData.price;
+  updateCost() {
+    if (this.stockData && this.stockData.price) {
+      this.cost = this.quantity * this.stockData.price;
+    }
   }
-}
+
+  onAccountChange(accountId: string) {
+    const selectedAccount = this.accounts.find(account => account._id === accountId);
+    if (selectedAccount) {
+      this.balance = selectedAccount.solde;
+    }
+  }
 }

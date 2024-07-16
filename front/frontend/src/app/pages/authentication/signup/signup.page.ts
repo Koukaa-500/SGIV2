@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,8 @@ export class SignupPage {
 
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private toastController: ToastController
   ) {
     this.name = '';
     this.email = '';
@@ -27,6 +29,16 @@ export class SignupPage {
 
   onFileSelected(event: any) {
     this.image = event.target.files[0];
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: color,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   createAccount() {
@@ -42,10 +54,12 @@ export class SignupPage {
     this.authService.register(formData).subscribe(
       (response) => {
         console.log('Registration successful', response);
+        this.presentToast('Registration successful', 'success');
         this.router.navigate(['/login']); // Redirect to login page
       },
       (error) => {
         console.error('Registration failed', error);
+        this.presentToast('Registration failed: ' + error, 'danger');
       }
     );
   }
@@ -58,7 +72,4 @@ export class SignupPage {
     this.router.navigate(['/login']);
   }
 
-  continueAsGuest() {
-    this.router.navigate(['/guest-dashboard']);
-  }
 }

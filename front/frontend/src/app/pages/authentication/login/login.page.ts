@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,12 @@ export class LoginPage implements OnInit {
   isDarkMode: boolean;
   errorMessage: string = '';
   showPassword: boolean = true;
-  constructor(private authService: AuthenticationService, private router: Router) {
+
+  constructor(
+    private authService: AuthenticationService, 
+    private router: Router,
+    private toastController: ToastController
+  ) {
     this.isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     // Listen to route changes
@@ -32,12 +38,25 @@ export class LoginPage implements OnInit {
     this.email = '';
     this.password = '';
   }
+
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: color,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
   login() {
     if (!this.email || !this.password) {
       this.errorMessage = 'Please provide both email and password';
+      this.presentToast(this.errorMessage, 'danger');
       return;
     }
     const credentials = {
@@ -46,25 +65,17 @@ export class LoginPage implements OnInit {
     };
     this.authService.login(credentials).subscribe(
       res => {
-        console.log("niceeuuuu");
+        console.log("Login successful");
+        this.presentToast('Login successful', 'success');
         this.router.navigate(['./profile']);
       },
       err => {
-        console.log("error");
+        console.log("Login error");
         this.errorMessage = err;
+        this.presentToast('Login failed: ' + err, 'danger');
       }
     );
   }
 
-  navigateToForgotPassword() {
-    console.log("This is forgot password");
-  }
 
-  navigateToRegister() {
-    console.log("This is register");
-  }
-
-  continueAsGuest() {
-    console.log('Continue as Guest');
-  }
 }

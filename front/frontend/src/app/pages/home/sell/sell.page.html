@@ -16,7 +16,7 @@
     </ion-card-header>
     <ion-card-content>
       <ion-row class="card-content-row">
-        <ion-col>{{balance}}$</ion-col>
+        <ion-col>{{balance | number:'1.2-2' }}$</ion-col>
         <ion-col text-right>05/25</ion-col>
       </ion-row>
     </ion-card-content>
@@ -25,8 +25,8 @@
   <!-- Choose an Account Select -->
   <div class="custom-select-container">
     <label for="account-select" class="custom-select-label">Choose an Account</label>
-    <select id="account-select" class="custom-select" [(ngModel)]="selectedAccount">
-      <option *ngFor="let account of accounts" [value]="account._id">{{ account.name }} **** {{ account.solde }}</option>
+    <select id="account-select" class="custom-select" [(ngModel)]="selectedAccount" (ngModelChange)="onAccountChange($event)">
+      <option *ngFor="let account of accounts" [value]="account._id">{{ account.name }}</option>
     </select>
   </div>
 
@@ -61,7 +61,7 @@
   <!-- Display updated account balance after transaction -->
   <ion-row class="balance-row">
     <ion-col>Your new balance is:</ion-col>
-    <ion-col text-right>{{cost}}$</ion-col>
+    <ion-col text-right>{{cost | number:'1.2-2'}}$</ion-col>
   </ion-row>
 
   <!-- Buy button -->

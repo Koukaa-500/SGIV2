@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/product.service';
 import { AccountsService } from 'src/app/services/accounts.service';
-
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-buy',
   templateUrl: './buy.page.html',
@@ -25,7 +25,8 @@ export class BuyPage implements OnInit {
     private navCtrl: NavController,
     private route: ActivatedRoute,
     private productService: ProductService,
-    private accountsService: AccountsService
+    private accountsService: AccountsService,
+    private toastController: ToastController
   ) {
     this.route.paramMap.subscribe(params => {
       if (params.has('symbol')) {
@@ -42,7 +43,7 @@ export class BuyPage implements OnInit {
       this.quantity = 1;
       this.validity = 1;
       this.stock = 0;
-      this.balance = 1000;
+      this.balance = '';
     });
     this.getAccounts();
   }
@@ -66,12 +67,12 @@ export class BuyPage implements OnInit {
 
   async buy(stock: any, quantity: number) {
     if (!this.selectedAccount) {
-      console.error('No account selected');
+      this.presentToast('No account selected', 'danger');
       return;
     }
     const totalCost = stock.price * quantity;
     if (this.balance < totalCost) {
-      console.error('Insufficient balance');
+      this.presentToast('Insufficient balance', 'danger');
       return;
     }
 
@@ -85,9 +86,21 @@ export class BuyPage implements OnInit {
       const response = await this.accountsService.buyStock(payload);
       console.log('Stock purchased successfully:', response);
       this.balance -= totalCost; // Update balance locally
+      this.presentToast('Stock purchased successfully!', 'success');
     } catch (error) {
       console.error('Error buying stock:', error);
+      this.presentToast('Error buying stock', 'danger');
     }
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+      color: color
+    });
+    toast.present();
   }
 
   incrementQuantity() {
@@ -115,6 +128,13 @@ export class BuyPage implements OnInit {
 updateCost() {
   if (this.stockData && this.stockData.price) {
     this.cost = this.quantity * this.stockData.price;
+  }
+}
+
+onAccountChange(accountId: string) {
+  const selectedAccount = this.accounts.find(account => account._id === accountId);
+  if (selectedAccount) {
+    this.balance = selectedAccount.solde;
   }
 }
 }

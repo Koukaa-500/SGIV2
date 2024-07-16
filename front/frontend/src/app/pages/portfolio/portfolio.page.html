@@ -55,10 +55,10 @@
     <ion-card *ngFor="let stock of selectedStocks" class="stock-card">
       <ion-card-header>
         <ion-card-title>{{ stock.symbol }}</ion-card-title>
-        <ion-card-subtitle>{{ stock.quantity }} Units</ion-card-subtitle>
+        <ion-card-subtitle>Qte : {{ stock.quantity }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <p>Price: {{ stock.price | currency }}</p>
+        <p>Price: {{stock.quantity*stock.price | currency }}</p>
         <p>Type: {{ stock.type }}</p>
         <p>Validity: {{ stock.validity }}</p>
       </ion-card-content>
