@@ -1,3 +1,10 @@
+* {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 .profile-card {
   background-color: #201c24;
   background-repeat: no-repeat;
@@ -8,21 +15,22 @@
   width: 100vw;
 }
 
-.theme-toggle {
-  margin-top: 20px;
+ion-header {
+  background-color: #201c24;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  color: white;
+  // padding: 20px;
+  // min-height: calc(100vh - 56px); /* 56px is the height of the footer */
+  width: 100%;
+  ion-toolbar {
+    --background: transparent; /* Set toolbar background to transparent */
+    --ion-color-base: transparent; /* Set base color to transparent */
+    --border-color: transparent; /* Set border color to transparent */
+    --color: var(--ion-color-light); /* Set text color, adjust as needed */
+  }
 }
 
-.theme-toggle ion-button {
-  --background: #ff7f50;
-  --color: white;
-}
-
-ion-header ion-toolbar {
-  --background: #1c1c1c; /* Set a solid background color */
-  --ion-color-base: #1c1c1c;
-  --border-color: #1c1c1c;
-  --color: var(--ion-color-light);
-}
 
 .product-list {
   display: flex;
@@ -30,158 +38,96 @@ ion-header ion-toolbar {
   width: 100%;
 }
 
-.header-card {
-  background-color: #1c1c1c;
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 16px;
-  color: white;
-}
-
 .stock-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  width: 400px;
+  margin: 20px auto;
+  width: 500px;
   height: 200px;
+  padding: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  background-color: #d0e7da;
-  margin-left: 10px;
-}
-
-h1, h2, h3, h6, h4 {
-  margin: 0;
-}
-
-p {
-  width: 50px;
-}
-
-.buy-button,
-.sell-button {
-  background: none;
-  border: none;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 1px 2px 10px -4px;
+  background: #fff;
+  transition: transform 0.2s ease-in-out;
   cursor: pointer;
-  margin: 0;
-  padding: 0;
-  width: 5rem;
-  margin-left: 5rem;
-  opacity: 1;
-  transition: opacity 0.3s ease;
 }
 
-.stock-card.disabled,
-.buy-button:disabled,
-.sell-button:disabled {
+.stock-card.disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.stock-card .item-image {
+  width: 140px;
+  height: 140px;
+  // background: lightgrey
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stock-card .item-image ion-icon {
+  width: 5rem;
+  height: 5rem; /* Adjust size as needed */
+  color: #ccc; /* Icon color */
+  cursor: pointer;
+}
+
+.stock-card .item-image ion-icon.favorite {
+  color: gold; /* Color for favorite icon state */
+}
+
+.stock-card .item-image ion-icon:hover {
+  transform: scale(1.2); /* Scale effect on hover */
+}
+
+.stock-card .item-details {
+  height: 140px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.item-details span{
+  font-size: 3rem;
+ 
+}
+.stock-card .heading {
+  font-size: 40px;
+  
+}
+
+.stock-card .sub-heading {
+  font-size: 30px;
+  color: grey;
+  width: 100%;
+}
+
+.stock-card .item-price {
+  margin-top: 80px;
+  
+  text-align: left;
+  margin-right: 0;
+}
+
+.stock-card:hover {
+  transform: scale(1.05);
 }
 
 .button-container {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  left: 10rem;
-}
-
-.button-container button {
-  margin-bottom: 0.4rem;
-}
-
-.button-container button:last-child {
-  margin-bottom: 0;
-}
-
-.stock-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.stock-card {
-  width: 100vw;
-  margin: 10px 0px 0px 0px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.carousel-container {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.carousel {
-  display: flex;
-  width: max-content;
-  animation: scroll 10s linear infinite;
-}
-
-.stock-cardd {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-width: 200px;
-  height: 3rem;
-  margin: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #d0e7da;
-}
-
-.col {
-  flex: 1;
-  text-align: left;
-}
-
-.symbol,
-.price,
-.change {
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.filter-options {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 10px;
-}
-
-.filter-options button {
-  padding: 10px;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  color: #000;
-  transition: background-color 0.3s ease;
-}
-
-.filter-options button:hover {
-  background-color: #e0e0e0;
-}
-
-.col .symbol {
-  width: 50px;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-200px * 6));
-  }
+  margin-top: auto;
+  width: 5rem;
 }
 
 .button-container ion-icon {
-  font-size: 50px;
+  font-size: 24px;
   color: #ccc;
   cursor: pointer;
 }
@@ -194,13 +140,60 @@ p {
   transform: scale(1.2);
 }
 
-.title-and-icons {
-  display: flex;
-  align-items: center;
+.button-container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  width: 5rem;
+  
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-.title {
-  flex: 1;
+.button-container button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.stock-card :disabled{
+  cursor: not-allowed;
+}
+
+@media only screen and (max-width: 480px) {
+  .stock-card {
+    width: 100%;
+    height: 130px;
+  }
+  .stock-card .item-image {
+    width: 100px;
+    height: 100px;
+    margin-left: 0;
+  }
+  .stock-card .item-details {
+    height: 100px;
+    margin-right: 0;
+  }
+  .stock-card .heading {
+    font-size: 12px;
+  }
+  .stock-card .sub-heading {
+    font-size: 10px;
+  }
+  .stock-card .item-price {
+    margin-top: 60px;
+    font-size: 10px;
+  }
+  .stock-card:hover {
+    transform: scale(1.05);
+  }
+}
+
+ion-header ion-toolbar {
+  --background: #1c1c1c;
+  --ion-color-base: #1c1c1c;
+  --border-color: #1c1c1c;
+  --color: var(--ion-color-light);
 }
 
 .filter-buttons {
@@ -228,15 +221,89 @@ p {
 }
 
 ion-footer {
-  padding: 0;
-  font-size: 1rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #00bfa5; /* Set a solid background color */
-  ion-button{
-    margin:0 0 0 25px;
+  ion-toolbar {
+    --background: #000; /* Set your desired background color */
+    color: #fff; /* Text color */
+    font-size: 14px; /* Adjust font size as needed */
+    font-family: 'Arial', sans-serif; /* Example font family */
+    padding: 8px 16px; /* Adjust padding for spacing */
+    
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .footer-section {
+      text-align: center;
+    }
+
+    .date-section {
+      flex: 1.5; /* Date section takes more space */
+    }
+
+    .volume-section,
+    .change-section {
+      flex: 1.5; /* Equal width for volume and change sections */
+    }
+    .disponible {
+      color: green; /* Green color for disponible status */
+    }
+
+    .non-disponible {
+      color: red; /* Red color for non-disponible status */
+    }
   }
 }
 
-.footer-toolbar {
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  width: max-content; /* Ensure the container fits all the cards in a single line */
+  animation: scroll 10s linear infinite; /* Increase the speed by shortening the duration */
+}
+
+.stock-cardd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 200px;
+  height: 50px; /* Set the height to 100px */
+  margin: 10px;
+  
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #ccc;
+}
+
+.col {
+  flex: 1;
+  text-align: left;
+}
+
+.symbol, .price, .change {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.col .symbol{
+  width: 50px;
+}
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-200px * 6));
+  }
 }

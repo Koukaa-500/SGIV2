@@ -2,7 +2,7 @@
   <ion-toolbar class="bar">
     <div class="title-and-icons">
       <div class="title"><ion-title>{{ stock.symbol }} Intraday</ion-title></div>
-      <div class="filter-buttons">   <ion-icon class="icon1" name="star-outline"  [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite($event, stock)"></ion-icon>
+      <div class="filter-buttons">   <ion-icon class="icon1" name="star-outline" style="margin-right: 10px;"  [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite($event, stock)"></ion-icon>
       </div>
     </div>
     

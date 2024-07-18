@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-ordor',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdorPage implements OnInit {
   title: string = "Carnet d'ordre";
-  constructor() { }
+  history: any[] = [];
+  constructor(private AuthService: AuthenticationService) { }
 
   ngOnInit() {
+    this.loadNotifications();
+
+  }
+  async loadNotifications() {
+    (await this.AuthService.getUserHistory()).subscribe(
+      (history: any[]) => {
+        this.history = history;
+      },
+      (error: any) => {
+        console.error('Error fetching notifications:', error);
+      }
+    );
   }
 
 }

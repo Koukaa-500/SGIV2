@@ -37,4 +37,6 @@ export class NotificationPage implements OnInit {
     }
     return { message: notificationString, date: notification.date };
   }
+
+  
 }

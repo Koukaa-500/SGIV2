@@ -8,8 +8,16 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    
-
+    <div class="container"  >
+      <div>
+      <div class="rectangle" *ngFor="let historyy of history">
+        <div class="notification-text" >
+          <i class="material-icons">{{ historyy.date | date: 'yyyy-MM-dd' }}</i>
+          <span>&nbsp;&nbsp;{{ historyy.message }}</span>
+        </div>
+      </div>
+    </div>
+    </div>
     
   </div>
 </ion-content>

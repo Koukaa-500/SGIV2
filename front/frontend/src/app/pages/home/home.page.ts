@@ -21,6 +21,8 @@ export class HomePage implements OnInit, OnDestroy {
   filteredStocks: any[] = [];
   today: Date = new Date();
   availabilityStatus: string = '';
+  totalChange: number = 0;
+  totalSA: number = 0;
 
   constructor(
     private productService: ProductService,
@@ -45,6 +47,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.updateStockPrices();
       this.updateAvailabilityStatus();
+      this.calculateTotals();
     }, 1000);
     setInterval(() => {
       this.updateStockStatus();
@@ -52,6 +55,7 @@ export class HomePage implements OnInit, OnDestroy {
 
     // Initial status update
     this.updateAvailabilityStatus();
+    
   }
 
   ngOnDestroy() {
@@ -215,5 +219,15 @@ export class HomePage implements OnInit, OnDestroy {
   updateAvailabilityStatus(): void {
     const currentHour = new Date().getHours();
     this.availabilityStatus = (currentHour >= 6 && currentHour < 20) ? 'Disponible' : 'Non-Disponible';
+  }
+  calculateTotals(): void { 
+    // Calculate total SA and total Change
+    this.totalSA = this.stocks.reduce((total, stock) => total + stock.price, 0);
+    this.totalChange = this.stocks.reduce((total, stock) => total + stock.change, 0);
+  }
+  formatChange(change: number): string {
+    const prefix = change > 0 ? '+' : (change < 0 ? '-' : '');
+    const color = change > 0 ? 'green' : (change < 0 ? 'red' : '');
+    return `${color}${prefix}${Math.abs(change).toFixed(2)}%`;
   }
 }

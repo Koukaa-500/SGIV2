@@ -88,7 +88,7 @@ export class SellPage implements OnInit {
       const response = await this.accountsService.sellStock(payload);
       const message = `Sold ${quantity} shares of ${stock.symbol} for a total cost of ${stock.price * quantity}`;
       this.authService.addUserHistory(message);
-      const mess = `you're sold of the ${stock.symbol} stock is successful`;
+      const mess = ` ${stock.symbol} sold successfully`;
       this.notificationService.addNotification(mess);
       console.log('Stock sold successfully:', response);
       this.balance += stock.price * quantity; // Update balance locally

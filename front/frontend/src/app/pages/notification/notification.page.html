@@ -9,11 +9,22 @@
       </ion-toolbar>
     </ion-header>
 
-    <div class="notification-list">
+    <!-- <div class="notification-list">
       <div *ngFor="let notification of notificationMessages" class="notification">
         <div class="message">{{ notification.message }}</div>
         <div class="date">{{ notification.date | date: 'yyyy-MM-dd' }}</div>
       </div>
+    </div> -->
+    <div class="container" >
+      <div>
+      <div class="rectangle" *ngFor="let notification of notificationMessages" >
+        <div class="notification-text">
+          <i class="material-icons">{{ notification.date | date: 'yyyy-MM-dd' }}</i>
+          <span>&nbsp;&nbsp;{{ notification.message }}</span>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
+ 
 </ion-content>

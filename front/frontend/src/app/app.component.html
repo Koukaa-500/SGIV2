@@ -31,8 +31,9 @@
         <ion-item routerLink="/notification" (click)="closeMenu()" [class.active]="activeRoute === '/notification'">
           <ion-icon name="notifications-outline"></ion-icon>
           Notification
+          
         </ion-item>
-        <ion-item routerLink="/historique" (click)="closeMenu()" [class.active]="activeRoute === '/historique'">
+        <ion-item routerLink="/history" (click)="closeMenu()" [class.active]="activeRoute === '/history'">
           <ion-icon name="time-outline"></ion-icon>
           Historique
         </ion-item>
@@ -48,10 +49,7 @@
           <ion-icon name="exit-outline"></ion-icon>
           Sign out
         </ion-item>
-        <ion-item routerLink="/history" (click)="closeMenu();" [class.active]="activeRoute === '/history'">
-          <ion-icon name="document-text-outline"></ion-icon>
-          history
-        </ion-item>
+        
       </ion-list>
       
     </ion-content>

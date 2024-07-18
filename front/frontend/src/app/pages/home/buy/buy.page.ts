@@ -91,7 +91,7 @@ export class BuyPage implements OnInit {
       const response = await this.accountsService.buyStock(payload);
       const message = `Bought ${quantity} shares of ${stock.symbol} for a total cost of ${totalCost}`;
       this.authService.addUserHistory(message);
-      const mess = `you're bought of the ${stock.symbol} stock is successful`;
+      const mess = ` ${stock.symbol} bought successfully`;
       this.notificationService.addNotification(mess);
             console.log('Stock purchased successfully:', response);
       this.balance -= totalCost; // Update balance locally
