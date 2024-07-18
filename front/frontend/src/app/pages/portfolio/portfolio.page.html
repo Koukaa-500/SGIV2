@@ -28,19 +28,13 @@
       </div>
       <div class="wallet-info">
         <h2>Totale Portfeuille</h2>
-        <p class="currencies">Date: {{ currentDate }}</p>
-        <p class="currencies">Solde: {{ selectedAccount.solde }}</p>
-        <p class="currencies">Espèce: {{ espece }}</p>
-        <p class="currencies">Portfeuille Titre: {{ titre }}</p>
+        <p class="currencies">Date: {{ currentDate  }}</p>
+        <p class="currencies">Solde: {{ selectedAccount.solde | number:'1.2-2' }}</p>
+        <p class="currencies">Espèce: {{ espece | number:'1.2-2' }}</p>
+        <p class="currencies">Portfeuille Titre: {{ titre | number:'1.2-2' }}</p>
       </div>
     </div>
-    
-  </div>
-
-  
-  
-
-  <!-- Stock Details Section -->
+     <!-- Stock Details Section -->
   <div *ngIf="selectedAccount" class="section">
     <h2 class="section-title">Stocks for {{ selectedAccount.name }}</h2>
     <ion-card *ngFor="let stock of selectedStocks" class="stock-card">
@@ -55,6 +49,13 @@
       </ion-card-content>
     </ion-card>
   </div>
+    
+  </div>
+
+  
+  
+
+ 
   
 
 </ion-content>

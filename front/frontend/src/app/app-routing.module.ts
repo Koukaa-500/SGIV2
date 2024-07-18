@@ -56,6 +56,7 @@ const routes: Routes = [
       import('./pages/profile/forgetpassword/forgetpassword.module').then(
         (m) => m.ForgetpasswordPageModule
       ),
+      canActivate: [AuthGuard],
   },
   {
     path: 'home',
@@ -85,14 +86,18 @@ const routes: Routes = [
   },
   {
     path: 'guide',
-    loadChildren: () => import('./pages/guide/guide.module').then( m => m.GuidePageModule)
+    loadChildren: () => import('./pages/guide/guide.module').then( m => m.GuidePageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'reglementation',
-    loadChildren: () => import('./pages/reglementation/reglementation.module').then( m => m.ReglementationPageModule)
-  },  {
+    loadChildren: () => import('./pages/reglementation/reglementation.module').then( m => m.ReglementationPageModule),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'history',
-    loadChildren: () => import('./pages/history/history.module').then( m => m.HistoryPageModule)
+    loadChildren: () => import('./pages/history/history.module').then( m => m.HistoryPageModule),
+    canActivate: [AuthGuard],
   },
 
 

@@ -37,6 +37,16 @@ export class NotificationPage implements OnInit {
     }
     return { message: notificationString, date: notification.date };
   }
-
+  async markAsRead(notificationId: string) {
+    (await this.notificationService.markAsRead(notificationId)).subscribe(
+      () => {
+        this.loadNotifications(); // Reload notifications to update the state
+        
+      },
+      (error) => {
+        console.error('Error marking notification as read:', error);
+      }
+    );
+  }
   
 }

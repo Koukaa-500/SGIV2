@@ -356,4 +356,42 @@ router.get('/history', auth, async (req, res) => {
   }
 });
 
+router.get('/notifications/unread', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select('notifications');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const unreadCount = user.notifications.filter(notification => !notification.isRead).length;
+    res.status(200).json(unreadCount);
+    console.log(res);
+  } catch (error) {
+    console.error('Error fetching unread notifications count:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.put('/notifications/:id/read', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const notification = user.notifications.id(req.params.id);
+    if (!notification) {
+      return res.status(404).json({ message: 'Notification not found' });
+    }
+
+    notification.isRead = true; // Mark the notification as read
+    await user.save();
+
+    res.status(200).json({ message: 'Notification marked as read' });
+  } catch (error) {
+    console.error('Error marking notification as read:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
 module.exports = router;

@@ -31,7 +31,7 @@
         <ion-item routerLink="/notification" (click)="closeMenu()" [class.active]="activeRoute === '/notification'">
           <ion-icon name="notifications-outline"></ion-icon>
           Notification
-          
+          <span *ngIf="unreadCount > 0" class="notification-count">{{ unreadCount }}</span>
         </ion-item>
         <ion-item routerLink="/history" (click)="closeMenu()" [class.active]="activeRoute === '/history'">
           <ion-icon name="time-outline"></ion-icon>

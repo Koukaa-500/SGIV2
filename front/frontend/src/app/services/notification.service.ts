@@ -40,4 +40,33 @@ export class NotificationService {
       throw new Error('Failed to add notification');
     }
   }
+
+ async getUnreadCount(): Promise<Observable<any>> {
+    const token = await this.storage['get']('token');
+    console.log(token);
+    if (!token) {
+      return throwError(() => new Error('Token not found'));
+    }
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': `${token}`
+    });
+    return this.http.get<number>(`${this.apiUrl}/notifications/unread`,{ headers });
+  }
+
+  async markAsRead(notificationId: string): Promise<Observable<any>> {
+    const token = await this.storage['get']('token');
+    console.log(token);
+    if (!token) {
+      return throwError(() => new Error('Token not found'));
+    }
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': `${token}`
+    });
+    return this.http.put<number>(`${this.apiUrl}/notifications/${notificationId}/read`, {}, { headers });
+  }
+  
 }

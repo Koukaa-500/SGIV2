@@ -1,45 +1,104 @@
-.bar{
-    --background : #00bfa5;
-  }
+/* Dark theme for the header toolbar */
+.bar {
+  --background: #1e1e1e; /* Keep toolbar background color */
+}
 
+/* Dark theme for the content area */
 .container {
-    --background: #d0e7da;
-    
+  --background: #1e1e1e; /* Dark background for the content */
+}
+
+/* Dark theme for the footer */
+ion-footer {
+  --background: #1e1e1e; /* Footer background color */
+  padding: 10px 0 10px 0;
+  font-size: 1rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Dark theme for footer toolbar */
+.footer-toolbar {
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
+}
+
+/* Dark theme for buttons */
+ion-button {
+  margin: 5px; /* Margin between buttons */
+  --border-radius: 20px;
+  --color: #fff; /* Light text color for buttons */
+  --background: #333; /* Dark background for buttons */
+}
+
+/* Active button state */
+.button-active {
+  --background: #4CAF50; /* Active button background color */
+  --color: #ffffff; /* Active button text color */
+}
+
+/* Dark theme for the header */
+ion-header {
+  ion-toolbar {
+    --background: #1e1e1e; /* Keep toolbar background color */
+    --color: #fff; /* Light text color */
+    --border-color: transparent; /* Remove border color */
   }
+}
+
+/* Dark theme for table container */
+.table-container {
+  background: #333; /* Dark background for the table container */
+  border-radius: 8px; /* Rounded corners for the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
   
-  
+}
 
-  ion-footer {
-    padding: 10px 0 10px 0;
-    font-size: 1rem;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
+/* Dark theme for the table */
+table {
+  width: 100%;
+  border-collapse: collapse; /* Collapse borders between cells */
+}
 
-  .footer-toolbar {
-    /* White background for the toolbar */
-   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
- }
- 
- ion-button {
-   margin:5px; /* Margin between buttons */
-   --border-radius: 20px;
-   
-  
-    /* Light background for buttons */
-   --color: #333; /* Dark text color for buttons */
- }
- 
- .button-active {
-   --background: #4CAF50; /* Active button background color */
-   --color: #ffffff; /* Active button text color */
- }
+/* Table cells */
+th, td {
+  padding: 12px; /* Padding inside table cells */
+  text-align: center; /* Center-align text */
+  color: #fff; /* Light text color */
+}
 
+/* Table header */
+thead {
+  background-color: #1e1e1e; /* Header background color */
+  color: white; /* Text color for header */
+}
 
- ion-header {
-    ion-toolbar {
-      --background: transparent; /* Set toolbar background to transparent */
-      --ion-color-base: transparent; /* Set base color to transparent */
-      --border-color: transparent; /* Set border color to transparent */
-      --color: var(--ion-color-light); /* Set text color, adjust as needed */
-    }
-  }
+/* Bold text for table header */
+th {
+  font-weight: bold;
+}
+
+/* Dark alternating row background color */
+tbody tr:nth-child(even) {
+  background-color: #424242; /* Slightly lighter dark background */
+}
+
+/* Row hover effect */
+tbody tr:hover {
+  background-color: #616161; /* Highlight row on hover */
+}
+
+/* Table footer if needed */
+tfoot {
+  background-color: #333; /* Dark background color for table footer */
+}
+
+tfoot td {
+  padding: 10px;
+  text-align: right; /* Right-align text in footer cells */
+  font-weight: bold; /* Bold text for footer */
+  color: #fff; /* Light text color */
+}
+
+/* Ensure the canvas background is white */
+canvas {
+  background-color: #ffffff; /* White background for the canvas */
+}

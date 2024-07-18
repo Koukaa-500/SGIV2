@@ -104,3 +104,15 @@ h1 {
 }
 
 
+
+.notification-count {
+  background-color: #f00; /* Red background for the badge */
+  color: #fff; /* White text color */
+  border-radius: 50%; /* Circular shape */
+  padding: 2px 6px; /* Padding around the text */
+  font-size: 0.8rem; /* Adjust font size as needed */
+  margin-left: 8px; /* Space between icon and count */
+  position: absolute; /* Position it absolutely */
+  top: 10px; /* Adjust vertical position */
+  right: 10px; /* Adjust horizontal position */
+}

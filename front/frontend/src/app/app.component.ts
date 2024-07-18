@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AuthenticationService } from './services/authentication.service';
+import { NotificationService } from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +18,12 @@ export class AppComponent {
   isLightModeEnabled = true;
   edit : boolean = false
   activeRoute: string | any;
-
+  unreadCount: number = 0;
   constructor(
     private authService: AuthenticationService,
     private menu: MenuController,
-    private router: Router
+    private router: Router,
+    private notificationService:NotificationService
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -32,6 +34,7 @@ export class AppComponent {
 
   ngOnInit(){
     this.loadUserProfile();
+    this.loadUnreadCount();
   }
 
   closeMenu() {
@@ -65,6 +68,15 @@ export class AppComponent {
       }
     );
   }
-
+  async loadUnreadCount() {
+    (await this.notificationService.getUnreadCount()).subscribe(
+      (count) => {
+        this.unreadCount = count;
+      },
+      (error) => {
+        console.error('Error fetching unread count:', error);
+      }
+    );
+  }
  
 }

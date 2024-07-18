@@ -27,7 +27,7 @@ export class HomePage implements OnInit, OnDestroy {
   constructor(
     private productService: ProductService,
     private authService: AuthenticationService,
-    private router: Router,
+    
     private navCtrl: NavController
   ) {}
 

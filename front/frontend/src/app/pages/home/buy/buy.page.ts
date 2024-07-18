@@ -96,6 +96,21 @@ export class BuyPage implements OnInit {
             console.log('Stock purchased successfully:', response);
       this.balance -= totalCost; // Update balance locally
       this.presentToast('Stock purchased successfully!', 'success');
+      const profondeurData = {
+        symbol: stock.symbol,
+        sold: 0,
+        buy: stock.price, // Assuming buy is not applicable in sell context
+        qteA: quantity, // Assuming qteA is not applicable in sell context
+        qteV: 0
+      };
+      this.productService.addProfondeur(stock.symbol, profondeurData).subscribe(
+        res => {
+          console.log('Profondeur data saved:', res);
+        },
+        err => {
+          console.error('Error saving profondeur data:', err);
+        }
+      );
     } catch (error) {
       console.error('Error buying stock:', error);
       this.presentToast('Error buying stock', 'danger');

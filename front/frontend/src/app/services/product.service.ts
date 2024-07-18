@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 export class ProductService {
   private baseUrl = 'http://localhost:3000/product/stocks';
   private baseUrl1 = 'http://localhost:3000/user';
-
+  private apiUrl = 'http://localhost:3000/product';
   constructor(private http: HttpClient, private storage: Storage) {
     this.updateStockStatusBasedOnTime();
   }
@@ -144,5 +144,15 @@ export class ProductService {
 
   saveStockPrice(symbol: string, price: number, change: number, quantity: number) {
     return this.http.post<any>(this.baseUrl, { symbol, price, change,quantity });
+  }
+
+
+  getProfondeurBySymbol(symbol: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/profondeur/${symbol}`);
+  }
+
+  // Method to add new profondeur data
+  addProfondeur(symbol: string, profondeurData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/profondeur/${symbol}`, profondeurData);
   }
 }

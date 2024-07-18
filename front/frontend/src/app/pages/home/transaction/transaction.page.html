@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar class="bar">
+  <ion-toolbar class="bar" >
     <ion-title>{{ symbol }}</ion-title>
 
     <ion-buttons slot="start">
@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="container">
+<ion-content class="container" style="background-color: #201c24;">
   <ion-card>
     <ion-card-header>
       <ion-card-title>{{ symbol }} Transactions</ion-card-title>
@@ -49,9 +49,9 @@
 
 
 
-<ion-footer style="background-color: #00bfa5;">
+<ion-footer style="background-color: #201c24;">
   
-  <ion-buttons slot="start" style="background-color: #00bfa5;">
+  <ion-buttons slot="start" style="background-color: #201c24;">
     <ion-button (click)="goToIntraday(stock.symbol)">Intraday</ion-button>
     <ion-button >Transaction</ion-button>
     <ion-button (click)="goToProfond(stock.symbol)">Profondeur</ion-button>

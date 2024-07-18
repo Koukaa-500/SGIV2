@@ -17,8 +17,8 @@
 <ion-content [fullscreen]="true" class="container">
 <div>
   <ion-card class="budget-card">
-    <ion-card-header class="budget-header">
-      <ion-card-title>{{ stock.symbol }}</ion-card-title>
+    <ion-card-header class="budget-header" >
+      <ion-card-title style="color:#e0e0e0;">{{ stock.symbol }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
@@ -38,9 +38,9 @@
 </div>
 </ion-content>
 
-<ion-footer style="background-color: #00bfa5;">
+<ion-footer style="background-color:#201c24;">
   
-  <ion-buttons slot="start" style="background-color: #00bfa5;">
+  <ion-buttons slot="start" style="background-color:#201c24;">
     <ion-button>Intraday</ion-button>
     <ion-button (click)="goToTransaction(stock.symbol)">Transaction</ion-button>
     <ion-button (click)="goToProfond(stock.symbol)">Profondeur</ion-button>

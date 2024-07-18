@@ -9,6 +9,8 @@ const historySchema = new mongoose.Schema({
     }
 });
 
+
+
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -18,7 +20,8 @@ const productSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-    },
+        get: v => parseFloat(v).toFixed(2) // Format price to 2 decimal places
+      },
     symbol: {
         type: String,
     },
@@ -41,8 +44,8 @@ const accountSchema = new mongoose.Schema({
     },
     solde: {
         type: Number,
-        required: true
-    }
+        get: v => parseFloat(v).toFixed(2) // Format price to 2 decimal places
+      },
 });
 
 const notificationSchema = new mongoose.Schema({
@@ -51,7 +54,8 @@ const notificationSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-    }
+    },
+    isRead: { type: Boolean, default: false }
 });
 
 const userSchema = new mongoose.Schema({
@@ -78,7 +82,8 @@ const userSchema = new mongoose.Schema({
     accounts: [accountSchema],
     favoriteStocks: [String],
     notifications: [notificationSchema],
-    history: [historySchema]
+    history: [historySchema],
+    
 });
 
 const User = mongoose.model('User', userSchema);

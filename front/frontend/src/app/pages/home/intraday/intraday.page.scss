@@ -1,144 +1,160 @@
+/* Dark theme for the container */
 .container {
-  --background: #d0e7da;
-  
+  --background: #201c24; /* Dark background color */
+  color: #e0e0e0; /* Light text color */
 }
 
-.bar{
-  --background : #00bfa5;
-}
-.price {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333; /* Darker text color */
+/* Dark theme for the toolbar */
+.bar {
+  --background: #201c24; /* Darker background for the toolbar */
 }
 
-.chart-container {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 300px; /* Increased height */
+ion-header {
+  ion-toolbar {
+    --background: #201c24;
+    color:#e0e0e0; /* Dark background for header toolbar */
+  }
 }
 
+/* Styling for the card */
 ion-card {
+  margin-top: 30px;
   margin-bottom: 20px;
-  background-color: #f8f8f8; /* Light gray background */
+  background-color: #1e1e1e; /* Dark background for cards */
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
+  color:#e0e0e0;
 }
 
 ion-card-header {
-  background-color: #00bfa5; /* Green header background */
-  color: #fff; /* White text */
+  background-color: #333; /* Darker header background */
+  color: #e0e0e0; /* White text */
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+
 }
 
 ion-card-content {
   padding: 10px;
+  color:#e0e0e0;
 }
 
-.budget-card {
-  background-color: #009688;
-  color: white;
-  text-align: center;
-  padding: 16px;
-  border-radius: 10px;
-  height: 500px; /* Increased height to accommodate larger chart */
-}
-
-.budget-header {
-  margin-bottom: 10px;
-  color: white;
-}
-
-.budget-amount {
-  font-size: 2em;
-  align-items: left;
-  
-}
-
-.per-month {
-  font-size: 0.6em;
-}
-
-.budget-time, .total-spent {
-  margin: 0;
-  font-size: 1em;
-}
-
-.spent-amount {
-  font-weight: bold;
-}
-
-.chart-container {
-  margin-top: 20px;
-  height: 300px; /* Increased height */
-}
-
-canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-ion-footer {
-  padding: 10px 0 10px 0;
-  font-size: 1rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.footer-toolbar {
-   /* White background for the toolbar */
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-}
-
+/* Styling for buttons */
 ion-button {
-  margin:5px; /* Margin between buttons */
-  --border-radius: 20px;
-  
- 
-   /* Light background for buttons */
-  --color: #333; /* Dark text color for buttons */
-}
-
-.button-active {
-  --background: #4CAF50; /* Active button background color */
-  --color: #ffffff; /* Active button text color */
+  margin: 5px; /* Margin between buttons */
+  --border-radius: 12px;
+  --color: #e0e0e0; /* Light text color for buttons */
 }
 
 .send-transfer-btn {
   width: 10rem;
   height: 50px;
   --border-radius: 12px;
-  --background: #C80036;
-  text-transform:capitalize; /* Ensure text is lowercase */
+  --background: #d32f2f; /* Dark red background for sell button */
+  text-transform: capitalize; /* Ensure text is capitalized */
   font-family: Arial, Helvetica, sans-serif;
   margin: 16px 0 0 16px;
-  font-size: 2rem;
-  color: white;
+  font-size: 1.2rem;
+  color: #ffffff; /* White text */
 }
 
 .send-transfer-btnn {
   width: 10rem;
   height: 50px;
   --border-radius: 12px;
-  --background: #00bfa5;
-  text-transform:capitalize; /* Ensure text is lowercase */
+  --background: #00796b; /* Dark teal background for buy button */
+  text-transform: capitalize; /* Ensure text is capitalized */
   font-family: Arial, Helvetica, sans-serif;
   margin: 16px 0 0 16px;
-  font-size: 2rem;
-  color: white;
+  font-size: 1.2rem;
+  color: #ffffff; /* White text */
 }
 
-.button-container ion-icon.favorite {
-  color: gold;
-  /* Set the color to gold when filled */
+/* Dark theme for table */
+.table-container {
+  padding: 20px;
+  background: #1e1e1e; /* Dark background for table container */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
 }
 
-.button-container ion-icon:hover {
-  transform: scale(1.2);
-  /* Optional: Add a hover effect */
+table {
+  width: 100%;
+  border-collapse: collapse; /* Collapse borders between cells */
+}
+
+th, td {
+  padding: 12px; /* Padding inside table cells */
+  text-align: center; /* Center-align text */
+  color: #e0e0e0; /* Light text color */
+}
+
+thead {
+  background-color: #333; /* Darker background for table header */
+  color: #ffffff; /* White text color for table header */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #2c2c2c; /* Slightly lighter background color for alternating rows */
+}
+
+tbody tr:hover {
+  background-color: #444; /* Highlight row on hover with a slightly lighter color */
+}
+
+/* Dark theme for the chart container */
+.chart-container {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #1e1e1e; /* Dark background for chart container */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
+  height: 300px; /* Increased height */
+}
+
+/* White background for the canvas element */
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #ffffff; /* White background for the canvas */
+  border-radius: 8px; /* Optional: Match the border-radius of the container */
+}
+
+/* Optional: If the chart library allows, set the chart's background color */
+.chart-container canvas {
+  background-color: #ffffff; /* Ensure the canvas background is white */
+}
+
+/* Dark theme for footer */
+ion-footer {
+  background-color: #1f1f1f; /* Dark background for footer */
+  padding: 10px 0 10px 0;
+  font-size: 1rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #e0e0e0; /* Light text color */
+}
+
+.footer-toolbar {
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
+}
+
+/* Dark theme for filter buttons */
+.filter-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.icon1 {
+  color: #e0e0e0; /* Light color for icons */
+  background: none; /* Remove any background */
+  border: none; /* Remove border if present */
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.icon1:hover {
+  color: #ffd700; /* Gold color on hover */
+  transform: scale(1.2); /* Slightly enlarge on hover */
 }
 
 .title-and-icons {
@@ -150,24 +166,6 @@ ion-button {
   flex: 1; /* Take up remaining space */
 }
 
-.filter-buttons {
-  display: flex;
-  align-items: center;
-}
-
-.icon1  {
-   /* Adjust padding as needed */
-  background: none; /* Remove any background */
-  border: none; /* Remove border if present */
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-}
-
-ion-icon.favorite {
-  color: gold;
-  /* Set the color to gold when filled */
+.button-container ion-icon.favorite {
+  color: gold; /* Gold color for favorite icon */
 }

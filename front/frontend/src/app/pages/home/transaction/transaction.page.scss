@@ -1,80 +1,83 @@
-/* stock.component.scss */
-.container {
-    padding: 10px;
-  }
-  .bar{
-    --background : #00bfa5;
-  }
-  
-  .budget-card {
-    background-color: #009688;
-    color: white;
-    text-align: center;
-    padding: 16px;
-    border-radius: 10px;
-  }
-  
-  .budget-header {
-    margin-bottom: 10px;
-  }
-  
-  .table-container {
-    margin-top: 20px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  th, td {
-    padding: 10px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #00bfa5;
-    color: white;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  
-  
-  ion-button {
-    margin: 0 5px; /* Margin between buttons */
-    --border-radius: 20px;
-    
-    
-    --background: #f1f1f1; /* Light background for buttons */
-    --color: #333; /* Dark text color for buttons */
-  }
-  
-  ion-footer {
-    padding: 10px 0 10px 0;
-    font-size: 1rem;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
+/* Dark theme for the header */
+.bar {
+  --background: #201c24;
+  color:#ffffff;/* Toolbar background color */
+}
 
-  .footer-toolbar {
-    /* White background for the toolbar */
-   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
- }
- 
- ion-button {
-   margin:5px; /* Margin between buttons */
-   --border-radius: 20px;
-   
-  
-    /* Light background for buttons */
-   --color: #333; /* Dark text color for buttons */
- }
- 
- .button-active {
-   --background: #4CAF50; /* Active button background color */
-   --color: #ffffff; /* Active button text color */
- }
-  
+/* Dark theme for the content area */
+.container {
+  --background: #201c24; /* Dark background for the content */
+}
+
+/* Dark theme for the footer */
+ion-footer {
+  --background: #201c24; /* Footer background color */
+  padding: 10px 0 20px 0;
+  font-size: 1rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Dark theme for buttons */
+ion-button {
+  margin: 5px; /* Margin between buttons */
+  --border-radius: 20px;
+  --color: #333; /* Dark text color for buttons */
+}
+
+/* Active button state */
+.button-active {
+  --background: #4CAF50; /* Active button background color */
+  --color: #ffffff; /* Active button text color */
+}
+
+/* Table container */
+.table-container {
+  background: #333; /* Dark background for the table container */
+  border-radius: 8px; /* Rounded corners for the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
+  color:#ffffff;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse; /* Collapse borders between cells */
+}
+
+th, td {
+  padding: 12px; /* Padding inside table cells */
+  text-align: center; /* Center-align text */
+}
+
+/* Table header */
+thead {
+  background-color: #333;  /* Header background color */
+  color: white; /* Text color for header */
+}
+
+/* Table header cells */
+th {
+  font-weight: bold; /* Bold text for header cells */
+}
+
+/* Alternating row background color */
+tbody tr:nth-child(even) {
+  background-color: #424242; /* Slightly lighter dark background */
+}
+
+/* Row hover effect */
+tbody tr:hover {
+  background-color: #616161; /* Highlight row on hover */
+}
+
+/* Table footer if needed */
+tfoot {
+  background-color: #333; /* Dark background color for table footer */
+}
+
+tfoot td {
+  padding: 10px;
+  text-align: right; /* Right-align text in footer cells */
+  font-weight: bold; /* Bold text for footer */
+}
+

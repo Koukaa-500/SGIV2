@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ToastController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-sell',
   templateUrl: './sell.page.html',
@@ -31,8 +32,8 @@ export class SellPage implements OnInit {
     private accountsService: AccountsService,
     private authService: AuthenticationService,
     private notificationService: NotificationService,
+    private toastController: ToastController,
     
-    private toastController: ToastController
   ) {
     this.route.paramMap.subscribe(params => {
       if (params.has('symbol')) {
@@ -52,7 +53,6 @@ export class SellPage implements OnInit {
       this.stock = 100;
       this.balance = '';
     });
-    
   }
 
   async getAccounts() {
@@ -93,6 +93,23 @@ export class SellPage implements OnInit {
       console.log('Stock sold successfully:', response);
       this.balance += stock.price * quantity; // Update balance locally
       this.presentToast('Stock sold successfully!', 'success');
+
+      // Save profondeur data
+      const profondeurData = {
+        symbol: stock.symbol,
+        sold: stock.price,
+        buy: 0, // Assuming buy is not applicable in sell context
+        qteA: 0, // Assuming qteA is not applicable in sell context
+        qteV: quantity
+      };
+      this.productService.addProfondeur(stock.symbol, profondeurData).subscribe(
+        res => {
+          console.log('Profondeur data saved:', res);
+        },
+        err => {
+          console.error('Error saving profondeur data:', err);
+        }
+      );
     } catch (error) {
       console.error('Error selling stock:', error);
       this.presentToast('Error selling stock', 'danger');

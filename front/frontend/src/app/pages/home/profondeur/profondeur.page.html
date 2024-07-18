@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar class="bar">
+  <ion-toolbar style="background-color: #1e1e1e;">
     <ion-title>{{ stock.symbol }} Depth</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
@@ -7,13 +7,45 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" class="container">
-  azeaze
+  <ion-content class="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ symbol }} Profondeur</ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>QteA</th>
+                <th>Buy Price</th>
+                <th>QteV</th>
+                <th>Sell Price</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of profondeurData">
+                <td>{{ item.qteA || 0 }}</td>
+                <td>{{ item.buy | number:'1.2-2' }}</td>
+                <td>{{ item.qteV || 0 }}</td>
+                <td>{{ item.sold | number:'1.2-2' }}</td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-card-content>
+      
+    </ion-card>
+  </ion-content>
   </ion-content>
 
 
-<ion-footer style="background-color: #00bfa5;">
+<ion-footer style="background-color: #1e1e1e;">
   
-  <ion-buttons slot="start" style="background-color: #00bfa5;">
+  <ion-buttons slot="start" style="background-color: #1e1e1e;">
     <ion-button (click)="goToIntraday(stock.symbol)">Intraday</ion-button>
     <ion-button (click)="goToTransaction(stock.symbol)">Transaction</ion-button>
     <ion-button >Profondeur</ion-button>
