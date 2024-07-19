@@ -146,7 +146,7 @@ router.get('/get-image/:userId', auth, async (req, res) => {
       return res.status(404).json({ message: 'User or image not found' });
     }
 
-    const imagePath = `http://localhost:3000/uploads/${user.image}`;
+    const imagePath = `http://192.168.56.1:3000/uploads/${user.image}`;
     res.json({ imagePath });
   } catch (error) {
     console.error('Error fetching user image:', error);

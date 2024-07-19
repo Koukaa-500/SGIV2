@@ -118,7 +118,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   updateStockPrices() {
     const currentTime = Date.now();
-    const tenSeconds = 50000;
+    const tenSeconds = 100000;
   
     if (!this.lastSavedTime || currentTime - this.lastSavedTime >= tenSeconds) {
       this.stocks.forEach(stock => {

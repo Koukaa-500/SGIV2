@@ -19,8 +19,8 @@ const productSchema = new mongoose.Schema({
         type: Number,
     },
     price: {
-        type: Number,
-        get: v => parseFloat(v).toFixed(2) // Format price to 2 decimal places
+        type: Number
+         // Format price to 2 decimal places
       },
     symbol: {
         type: String,
