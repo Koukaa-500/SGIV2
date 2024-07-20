@@ -1,6 +1,7 @@
 /* Dark theme for the header toolbar */
 .bar {
-  --background: #1e1e1e; /* Keep toolbar background color */
+  --background: #1e1e1e;
+  color: #e0e0e0; /* Keep toolbar background color */
 }
 
 /* Dark theme for the content area */
@@ -101,4 +102,56 @@ tfoot td {
 /* Ensure the canvas background is white */
 canvas {
   background-color: #ffffff; /* White background for the canvas */
+}
+
+
+
+
+
+/* Dark theme for filter buttons */
+.filter-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.icon1 {
+  color: #e0e0e0; /* Light color for icons */
+  background: none; /* Remove any background */
+  border: none; /* Remove border if present */
+  cursor: pointer;
+  font-size: 24px;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.icon1:hover {
+  color: #ffd700; /* Gold color on hover */
+  transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+.title-and-icons {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  flex: 1; /* Take up remaining space */
+}
+
+.button-container ion-icon.favorite {
+  color: gold; /* Gold color for favorite icon */
+}
+
+
+.filter-button {
+  padding: 0 0 0 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 2rem;
+  height: 2rem;
 }

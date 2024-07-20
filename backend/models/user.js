@@ -30,7 +30,11 @@ const productSchema = new mongoose.Schema({
     },
     validity: {
         type: String,
-    }
+    },
+    date: {
+        type: Date,
+    },
+    change:Number
 });
 
 const accountSchema = new mongoose.Schema({
@@ -42,10 +46,7 @@ const accountSchema = new mongoose.Schema({
         type: [productSchema],
         default: () => []
     },
-    solde: {
-        type: Number,
-        get: v => parseFloat(v).toFixed(2) // Format price to 2 decimal places
-      },
+    solde: { type: Number, required: true }
 });
 
 const notificationSchema = new mongoose.Schema({
@@ -55,7 +56,8 @@ const notificationSchema = new mongoose.Schema({
     date: {
         type: Date,
     },
-    isRead: { type: Boolean, default: false }
+    isRead: { type: Boolean, default: false },
+    color: {type:String}
 });
 
 const userSchema = new mongoose.Schema({

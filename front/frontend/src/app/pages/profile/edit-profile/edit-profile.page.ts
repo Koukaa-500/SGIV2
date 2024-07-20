@@ -78,4 +78,7 @@ export class EditProfilePage implements OnInit {
       // Handle error
     }
   }
+  navigateBack(){
+    this.router.navigate(['/profile'])
+  }
 }

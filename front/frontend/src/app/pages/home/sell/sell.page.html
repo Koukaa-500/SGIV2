@@ -1,15 +1,29 @@
 <ion-header >
   <ion-toolbar class="bar">
-    <ion-title>{{ stockData?.symbol }}</ion-title>
+    <div class="title-and-icons" style="display: flex; align-items: center;">
+      <div class="title" style="flex: 1;">
+        <ion-title style="color: white;">{{ stockData?.symbol }}</ion-title>
+      </div>
+      <div class="filter-buttons" style=" padding: 0 0 0 10px;
+      background: none; 
+      border: none; 
+      cursor: pointer;
+      transition: background-color 0.3s;
+      
+      ">
+        <button (click)="navigateBack()" class="filter-button" style="font-size: 24px;color: white;width: 5rem;">
+          <ion-icon name="arrow-back" fill="clear"></ion-icon></button>
+      </div>
+    </div>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="custom-content">
+<ion-content [fullscreen]="true" class="custom-content" >
   <!-- Balance Card -->
-  <ion-card class="balance-card">
+  <ion-card class="balance-card" style="margin: 35px 0 0 35px;">
     <ion-card-header>
       <ion-card-title>Stock: {{stock }}</ion-card-title>
       <ion-card-subtitle>{{stockData?.price | number:'1.2-2' }}</ion-card-subtitle>
@@ -23,7 +37,7 @@
   </ion-card>
 
   <!-- Choose an Account Select -->
-  <div class="custom-select-container">
+  <div class="custom-select-container" style="margin-left: 35px;">
     <label for="account-select" class="custom-select-label">Choose an Account</label>
     <select id="account-select" class="custom-select" [(ngModel)]="selectedAccount" (ngModelChange)="onAccountChange($event)">
       <option *ngFor="let account of accounts" [value]="account._id">{{ account.name }}</option>
@@ -31,7 +45,7 @@
   </div>
 
   <!-- Type Select -->
-  <div class="custom-select-container">
+  <div class="custom-select-container" style="margin-left: 35px;">
     <label for="type-select" class="custom-select-label">Type</label>
     <select id="type-select" class="custom-select" [(ngModel)]="stockData.type">
       <option value="Tech">Tech</option>
@@ -43,7 +57,7 @@
   </div>
 
   <!-- Validity Controls -->
-  <ion-item class="custom-item">
+  <ion-item class="custom-item" style="margin-left: 35px;">
     <ion-label class="custom-select-label">Validity</ion-label>
     <ion-label>{{ validity }} days</ion-label>
     <ion-button (click)="decrementValidity()">-</ion-button>
@@ -51,7 +65,7 @@
   </ion-item>
 
   <!-- Quantity Controls -->
-  <ion-item class="custom-item">
+  <ion-item class="custom-item" style="margin-left: 35px;">
     <ion-label class="custom-select-label">Quantity</ion-label>
     <ion-label>{{ quantity }}</ion-label>
     <ion-button (click)="decrementQuantity()">-</ion-button>
@@ -59,14 +73,14 @@
   </ion-item>
 
   <!-- Display updated account balance after transaction -->
-  <ion-row class="balance-row">
+  <ion-row class="balance-row" style="margin-left: 35px;">
     <ion-col>Your new balance is:</ion-col>
     <ion-col text-right>{{cost | number:'1.2-2'}}$</ion-col>
   </ion-row>
 
   <!-- Buy button -->
-  <ion-button class="send-transfer-btn" (click)="sell(stockData, quantity)">Sell</ion-button>
+  <ion-button class="send-transfer-btn" (click)="sell(stockData, quantity)" style="margin-left: 35px;">Sell</ion-button>
 
   <!-- Information text -->
-  <p class="info-text">Tap above to complete transfer</p>
+  <p class="info-text" style="margin-left: 35px;">Tap above to complete transfer</p>
 </ion-content>

@@ -5,26 +5,43 @@
     <div class="title-and-icons" style="display: flex; align-items: center;">
       <div class="title" style="flex: 1;">
         <ion-title>{{ title }}</ion-title>
+        
       </div>
-      <div class="filter-buttons" style=" padding: 0 0 0 10px; /* Adjust padding as needed */
-      background: none; /* Remove any background */
-      border: none; /* Remove border if present */
+      <div class="filter-buttons" style=" padding: 0 0 0 10px;
+      background: none; 
+      border: none; 
       cursor: pointer;
       transition: background-color 0.3s;
       display: flex;
       justify-content: center;
-      align-items: center;">
+      align-items: center;
+      
+      ">
+      <div class="search-container">
+        <ion-icon 
+          name="search-outline" 
+          (click)="toggleSearch()" 
+          style="font-size: 24px; color: white;">
+        </ion-icon>
+        <div class="search-bar" [class.expanded]="isSearchExpanded">
+          <ion-searchbar 
+            [(ngModel)]="searchTerm" 
+            (ionInput)="filterStock()" 
+            placeholder="Search stocks">
+          </ion-searchbar>
+        </div>
+      </div>
         <button (click)="filterStocks('priceHighToLow')" class="filter-button">
-          <ion-icon name="trending-up-outline" fill="clear" style="font-size: 24px;"></ion-icon>
+          <ion-icon name="trending-up-outline" fill="clear" style="font-size: 24px;color: white;"></ion-icon>
         </button>
         <button (click)="filterStocks('alphabetical')" class="filter-button">
-          <ion-icon name="text-outline" fill="clear" style="font-size: 24px;"></ion-icon>
+          <ion-icon name="text-outline" fill="clear" style="font-size: 24px;color: white;"></ion-icon>
         </button>
         <button (click)="filterStocks('favorites')" class="filter-button">
-          <ion-icon name="star-outline" fill="clear" style="font-size: 24px "></ion-icon>
+          <ion-icon name="star-outline" fill="clear" style="font-size: 24px ;color: white;"></ion-icon>
         </button>
         <button (click)="clearFilters()" class="filter-button">
-          <ion-icon name="close-outline" fill="clear" style="font-size: 24px; margin-right: 10px;"></ion-icon>
+          <ion-icon name="close-outline" fill="clear" style="font-size: 24px; margin-right: 10px;color: white;"></ion-icon>
         </button>
       </div>
     </div>

@@ -18,29 +18,35 @@ ion-header {
 }
 
 
-.container {
-display: flex;
-height: 90%;
-
+.container{
+	padding:6px 20px;
+	color : #FFFFFF;
+	
+	ion-item{
+		--background : rgba(255 ,255,255,.1);
+		padding:0;
+		margin:14px 0;
+		--border-radius : 14px;
+		color : #FFFFFF;
+		font-weight:600;
+		width: 80vw;
+    
+		ion-label{
+			padding:6px 0;
+      
+			h4{
+				font-weight: 600;
+				font-size: 16px;
+        word-wrap: break-word; /* Breaks long words onto the next line */
+        max-width: 100%; /* Ensures the h4 element doesn't exceed the container's width */
+        overflow-wrap: break-word;			}
+			h6{
+				color : rgba(255,255,255,.66)
+			}
+		}
+	}
 }
 
-.rectangle {
-margin-top: 2rem;
-display: flex;
-align-items: center;
-justify-content: flex-start;
-position: relative;
-width: 50px;
-height: 50px;
-background: #108672;
-transform: scale(0);
-border-radius: 50%;
-color: white;
-opacity: 0;
-overflow: hidden;
-animation: scale-in .3s ease-out forwards,
-  expand .35s .25s ease-out forwards;
-}
 
 .notification-text {
 display: flex;
@@ -80,3 +86,5 @@ animation: fade-in .65s ease-in forwards;
   opacity: .8;
 }
 }
+
+

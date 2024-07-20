@@ -34,7 +34,7 @@ export class IntradayPage implements OnInit {
   }
 
   fetchStockPriceHistory() {
-    const apiUrl = `http://localhost:3000/product/history/${this.symbol}`;
+    const apiUrl = `http://192.168.1.112:3000/product/history/${this.symbol}`;
     this.http.get<any[]>(apiUrl).subscribe(
       data => {
         const labels = data.map(entry => new Date(entry.timestamp));
@@ -121,5 +121,8 @@ export class IntradayPage implements OnInit {
       console.error(`Failed to update favorite status for ${stock.symbol}:`, error);
       // Rollback UI state if needed
     }
+  }
+  navigateBack(){
+    this.router.navigate(['/home'])
   }
 }

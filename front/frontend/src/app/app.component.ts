@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AuthenticationService } from './services/authentication.service';
@@ -10,7 +10,6 @@ import { NotificationService } from './services/notification.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-
   name: string | undefined;
   email: string | undefined;
   phoneNumber: string | undefined;
@@ -25,14 +24,17 @@ export class AppComponent {
     private router: Router,
     private notificationService:NotificationService
   ) {
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.activeRoute = event.urlAfterRedirects;
       }
     });
+
   }
 
   ngOnInit(){
+
     this.loadUserProfile();
     this.loadUnreadCount();
   }

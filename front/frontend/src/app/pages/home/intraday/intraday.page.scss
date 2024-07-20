@@ -109,7 +109,7 @@ tbody tr:hover {
   background-color: #1e1e1e; /* Dark background for chart container */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
-  height: 300px; /* Increased height */
+  height: 20rem; /* Increased height */
 }
 
 /* White background for the canvas element */
@@ -149,6 +149,7 @@ ion-footer {
   background: none; /* Remove any background */
   border: none; /* Remove border if present */
   cursor: pointer;
+  font-size: 24px;
   transition: color 0.3s, transform 0.3s;
 }
 
@@ -168,4 +169,56 @@ ion-footer {
 
 .button-container ion-icon.favorite {
   color: gold; /* Gold color for favorite icon */
+}
+
+
+.filter-button {
+  padding: 0 0 0 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 2rem;
+  height: 2rem;
+}
+
+.budget-header {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.budget-amount {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px; /* Adjust spacing between rows */
+}
+
+.detail-item {
+  flex: 1;
+  margin-right: 8px; /* Adjust spacing between items */
+}
+
+.detail-item:last-child {
+  margin-right: 0; /* Remove margin for the last item in a row */
+}
+
+.sub-heading {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
 }

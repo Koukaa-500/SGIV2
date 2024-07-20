@@ -38,5 +38,7 @@ ngOnInit(){
         // Handle error response, e.g., show error message to the user
       });
   }
-
+  navigateBack(){
+    this.router.navigate(['/profile'])
+  }
 }

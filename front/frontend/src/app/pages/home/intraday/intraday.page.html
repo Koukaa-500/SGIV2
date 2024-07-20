@@ -2,10 +2,21 @@
   <ion-toolbar class="bar">
     <div class="title-and-icons">
       <div class="title"><ion-title>{{ stock.symbol }} Intraday</ion-title></div>
-      <div class="filter-buttons">   <ion-icon class="icon1" name="star-outline" style="margin-right: 10px;"  [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite($event, stock)"></ion-icon>
+      <div class="filter-buttons"> <ion-icon class="icon1" name="star-outline" style="margin-right: 10px;"
+          [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite($event, stock)"></ion-icon>
+        <div class="filter-buttons" style=" padding: 0 0 0 10px;
+    background: none; 
+    border: none; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+    ">
+          <button (click)="navigateBack()" class="filter-button" style="font-size: 24px;color: white;width: 3rem;">
+            <ion-icon name="arrow-back" fill="clear" style="margin-right: 10px;"></ion-icon></button>
+        </div>
       </div>
     </div>
-    
+
 
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
@@ -15,31 +26,63 @@
 
 
 <ion-content [fullscreen]="true" class="container">
-<div>
-  <ion-card class="budget-card">
-    <ion-card-header class="budget-header" >
-      <ion-card-title style="color:#e0e0e0;">{{ stock.symbol }}</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <h2 class="budget-amount">{{ stock.price | currency }}<span class="per-month"></span></h2>
-      <p class="budget-time"></p>
-      <p class="total-spent"><span class="spent-amount"></span></p>
-      
-      <div class="chart-container">
-        <canvas id="canvas"></canvas>
-      </div>
-    </ion-card-content>
-  </ion-card>
   <div>
-  <ion-button class="send-transfer-btnn" (click)="buy(stock)" >Buy</ion-button>
-  <ion-button class="send-transfer-btn" (click)="sell(stock)" >Sell</ion-button>
-</div>
-</div>
+    <ion-card class="budget-card">
+      <ion-card-header class="budget-header">
+       
+        <div class="item-details">
+          <div class="detail-row">
+            <div class="detail-item">
+              <span class="sub-heading" > <ion-card-title [ngStyle]="{'color': stock.color}">{{ stock.symbol }}</ion-card-title></span>
+            </div>
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}"><h2 class="budget-amount">{{ stock.price | currency }}<span class="per-month"></span></h2>
+            </span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">SA: {{ stock.price | currency }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">SP: {{ stock.price | currency }}</span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">+B {{ stock.change | number:'1.2-2' }}%</span>
+            </div>
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">Qte: {{ stock.quantity }}</span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">{{ stock.status }}</span>
+            </div>
+          </div>
+        </div>
+      </ion-card-header>
+      
+
+      <ion-card-content>
+        
+        
+
+        <div class="chart-container">
+          <canvas id="canvas"></canvas>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <div style="align-items: center;display: flex;justify-content: center;">
+      <ion-button class="send-transfer-btnn" (click)="buy(stock)">Buy</ion-button>
+      <ion-button class="send-transfer-btn" (click)="sell(stock)">Sell</ion-button>
+    </div>
+  </div>
 </ion-content>
 
-<ion-footer style="background-color:#201c24;">
-  
+<ion-footer style="background-color:#201c24;align-items: center;display: flex;justify-content: center;">
+
   <ion-buttons slot="start" style="background-color:#201c24;">
     <ion-button>Intraday</ion-button>
     <ion-button (click)="goToTransaction(stock.symbol)">Transaction</ion-button>
@@ -47,5 +90,3 @@
   </ion-buttons>
 
 </ion-footer>
-
-

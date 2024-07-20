@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/product.service';
 import { AccountsService } from 'src/app/services/accounts.service';
@@ -30,7 +30,7 @@ export class BuyPage implements OnInit {
     private accountsService: AccountsService,
     private authService: AuthenticationService,
     private notificationService: NotificationService,
-    
+    private router : Router,
     private toastController: ToastController
   ) {
     this.route.paramMap.subscribe(params => {
@@ -45,14 +45,14 @@ export class BuyPage implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.stockSymbol = params.get('symbol');
       this.stockData = this.productService.getStockBySymbol(this.stockSymbol);
-      this.quantity = 1;
+      this.quantity = 0;
       this.validity = 1;
       this.stock = 0;
       this.balance = '';
     });
     this.getAccounts();
   }
-
+  
   async getAccounts() {
     try {
       const accountsObservable = await this.accountsService.getAccounts();
@@ -91,9 +91,9 @@ export class BuyPage implements OnInit {
       const response = await this.accountsService.buyStock(payload);
       const message = `Bought ${quantity} shares of ${stock.symbol} for a total cost of ${totalCost}`;
       this.authService.addUserHistory(message);
-      const mess = ` ${stock.symbol} bought successfully`;
-      this.notificationService.addNotification(mess);
-            console.log('Stock purchased successfully:', response);
+      const mess = `${stock.symbol} bought successfully`;
+      await this.notificationService.addNotification(mess, 'green'); // Add green color for buy notifications
+      console.log('Stock purchased successfully:', response);
       this.balance -= totalCost; // Update balance locally
       this.presentToast('Stock purchased successfully!', 'success');
       const profondeurData = {
@@ -115,7 +115,10 @@ export class BuyPage implements OnInit {
       console.error('Error buying stock:', error);
       this.presentToast('Error buying stock', 'danger');
     }
-  }
+      window.location.reload()
+    
+}
+
 
   async presentToast(message: string, color: string) {
     const toast = await this.toastController.create({
@@ -160,5 +163,9 @@ onAccountChange(accountId: string) {
   if (selectedAccount) {
     this.balance = selectedAccount.solde;
   }
+}
+
+navigateBack(){
+  this.router.navigate(['/home'])
 }
 }

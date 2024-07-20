@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { BaseChartDirective  } from 'ng2-charts';
 import { IonicModule } from '@ionic/angular';
 
 import { PortfolioPageRoutingModule } from './portfolio-routing.module';
@@ -15,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     IonicModule,
     HttpClientModule,
-    PortfolioPageRoutingModule
+    PortfolioPageRoutingModule,
+    BaseChartDirective ,
   ],
   declarations: [PortfolioPage]
 })

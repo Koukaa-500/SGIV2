@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -23,11 +23,12 @@ export class HomePage implements OnInit, OnDestroy {
   availabilityStatus: string = '';
   totalChange: number = 0;
   totalSA: number = 0;
-
+  searchTerm: string = '';
+  isSearchExpanded: boolean = false;
   constructor(
     private productService: ProductService,
     private authService: AuthenticationService,
-    
+    private elementRef: ElementRef, private renderer: Renderer2,
     private navCtrl: NavController
   ) {}
 
@@ -229,5 +230,35 @@ export class HomePage implements OnInit, OnDestroy {
     const prefix = change > 0 ? '+' : (change < 0 ? '-' : '');
     const color = change > 0 ? 'green' : (change < 0 ? 'red' : '');
     return `${color}${prefix}${Math.abs(change).toFixed(2)}%`;
+  }
+
+  toggleSearch() {
+    this.isSearchExpanded = !this.isSearchExpanded;
+    if (this.isSearchExpanded) {
+      setTimeout(() => {
+        const searchInput = this.elementRef.nativeElement.querySelector('ion-searchbar input') as HTMLInputElement;
+        if (searchInput) {
+          searchInput.focus();
+        }
+      }, 300); // Delay to ensure expansion transition completes
+    }
+  }
+
+  filterStock() {
+    if (this.searchTerm.trim() === '') {
+      this.filteredStocks = this.stocks;
+    } else {
+      this.filteredStocks = this.stocks.filter(stock =>
+        stock.symbol.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const clickedInside = this.elementRef.nativeElement.contains(event.target);
+    if (!clickedInside && this.isSearchExpanded) {
+      this.isSearchExpanded = false;
+    }
   }
 }

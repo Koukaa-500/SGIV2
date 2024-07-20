@@ -44,4 +44,7 @@ export class AddAccountPage implements OnInit {
     });
     toast.present();
   }
+  navigateBack(){
+    this.router.navigate(['/profile'])
+  }
 }

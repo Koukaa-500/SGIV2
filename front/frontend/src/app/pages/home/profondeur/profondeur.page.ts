@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProfondeurPage implements OnInit {
   stock: any;
+  stocks: any[] = [];
   symbol: string;
   stockData: any;
   profondeurData: any[] = []; // Add this property to hold profondeur data
@@ -53,5 +54,24 @@ export class ProfondeurPage implements OnInit {
     this.navCtrl.navigateForward(`/intraday/${symbol}`, {
       state: { stockData: symbol }
     });
+  }
+
+  navigateBack(){
+    this.router.navigate(['/home'])
+  }
+  toggleFavorite(event: Event, stock: any) {
+    try {
+      event.stopPropagation(); // Stops event propagation
+      this.productService.toggleFavorite(stock.symbol,!stock.favorite);
+
+      // Update stocks array to reflect the change
+      const index = this.stocks.findIndex(s => s.symbol === stock.symbol);
+      if (index !== -1) {
+        this.stocks[index].favorite = !this.stocks[index].favorite;
+      }
+    } catch (error) {
+      console.error(`Failed to update favorite status for ${stock.symbol}:`, error);
+      // Rollback UI state if needed
+    }
   }
 }

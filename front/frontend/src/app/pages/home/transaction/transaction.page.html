@@ -1,6 +1,21 @@
 <ion-header>
   <ion-toolbar class="bar" >
-    <ion-title>{{ symbol }}</ion-title>
+    <div class="title-and-icons">
+      <div class="title"><ion-title>{{ stock.symbol }} Intraday</ion-title></div>
+      <div class="filter-buttons"> <ion-icon class="icon1" name="star-outline" style="margin-right: 10px;"
+          [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite($event, stock)"></ion-icon>
+        <div class="filter-buttons" style=" padding: 0 0 0 10px;
+    background: none; 
+    border: none; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+    ">
+          <button (click)="navigateBack()" class="filter-button" style="font-size: 24px;color: white;width: 3rem;">
+            <ion-icon name="arrow-back" fill="clear" style="margin-right: 10px;"></ion-icon></button>
+        </div>
+      </div>
+    </div>
 
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
@@ -49,9 +64,9 @@
 
 
 
-<ion-footer style="background-color: #201c24;">
+<ion-footer style="background-color: #201c24;align-items: center;display: flex;justify-content: center;">
   
-  <ion-buttons slot="start" style="background-color: #201c24;">
+  <ion-buttons slot="start" style="background-color: #201c24;color:white;" >
     <ion-button (click)="goToIntraday(stock.symbol)">Intraday</ion-button>
     <ion-button >Transaction</ion-button>
     <ion-button (click)="goToProfond(stock.symbol)">Profondeur</ion-button>

@@ -54,7 +54,7 @@ router.get('/accounts', auth, async (req, res) => {
 });
 router.post('/buy-stock', auth, async (req, res) => {
     try {
-        const { accountId, stockData, quantity } = req.body;
+        const { accountId, stockData, quantity,date } = req.body;
         if (!accountId || !stockData || !quantity) {
             return res.status(400).json({ message: 'Account ID, stock data, and quantity are required' });
         }
@@ -73,14 +73,17 @@ router.post('/buy-stock', auth, async (req, res) => {
         if (account.solde < totalCost) {
             return res.status(400).json({ message: 'Insufficient balance' });
         }
-
+        
+        
         const newStock = {
             name: stockData.name,
             quantity,
             price: stockData.price,
             symbol: stockData.symbol,
             type: stockData.type,
-            validity: stockData.validity
+            validity: stockData.validity,
+            date:stockData.date,
+            change : stockData.change
         };
 
         account.stock.push(newStock);

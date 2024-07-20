@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.page.html',
   styleUrls: ['./notification.page.scss'],
+  providers: [DatePipe]
 })
 export class NotificationPage implements OnInit {
   title: string = "Notification";
   notificationMessages: any[] = [];
 
-  constructor(private notificationService: NotificationService) { }
+  constructor(private notificationService: NotificationService,private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.loadNotifications();
@@ -35,8 +37,13 @@ export class NotificationPage implements OnInit {
         notificationString += notification[key];
       }
     }
-    return { message: notificationString, date: notification.date };
+
+    // Format the date using DatePipe and provide a default value if null
+    const formattedDate = this.datePipe.transform(notification.date, 'yyyy-MM-dd HH:mm:ss') || '';
+
+    return { message: notificationString, date: formattedDate };
   }
+
   async markAsRead(notificationId: string) {
     (await this.notificationService.markAsRead(notificationId)).subscribe(
       () => {
@@ -47,6 +54,7 @@ export class NotificationPage implements OnInit {
         console.error('Error marking notification as read:', error);
       }
     );
+    window.location.reload();
   }
   
 }

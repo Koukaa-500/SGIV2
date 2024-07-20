@@ -90,3 +90,30 @@
 		opacity: .8;
 	}
 }
+
+
+.container{
+	padding:6px 20px;
+	color : #FFFFFF;
+	
+	ion-item{
+		--background : rgba(255 ,255,255,.1);
+		padding:0;
+		margin:14px 0;
+		--border-radius : 14px;
+		color : #FFFFFF;
+		font-weight:600;
+		width: 80vw;
+		ion-label{
+			padding:6px 0;
+
+			h4{
+				font-weight: 600;
+				font-size: 16px;
+			}
+			h6{
+				color : rgba(255,255,255,.66)
+			}
+		}
+	}
+}

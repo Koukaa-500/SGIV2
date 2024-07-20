@@ -53,7 +53,7 @@ router.get('/notifications', auth, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.status(200).json(user.notifications);
+    res.status(200).json(user.notifications); // Return notifications with color property
   } catch (error) {
     console.error('Error fetching notifications:', error);
     res.status(500).json({ message: 'Server error' });
@@ -61,11 +61,20 @@ router.get('/notifications', auth, async (req, res) => {
 });
 
 
+
 router.post('/notifications1', auth, async (req, res) => {
   try {
     const userId = req.user._id; // Extract user ID from the token
-    const { message } = req.body;
-
+    const { message, color } = req.body; // Accept color from the request body
+    
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed
+    const day = String(now.getDate()).padStart(2, "0");
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
+    
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -73,7 +82,8 @@ router.post('/notifications1', auth, async (req, res) => {
 
     const notification = {
       message,
-      date: new Date()
+      color, // Add the color property
+      date: formattedDate
     };
 
     user.notifications.push(notification);
@@ -85,6 +95,7 @@ router.post('/notifications1', auth, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 
 ///// Log in 
@@ -362,11 +373,9 @@ router.get('/notifications/unread', auth, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    const unreadCount = user.notifications.filter(notification => !notification.isRead).length;
-    res.status(200).json(unreadCount);
-    console.log(res);
+    res.status(200).json(user.notifications);
   } catch (error) {
-    console.error('Error fetching unread notifications count:', error);
+    console.error('Error fetching notifications:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

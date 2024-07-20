@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ProductService } from 'src/app/services/product.service';
 import { AccountsService } from 'src/app/services/accounts.service';
@@ -33,7 +33,7 @@ export class SellPage implements OnInit {
     private authService: AuthenticationService,
     private notificationService: NotificationService,
     private toastController: ToastController,
-    
+    private router : Router,
   ) {
     this.route.paramMap.subscribe(params => {
       if (params.has('symbol')) {
@@ -89,7 +89,7 @@ export class SellPage implements OnInit {
       const message = `Sold ${quantity} shares of ${stock.symbol} for a total cost of ${stock.price * quantity}`;
       this.authService.addUserHistory(message);
       const mess = ` ${stock.symbol} sold successfully`;
-      this.notificationService.addNotification(mess);
+      this.notificationService.addNotification(mess,'red');
       console.log('Stock sold successfully:', response);
       this.balance += stock.price * quantity; // Update balance locally
       this.presentToast('Stock sold successfully!', 'success');
@@ -110,10 +110,13 @@ export class SellPage implements OnInit {
           console.error('Error saving profondeur data:', err);
         }
       );
+      
     } catch (error) {
       console.error('Error selling stock:', error);
       this.presentToast('Error selling stock', 'danger');
     }
+    window.location.reload()
+
   }
 
   async presentToast(message: string, color: string) {
@@ -159,5 +162,9 @@ export class SellPage implements OnInit {
     if (selectedAccount) {
       this.balance = selectedAccount.solde;
     }
+  }
+
+  navigateBack(){
+    this.router.navigate(['/home'])
   }
 }

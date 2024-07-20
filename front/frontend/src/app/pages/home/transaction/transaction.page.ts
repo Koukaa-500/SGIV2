@@ -29,7 +29,7 @@ export class TransactionPage implements OnInit {
   }
 
   fetchTransactionData() {
-    const apiUrl = `http://localhost:3000/product/history/${this.symbol}`;
+    const apiUrl = `http://192.168.1.112:3000/product/history/${this.symbol}`;
     this.http.get<any[]>(apiUrl).subscribe(
       data => {
         this.stocks = data;
@@ -54,5 +54,22 @@ export class TransactionPage implements OnInit {
     });
   }
 
-  
+  navigateBack(){
+    this.router.navigate(['/home'])
+  }
+  toggleFavorite(event: Event, stock: any) {
+    try {
+      event.stopPropagation(); // Stops event propagation
+      this.productService.toggleFavorite(stock.symbol,!stock.favorite);
+
+      // Update stocks array to reflect the change
+      const index = this.stocks.findIndex(s => s.symbol === stock.symbol);
+      if (index !== -1) {
+        this.stocks[index].favorite = !this.stocks[index].favorite;
+      }
+    } catch (error) {
+      console.error(`Failed to update favorite status for ${stock.symbol}:`, error);
+      // Rollback UI state if needed
+    }
+  }
 }

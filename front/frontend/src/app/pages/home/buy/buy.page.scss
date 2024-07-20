@@ -4,6 +4,7 @@
 }
 .bar{
   --background : #00bfa5;
+
 }
 .custom-content {
   
@@ -12,6 +13,19 @@
   --background: #1e1e1e;
   width: 100vw;
   height: 100vh;
+}
+.filter-button {
+  padding: 0 0 0 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 2rem;
+  height: 2rem;
 }
 
   

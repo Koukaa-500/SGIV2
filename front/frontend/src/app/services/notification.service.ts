@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root'
 })
 export class NotificationService {
-  private apiUrl = 'http://localhost:3000/user'; // Replace with your API base URL
+  private apiUrl = 'http://192.168.1.112:3000/user'; // Replace with your API base URL
 
   constructor(private http: HttpClient,  private storage: Storage) { }
 
@@ -24,23 +24,24 @@ export class NotificationService {
     });
     return this.http.get<any[]>(`${this.apiUrl}/notifications`, { headers });
   }
-  async addNotification(message: string): Promise<any> {
+  async addNotification(message: string, color: string = 'default'): Promise<any> {
     try {
       const token = await this.storage.get('token');
-
+  
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'token': `${token}`
       });
-
-      return this.http.post<any>(`${this.apiUrl}/notifications1`, { message }, { headers })
+  
+      return this.http.post<any>(`${this.apiUrl}/notifications1`, { message, color }, { headers })
         .toPromise();
     } catch (error) {
       console.error('Error adding notification:', error);
       throw new Error('Failed to add notification');
     }
   }
-
+  
+  
  async getUnreadCount(): Promise<Observable<any>> {
     const token = await this.storage['get']('token');
     console.log(token);
