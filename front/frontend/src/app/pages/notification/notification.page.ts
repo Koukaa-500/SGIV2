@@ -11,10 +11,13 @@ import { DatePipe } from '@angular/common';
 export class NotificationPage implements OnInit {
   title: string = "Notification";
   notificationMessages: any[] = [];
-
-  constructor(private notificationService: NotificationService,private datePipe: DatePipe) { }
+  today: Date = new Date();
+  constructor(private notificationService: NotificationService,private datePipe: DatePipe) {
+    
+   }
 
   ngOnInit() {
+    
     this.loadNotifications();
   }
 

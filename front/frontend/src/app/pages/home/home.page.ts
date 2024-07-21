@@ -63,6 +63,7 @@ export class HomePage implements OnInit, OnDestroy {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
+    
   }
 
   async loadUserProfile() {
@@ -220,6 +221,7 @@ export class HomePage implements OnInit, OnDestroy {
   updateAvailabilityStatus(): void {
     const currentHour = new Date().getHours();
     this.availabilityStatus = (currentHour >= 6 && currentHour < 20) ? 'Disponible' : 'Non-Disponible';
+   
   }
   calculateTotals(): void { 
     // Calculate total SA and total Change

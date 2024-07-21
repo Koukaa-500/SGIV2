@@ -2,18 +2,23 @@
   <ion-toolbar class="bar" >
     <div class="title-and-icons">
       <div class="title"><ion-title>{{ stock.symbol }} Intraday</ion-title></div>
-      <div class="filter-buttons"> <ion-icon class="icon1" name="star-outline" style="margin-right: 10px;"
+      <div class="filter-buttons"> <ion-icon class="icon1" name="star-outline"
           [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite($event, stock)"></ion-icon>
-        <div class="filter-buttons" style=" padding: 0 0 0 10px;
-    background: none; 
-    border: none; 
-    cursor: pointer;
-    transition: background-color 0.3s;
-    
-    ">
+        <div class="filter-buttons" style=" padding: 0 0 0 10px;background: none; border: none; cursor: pointer;transition: background-color 0.3s;">
+          <button (click)="filterStocks('priceHighToLow')" class="filter-button">
+            <ion-icon name="trending-up-outline" fill="clear" style="font-size: 24px;color: white;"></ion-icon>
+          </button>
+          <button (click)="filterStocks('change')" class="filter-button">
+            <ion-icon name="text-outline" fill="clear" style="font-size: 24px;color: white;"></ion-icon>
+          </button>
+          <button (click)="clearFilters()" class="filter-button">
+            <ion-icon name="close-outline" fill="clear" style="font-size: 40px;color: white;"></ion-icon>
+          </button>
           <button (click)="navigateBack()" class="filter-button" style="font-size: 24px;color: white;width: 3rem;">
             <ion-icon name="arrow-back" fill="clear" style="margin-right: 10px;"></ion-icon></button>
+            
         </div>
+
       </div>
     </div>
 

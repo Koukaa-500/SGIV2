@@ -159,7 +159,9 @@ ion-header {
 }
 .stock-card :disabled{
   cursor: not-allowed;
+  
 }
+
 
 @media only screen and (max-width: 480px) {
   .stock-card {
@@ -253,7 +255,7 @@ ion-footer {
     }
 
     .non-disponible {
-      color: red; /* Red color for non-disponible status */
+      color: blue; /* Red color for non-disponible status */
     }
   }
 }
@@ -339,4 +341,21 @@ ion-searchbar {
   --padding-start: 10px;
   --padding-end: 10px;
   --placeholder-color: #ccc;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-heading {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+ion-icon {
+  margin-left: 5px; /* Adjust spacing between the text and the icon */
+  font-size: 16px;  /* Adjust icon size if needed */
 }

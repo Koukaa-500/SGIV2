@@ -8,22 +8,22 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class OrdorPage implements OnInit {
   title: string = "Carnet d'ordre";
-  history: any[] = [];
+  orders: any[] = [];
+
   constructor(private AuthService: AuthenticationService) { }
 
   ngOnInit() {
-    this.loadNotifications();
-
+    this.loadOrders();
   }
-  async loadNotifications() {
+
+  async loadOrders() {
     (await this.AuthService.getUserHistory()).subscribe(
-      (history: any[]) => {
-        this.history = history;
+      (orders: any[]) => {
+        this.orders = orders;
       },
       (error: any) => {
-        console.error('Error fetching notifications:', error);
+        console.error('Error fetching orders:', error);
       }
     );
   }
-
 }

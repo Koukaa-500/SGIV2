@@ -49,9 +49,17 @@
             </div>
           </div>
           <div class="detail-row">
-            <div class="detail-item">
-              <span class="sub-heading" [ngStyle]="{'color': stock.color}">+B {{ stock.change | number:'1.2-2' }}%</span>
+            <div class="detail-item" style="display: flex; align-items: center;">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">
+                +B {{ stock.change | number:'1.2-2' }}%
+              </span>
+              <ion-icon 
+                style="margin-left: 5px; font-size: 16px;" 
+                [name]="stock.change === 0 ? 'remove-circle' : (stock.change > 0 ? 'arrow-up-circle' : 'arrow-down-circle')"
+                [ngStyle]="{'color': stock.change === 0 ? 'gray' : (stock.change > 0 ? 'green' : 'red')}">
+              </ion-icon>
             </div>
+            
             <div class="detail-item">
               <span class="sub-heading" [ngStyle]="{'color': stock.color}">Qte: {{ stock.quantity }}</span>
             </div>

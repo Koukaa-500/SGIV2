@@ -18,6 +18,9 @@ export class PortfolioPage implements OnInit {
   isMarketOpen: boolean | undefined;
   espece: number = 0;
   titre: number = 0;
+  activeFilter: string = '';
+  filteredStocks: any[] = [];
+  stocks: any[] = [];
   showChart: boolean = false;
   isChartVisible = false; // Add this property
   pieChartOptions: ChartOptions<'pie'> = {
@@ -61,8 +64,7 @@ export class PortfolioPage implements OnInit {
     this.getAccounts();
     this.user = this.accountsService.getUserData();
     console.log(this.user);
-    this.updateDateAndMarketStatus();
-    setInterval(() => this.updateDateAndMarketStatus(), 60000); // Update every minute
+    
   }
 
   async getAccounts() {
@@ -112,12 +114,7 @@ export class PortfolioPage implements OnInit {
     this.titre = this.selectedAccount.solde + this.espece;
   }
 
-  updateDateAndMarketStatus() {
-    const now = new Date();
-    this.currentDate = now.toLocaleDateString();
-    const hour = now.getHours();
-    this.isMarketOpen = hour >= 6 && hour < 20;
-  }
+ 
 
   updatePieChart() {
     if (this.selectedStocks && this.selectedStocks.length > 0) {
@@ -147,5 +144,29 @@ export class PortfolioPage implements OnInit {
 
   toggleChart() {
     this.isChartVisible = !this.isChartVisible;
+  }
+
+  filterStocks(option: string): void {
+    switch (option) {
+      case 'priceHighToLow':
+        this.filteredStocks = [...this.stocks.sort((a, b) => b.price - a.price)];
+        break;
+        case 'change':
+          this.filteredStocks = [...this.stocks.sort((a, b) => b.change - a.change)];
+          break;
+      case 'favorites':
+        this.filteredStocks = this.stocks.filter(stock => stock.favorite);
+        break;
+      default:
+        this.filteredStocks = [...this.stocks];
+        break;
+    }
+    
+    this.activeFilter = option; // Set active filter
+  }
+
+  clearFilters(): void {
+    this.filteredStocks = [...this.stocks]; // Reset filtered stocks to all stocks
+    this.activeFilter = ''; // Clear active filter
   }
 }

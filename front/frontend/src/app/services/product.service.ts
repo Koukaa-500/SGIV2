@@ -8,9 +8,9 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private baseUrl = 'http://192.168.1.112:3000/product/stocks';
-  private baseUrl1 = 'http://192.168.1.112:3000/user';
-  private apiUrl = 'http://192.168.1.112:3000/product';
+  private baseUrl = 'http://192.168.1.149:3000/product/stocks';
+  private baseUrl1 = 'http://192.168.1.149:3000/user';
+  private apiUrl = 'http://192.168.1.149:3000/product';
   constructor(private http: HttpClient, private storage: Storage) {
     this.updateStockStatusBasedOnTime();
   }
@@ -58,7 +58,7 @@ export class ProductService {
       };
       console.log('Request payload:', requestPayload);
     
-      return this.http.post<any>(`http://192.168.1.112:3000/user/favorite1`, requestPayload, { headers }).toPromise();
+      return this.http.post<any>(`http://192.168.1.149:3000/user/favorite1`, requestPayload, { headers }).toPromise();
     } catch (error) {
       console.error('An error occurred:', error);
       return throwError(() => new Error('An error occurred'));
@@ -96,7 +96,7 @@ export class ProductService {
       'token': `${token}`
     });
   
-    return this.http.get<string[]>(`http://192.168.1.112:3000/user/favorite`, { headers }).pipe(
+    return this.http.get<string[]>(`http://192.168.1.149:3000/user/favorite`, { headers }).pipe(
       map((favoriteSymbols: string[]) => {
         this.stocks = this.stocks.map(stock => ({
           ...stock,

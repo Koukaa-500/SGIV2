@@ -10,16 +10,11 @@
     </ion-header>
 
     
-    <!-- <div class="container" >
+    <div class="containerr">
       <div>
-      <div class="rectangle" *ngFor="let notification of notificationMessages" (click)="markAsRead(notification._id)" >
-        <div class="notification-text" [ngClass]="{'read': notification.read}" >
-          <i class="material-icons">{{ notification.date | date: 'yyyy-MM-dd' }}</i>
-          <span>&nbsp;&nbsp;{{ notification.message }}</span>
-        </div>
+        <span>{{ today | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
       </div>
     </div>
-    </div> -->
 
     <div class="container">
       <div>

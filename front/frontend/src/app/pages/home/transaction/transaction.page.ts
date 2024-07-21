@@ -16,6 +16,8 @@ export class TransactionPage implements OnInit {
   validity:any;
   stockData:any;
   stock:any;
+  activeFilter: string = '';
+  filteredStocks: any[] = [];
   constructor(private route: ActivatedRoute, private http: HttpClient , private router:Router,private navCtrl: NavController,private productService : ProductService ) {
     this.symbol = '';
     this.stockData = this.productService.getStockBySymbol(this.symbol);
@@ -29,7 +31,7 @@ export class TransactionPage implements OnInit {
   }
 
   fetchTransactionData() {
-    const apiUrl = `http://192.168.1.112:3000/product/history/${this.symbol}`;
+    const apiUrl = `http://192.168.1.149:3000/product/history/${this.symbol}`;
     this.http.get<any[]>(apiUrl).subscribe(
       data => {
         this.stocks = data;
@@ -71,5 +73,29 @@ export class TransactionPage implements OnInit {
       console.error(`Failed to update favorite status for ${stock.symbol}:`, error);
       // Rollback UI state if needed
     }
+  }
+
+  filterStocks(option: string): void {
+    switch (option) {
+      case 'priceHighToLow':
+        this.filteredStocks = [...this.stocks.sort((a, b) => b.price - a.price)];
+        break;
+        case 'change':
+          this.filteredStocks = [...this.stocks.sort((a, b) => b.change - a.change)];
+          break;
+      case 'favorites':
+        this.filteredStocks = this.stocks.filter(stock => stock.favorite);
+        break;
+      default:
+        this.filteredStocks = [...this.stocks];
+        break;
+    }
+    
+    this.activeFilter = option; // Set active filter
+  }
+
+  clearFilters(): void {
+    this.filteredStocks = [...this.stocks]; // Reset filtered stocks to all stocks
+    this.activeFilter = ''; // Clear active filter
   }
 }

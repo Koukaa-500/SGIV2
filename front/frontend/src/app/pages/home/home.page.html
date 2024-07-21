@@ -74,19 +74,25 @@
       <div *ngFor="let stock of filteredStocks" class="stock-card" [ngStyle]="{'color': stock.color}"
         [class.disabled]="stock.status === 'Non-Disponible'"
         (click)="stock.status !== 'Non-Disponible' && goToIntraday(stock.symbol)">
-        <div class="item-image"><ion-icon name="star-outline" [ngClass]="{'favorite': stock.favorite}"
+        <div class="item-image">
+          <ion-icon name="star-outline" [ngClass]="{'favorite': stock.favorite}"
             (click)="toggleFavorite($event, stock)">
-          </ion-icon></div>
-        <div class="item-details" style="width: 7rem; font-size: 3rem;" [ngStyle]="{'color': stock.color}" >
+          </ion-icon>
+        </div>
+        <div class="item-details" style="width: 7rem; font-size: 3rem;" [ngStyle]="{'color': stock.color}">
           <h1 class="heading" style="font-size: 1rem;margin: 0;">{{ stock.symbol }}</h1>
           <span class="sub-heading" style="font-size: 12px;font-weight: bold;" [ngStyle]="{'color': stock.color}">SA: {{ stock.price | currency }}</span>
           <span class="sub-heading" style="font-size: 12px;font-weight: bold;" [ngStyle]="{'color': stock.color}">SP: {{ stock.price | currency }}</span>
-          <span class="sub-heading" style="font-size: 12px;font-weight: bold;" [ngStyle]="{'color': stock.color}">+B {{ stock.change | number:'1.2-2' }}%</span>
+          <span class="sub-heading" style="font-size: 12px;font-weight: bold;" [ngStyle]="{'color': stock.color}">
+            +B {{ stock.change | number:'1.2-2' }}% 
+            <ion-icon style="margin-left: 5px;font-size: 16px; " [name]="stock.change >= 0 ? 'arrow-up-circle' : 'arrow-down-circle'"
+                      [ngStyle]="{'color': stock.change >= 0 ? 'green' : 'red'}">
+            </ion-icon>
+          </span>
           <span class="sub-heading" style="font-size: 12px;font-weight: bold;" [ngStyle]="{'color': stock.color}">Qte: {{ stock.quantity }}</span>
           <span class="sub-heading" style="font-size: 12px;font-weight: bold;" [ngStyle]="{'color': stock.color}">{{ stock.status }}</span>
         </div>
         <div class="button-container">
-    
           <button (click)="buy($event, stock)" [disabled]="stock.status === 'Non-Disponible'" class="buy-button">
             <img src="../../../assets/images/buy.png" alt="Buy">
           </button>
@@ -96,6 +102,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </ion-content>
 
@@ -113,7 +120,7 @@
       </div>
       <div class="footer-section change-section">
         Change <br>
-        <span [ngClass]="formatChange(totalChange)">  {{totalChange | number:'1.2-2'}}% </span>
+        <span [ngClass]="formatChange(totalChange)"> {{totalChange | number:'1.2-2'}}% </span>
       </div>
     </div>
   </ion-toolbar>
