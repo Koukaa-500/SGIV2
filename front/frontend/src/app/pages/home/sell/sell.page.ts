@@ -85,14 +85,26 @@ export class SellPage implements OnInit {
     };
 
     try {
+      
       const response = await this.accountsService.sellStock(payload);
-      const message = `Sold ${quantity} shares of ${stock.symbol} for a total cost of ${stock.price * quantity}`;
-      this.authService.addUserHistory(message);
+        const orderData = {
+          date: new Date(),
+          symbol: stock.symbol,
+          price: stock.price,
+          quantityOrdered: quantity,
+          status: 'Completed',  // Or any other status based on your logic
+          orderType: 'Sold'      // This can be dynamic if you support multiple order types
+        };
+        
+      this.authService.addUserHistory(orderData);
+      
+      
       const mess = ` ${stock.symbol} sold successfully`;
-      this.notificationService.addNotification(mess,'red');
+      this.presentToast('Stock sold successfully!', 'success');
+      await this.notificationService.addNotification(mess,'red');
       console.log('Stock sold successfully:', response);
       this.balance += stock.price * quantity; // Update balance locally
-      this.presentToast('Stock sold successfully!', 'success');
+      
 
       // Save profondeur data
       const profondeurData = {
@@ -110,12 +122,14 @@ export class SellPage implements OnInit {
           console.error('Error saving profondeur data:', err);
         }
       );
+      window.location.reload()
       
     } catch (error) {
       console.error('Error selling stock:', error);
       this.presentToast('Error selling stock', 'danger');
+      window.location.reload()
     }
-    window.location.reload()
+    
 
   }
 

@@ -12,12 +12,10 @@ export class NotificationPage implements OnInit {
   title: string = "Notification";
   notificationMessages: any[] = [];
   today: Date = new Date();
-  constructor(private notificationService: NotificationService,private datePipe: DatePipe) {
-    
-   }
+  read:boolean=false
+  constructor(private notificationService: NotificationService, private datePipe: DatePipe) { }
 
   ngOnInit() {
-    
     this.loadNotifications();
   }
 
@@ -51,7 +49,6 @@ export class NotificationPage implements OnInit {
     (await this.notificationService.markAsRead(notificationId)).subscribe(
       () => {
         this.loadNotifications(); // Reload notifications to update the state
-        
       },
       (error) => {
         console.error('Error marking notification as read:', error);
@@ -59,5 +56,4 @@ export class NotificationPage implements OnInit {
     );
     window.location.reload();
   }
-  
 }

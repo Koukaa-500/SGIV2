@@ -89,13 +89,22 @@ export class BuyPage implements OnInit {
 
     try {
       const response = await this.accountsService.buyStock(payload);
-      const message = `Bought ${quantity} shares of ${stock.symbol} for a total cost of ${totalCost}`;
-      this.authService.addUserHistory(message);
+      const orderData = {
+        date: new Date(),
+        symbol: stock.symbol,
+        price: stock.price,
+        quantityOrdered: quantity,
+        status: 'Completed',  // Or any other status based on your logic
+        orderType: 'Buy'      // This can be dynamic if you support multiple order types
+      };
+      
+      this.authService.addUserHistory(orderData);
       const mess = `${stock.symbol} bought successfully`;
+      this.presentToast('Stock purchased successfully!', 'success');
       await this.notificationService.addNotification(mess, 'green'); // Add green color for buy notifications
       console.log('Stock purchased successfully:', response);
       this.balance -= totalCost; // Update balance locally
-      this.presentToast('Stock purchased successfully!', 'success');
+      
       const profondeurData = {
         symbol: stock.symbol,
         sold: 0,
@@ -111,11 +120,13 @@ export class BuyPage implements OnInit {
           console.error('Error saving profondeur data:', err);
         }
       );
+      window.location.reload()
     } catch (error) {
       console.error('Error buying stock:', error);
       this.presentToast('Error buying stock', 'danger');
-    }
       window.location.reload()
+    }
+      
     
 }
 

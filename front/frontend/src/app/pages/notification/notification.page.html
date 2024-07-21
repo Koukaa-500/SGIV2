@@ -28,10 +28,19 @@
           <ion-row class="ion-align-items-center" [ngClass]="{'read': notification.read}" >
             
             
-              <ion-label>
+            <ion-col size="8">
+              <div>
+                <ion-label>
                 <h4>{{ notification.date | date: 'yyyy-MM-dd HH:mm:ss' }}</h4>
-                <h4 >{{ notification.message }}</h4>
+                <h4>{{ notification.message }}</h4>
               </ion-label>
+              </div>
+            </ion-col>
+
+            <!-- Icon taking 30% width and aligned to the right -->
+            <ion-col size="4" class="ion-text-end">
+              <ion-icon *ngIf="notification.isRead" name="checkmark-circle-outline" style="font-size: 24px;"></ion-icon>
+            </ion-col>
             
             
           </ion-row>

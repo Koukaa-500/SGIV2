@@ -33,6 +33,7 @@ export class AddAccountPage implements OnInit {
       console.error('Error adding account:', error);
       this.presentToast('Error adding account', 'danger');
     }
+    window.location.reload();
   }
 
   async presentToast(message: string, color: string) {
