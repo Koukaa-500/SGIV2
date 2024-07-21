@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -24,6 +24,8 @@ export class NotificationService {
     });
     return this.http.get<any[]>(`${this.apiUrl}/notifications`, { headers });
   }
+
+  
   async addNotification(message: string, color: string = 'default'): Promise<any> {
     try {
       const token = await this.storage.get('token');
@@ -42,9 +44,8 @@ export class NotificationService {
   }
   
   
- async getUnreadCount(): Promise<Observable<any>> {
-    const token = await this.storage['get']('token');
-    console.log(token);
+  async getUnreadCount(): Promise<Observable<{ unreadCount: number }>> {
+    const token = await this.storage.get('token');
     if (!token) {
       return throwError(() => new Error('Token not found'));
     }
@@ -53,8 +54,12 @@ export class NotificationService {
       'Content-Type': 'application/json',
       'token': `${token}`
     });
-    return this.http.get<number>(`${this.apiUrl}/notifications/unread`,{ headers });
+  
+    return this.http.get<{ unreadCount: number }>(`${this.apiUrl}/notifications/unread`, { headers });
   }
+  
+  
+  
 
   async markAsRead(notificationId: string): Promise<Observable<any>> {
     const token = await this.storage['get']('token');

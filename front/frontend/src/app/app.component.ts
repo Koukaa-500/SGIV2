@@ -71,14 +71,21 @@ export class AppComponent {
     );
   }
   async loadUnreadCount() {
-    (await this.notificationService.getUnreadCount()).subscribe(
-      (count) => {
-        this.unreadCount = count;
-      },
-      (error) => {
-        console.error('Error fetching unread count:', error);
-      }
-    );
+    try {
+      const unreadCountObservable = await this.notificationService.getUnreadCount();
+      unreadCountObservable.subscribe(
+        (response: { unreadCount: number }) => {
+          this.unreadCount = response.unreadCount;
+        },
+        (error) => {
+          console.error('Error fetching unread count:', error);
+        }
+      );
+    } catch (error) {
+      console.error('Error loading unread count:', error);
+    }
   }
+  
+  
  
 }

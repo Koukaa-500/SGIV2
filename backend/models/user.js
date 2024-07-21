@@ -1,13 +1,26 @@
 const mongoose = require('mongoose');
 
 const historySchema = new mongoose.Schema({
-    message: {
-        type: String,
+    symbol: {
+      type: String, // Stock symbol or order identifier
+    },
+    price: {
+      type: Number, // Price of the stock
+    },
+    quantityOrdered: {
+      type: Number, // Quantity of stocks ordered
+    },
+    status: {
+      type: String, // Status of the order
+    },
+    orderType: {
+      type: String, // Type of the order (buy/sell)
     },
     date: {
-        type: Date,
+      type: Date, // Date of the order
     }
-});
+  });
+  
 
 
 

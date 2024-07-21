@@ -329,7 +329,7 @@ router.get('/user-data', auth, async (req, res) => {
 router.post('/history1', auth, async (req, res) => {
   try {
     const userId = req.user._id; // Extract user ID from the token
-    const { message } = req.body;
+    const { symbol, price, quantityOrdered, status, orderType } = req.body;
 
     const user = await User.findById(userId);
     if (!user) {
@@ -337,7 +337,11 @@ router.post('/history1', auth, async (req, res) => {
     }
 
     const historyEntry = {
-      message,
+      symbol,
+      price,
+      quantityOrdered,
+      status,
+      orderType,
       date: new Date() // Initialize date server-side
     };
 
@@ -350,6 +354,7 @@ router.post('/history1', auth, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 
 // Route to get user history
@@ -373,9 +378,13 @@ router.get('/notifications/unread', auth, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.status(200).json(user.notifications);
+
+    // Count unread notifications
+    const unreadCount = user.notifications.filter(notification => !notification.isRead).length;
+
+    res.status(200).json({ unreadCount });
   } catch (error) {
-    console.error('Error fetching notifications:', error);
+    console.error('Error fetching unread count:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

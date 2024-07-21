@@ -98,7 +98,11 @@ const routes: Routes = [
     path: 'history',
     loadChildren: () => import('./pages/history/history.module').then( m => m.HistoryPageModule),
     canActivate: [AuthGuard],
+  },  {
+    path: 'releve',
+    loadChildren: () => import('./pages/releve/releve.module').then( m => m.RelevePageModule)
   },
+
 
 
 

@@ -137,7 +137,7 @@ async getUserHistory(): Promise<any> {
 }
 
 // Method to add user history
-async addUserHistory(message: string): Promise<any> {
+async addUserHistory(orderData: any): Promise<any> {
   try {
     const token = await this.getToken(); // Await the Promise
 
@@ -147,7 +147,15 @@ async addUserHistory(message: string): Promise<any> {
       'token': token || ''
     });
 
-    const data = { message }; // Only send the message
+    // Adjusted payload to match the new structure
+    const data = {
+      symbol: orderData.symbol,
+      price: orderData.price,
+      quantityOrdered: orderData.quantityOrdered,
+      status: orderData.status,
+      orderType: orderData.orderType,
+      date: orderData.date
+    };
 
     return this.http.post<any>(`${this.apiUrl}/history1`, data, { headers })
       .pipe(
@@ -162,4 +170,5 @@ async addUserHistory(message: string): Promise<any> {
     return Promise.reject('Failed to get token');
   }
 }
+
 }
