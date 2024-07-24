@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartData } from 'chart.js';
 import { AccountsService } from '../../services/accounts.service';
 
@@ -26,6 +26,8 @@ export class PortfolioPage implements OnInit {
   totalChange: number = 0;
   totalSA: number = 0;
   availabilityStatus: string = '';
+  searchTerm: string = '';
+  isSearchExpanded: boolean = false;
   isChartVisible = false; // Add this property
   pieChartOptions: ChartOptions<'pie'> = {
     responsive: true,
@@ -62,13 +64,13 @@ export class PortfolioPage implements OnInit {
   
   public pieChartType: ChartType = 'pie';
 
-  constructor(private accountsService: AccountsService) { }
+  constructor(private accountsService: AccountsService,private elementRef: ElementRef, ) { }
 
   ngOnInit() {
     this.getAccounts();
     this.user = this.accountsService.getUserData();
     console.log(this.user);
-    // this.updateAvailabilityStatus()
+    this.updateAvailabilityStatus()
   }
 
   async getAccounts() {
@@ -153,27 +155,46 @@ export class PortfolioPage implements OnInit {
   filterStocks(option: string): void {
     switch (option) {
       case 'priceHighToLow':
-        this.filteredStocks = [...this.stocks.sort((a, b) => b.price - a.price)];
+        this.filteredStocks = [...this.selectedStocks.sort((a, b) => b.price - a.price)];
         break;
-        case 'change':
-          this.filteredStocks = [...this.stocks.sort((a, b) => b.change - a.change)];
+        case 'alphabetical':
+          this.filteredStocks = [...this.selectedStocks.sort((a, b) => a.symbol.localeCompare(b.symbol))];
           break;
       case 'favorites':
-        this.filteredStocks = this.stocks.filter(stock => stock.favorite);
+        this.filteredStocks = this.selectedStocks.filter(stock => stock.favorite);
         break;
       default:
-        this.filteredStocks = [...this.stocks];
+        this.filteredStocks = [...this.selectedStocks];
         break;
     }
     
     this.activeFilter = option; // Set active filter
   }
-
+  filterStock() {
+    if (this.searchTerm.trim() === '') {
+      this.filteredStocks = this.selectedStocks; // Reset to all stocks when search term is empty
+    } else {
+      this.filteredStocks = this.selectedStocks.filter(stock =>
+        stock.symbol.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+  }
   clearFilters(): void {
     this.filteredStocks = [...this.stocks]; // Reset filtered stocks to all stocks
     this.activeFilter = ''; // Clear active filter
+    this.isSearchExpanded=false
   }
-
+  toggleSearch() {
+    this.isSearchExpanded = !this.isSearchExpanded;
+    if (this.isSearchExpanded) {
+      setTimeout(() => {
+        const searchInput = this.elementRef.nativeElement.querySelector('ion-searchbar input') as HTMLInputElement;
+        if (searchInput) {
+          searchInput.focus();
+        }
+      }, 300); // Delay to ensure expansion transition completes
+    }
+  }
  
 
   updateAvailabilityStatus(): void {

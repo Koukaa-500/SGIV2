@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root'
 })
 export class NotificationService {
-  private apiUrl = 'http://192.168.1.199:3000/user'; // Replace with your API base URL
+  private apiUrl = 'http://192.168.43.253:3000/user'; // Replace with your API base URL
 
   constructor(private http: HttpClient,  private storage: Storage) { }
 

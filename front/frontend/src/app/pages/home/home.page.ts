@@ -226,7 +226,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   updateAvailabilityStatus(): void {
     const currentHour = new Date().getHours();
-    this.availabilityStatus = (currentHour >= 6 && currentHour > 20) ? 'Disponible' : 'Non-Disponible';
+    this.availabilityStatus = (currentHour >= 6 && currentHour < 20) ? 'Disponible' : 'Non-Disponible';
   }
   
   calculateTotals(): void { 

@@ -358,3 +358,33 @@ ion-footer {
     }
   }
 }
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 0;
+  width: 100%;
+  overflow: hidden;
+  transition: height 0.3s ease, width 0.3s ease;
+  background: white;
+  z-index: 100;
+}
+
+.search-bar.expanded {
+  height: 40px; /* Adjust based on your toolbar height */
+  width: 40vw;
+  border-radius: 7px;
+  bottom: 10px;
+}
+
+ion-searchbar {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --placeholder-color: #ccc;
+}
