@@ -95,10 +95,19 @@ export class BuyPage implements OnInit {
         price: stock.price,
         quantityOrdered: quantity,
         status: 'Completed',  // Or any other status based on your logic
-        orderType: 'Buy'      // This can be dynamic if you support multiple order types
+        orderType: 'Bought'      // This can be dynamic if you support multiple order types
       };
       
       this.authService.addUserHistory(orderData);
+      const operationdata = {
+        symbol: stock.symbol,
+        price: stock.price,
+        quantityOrdered: quantity,
+        change: stock.change,
+        owner: this.selectedAccount,
+        date: new Date(),
+      };
+      this.authService.addUserOperation(operationdata)
       const mess = `${stock.symbol} bought successfully`;
       this.presentToast('Stock purchased successfully!', 'success');
       await this.notificationService.addNotification(mess, 'green'); // Add green color for buy notifications

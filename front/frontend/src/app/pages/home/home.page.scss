@@ -250,15 +250,17 @@ ion-footer {
     .change-section {
       flex: 1.5; /* Equal width for volume and change sections */
     }
-    .disponible {
+
+    .Disponible {
       color: green; /* Green color for disponible status */
     }
 
-    .non-disponible {
-      color: blue; /* Red color for non-disponible status */
+    .Non-Disponible {
+      color: red; /* Blue color for non-disponible status */
     }
   }
 }
+
 
 
 
@@ -332,7 +334,7 @@ ion-footer {
 
 .search-bar.expanded {
   height: 40px; /* Adjust based on your toolbar height */
-  width: 50vw;
+  width: 40vw;
   border-radius: 7px;
   bottom: 10px;
 }

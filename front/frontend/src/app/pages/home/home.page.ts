@@ -25,6 +25,7 @@ export class HomePage implements OnInit, OnDestroy {
   totalSA: number = 0;
   searchTerm: string = '';
   isSearchExpanded: boolean = false;
+  
   constructor(
     private productService: ProductService,
     private authService: AuthenticationService,
@@ -47,7 +48,7 @@ export class HomePage implements OnInit, OnDestroy {
     );
     this.intervalId = setInterval(() => {
       this.updateStockPrices();
-      this.updateAvailabilityStatus();
+      this.updateAvailabilityStatus()
       this.calculateTotals();
     }, 1000);
     setInterval(() => {
@@ -198,6 +199,7 @@ export class HomePage implements OnInit, OnDestroy {
         break;
       default:
         this.filteredStocks = [...this.stocks];
+        
         break;
     }
     
@@ -207,8 +209,12 @@ export class HomePage implements OnInit, OnDestroy {
   clearFilters(): void {
     this.filteredStocks = [...this.stocks]; // Reset filtered stocks to all stocks
     this.activeFilter = ''; // Clear active filter
+    this.isSearchExpanded = false;
   }
 
+
+  
+  
   updateStockStatus() {
     this.stocks.forEach(stock => {
       // Randomly decide whether to change the status
@@ -220,9 +226,9 @@ export class HomePage implements OnInit, OnDestroy {
 
   updateAvailabilityStatus(): void {
     const currentHour = new Date().getHours();
-    this.availabilityStatus = (currentHour >= 6 && currentHour < 20) ? 'Disponible' : 'Non-Disponible';
-   
+    this.availabilityStatus = (currentHour >= 6 && currentHour > 20) ? 'Disponible' : 'Non-Disponible';
   }
+  
   calculateTotals(): void { 
     // Calculate total SA and total Change
     this.totalSA = this.stocks.reduce((total, stock) => total + stock.price, 0);

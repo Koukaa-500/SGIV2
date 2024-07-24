@@ -97,7 +97,15 @@ export class SellPage implements OnInit {
         };
         
       this.authService.addUserHistory(orderData);
-      
+      const operationdata = {
+        symbol: stock.symbol,
+        price: stock.price,
+        quantityOrdered: quantity,
+        change: stock.change,
+        owner: this.selectedAccount,
+        date: new Date(),
+      };
+      this.authService.addUserOperation(operationdata)
       
       const mess = ` ${stock.symbol} sold successfully`;
       this.presentToast('Stock sold successfully!', 'success');

@@ -5,7 +5,7 @@
     <ion-content>
       <div class="menu-header-bg"></div>
       <div class="header-content">
-        <img [src]="'http://192.168.1.149:3000/uploads/' + image" alt="Profile Image"/>
+        <img [src]="'http://192.168.1.199:3000/uploads/' + image" alt="Profile Image"/>
         <ion-label>
           <h1>{{name}}</h1>
         </ion-label>
@@ -37,7 +37,7 @@
           <ion-icon name="time-outline"></ion-icon>
           Historique
         </ion-item>
-        <ion-item routerLink="/releve" (click)="closeMenu()" [class.active]="activeRoute === '/history'">
+        <ion-item routerLink="/releve" (click)="closeMenu()" [class.active]="activeRoute === '/releve'">
           <ion-icon name="time-outline"></ion-icon>
           Relevé d'operation
         </ion-item>

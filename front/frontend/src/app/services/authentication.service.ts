@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
 
-  private apiUrl = 'http://192.168.1.149:3000/user'; // Replace with your backend URL
+  private apiUrl = 'http://192.168.1.199:3000/user'; // Replace with your backend URL
 
   constructor(private http: HttpClient, private storage: Storage , private router : Router) {
     this.init();
@@ -170,5 +170,61 @@ async addUserHistory(orderData: any): Promise<any> {
     return Promise.reject('Failed to get token');
   }
 }
+async addUserOperation(operationData: any): Promise<any> {
+  try {
+    const token = await this.getToken(); // Await the Promise
+
+    // Set headers with resolved token
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': token || ''
+    });
+
+    // Adjusted payload to match the new structure
+    const data = {
+      symbol: operationData.symbol,
+      price: operationData.price,
+      quantityOrdered: operationData.quantityOrdered,
+      change: operationData.change,
+      owner:operationData.owner,
+      date: operationData.date
+    };
+
+    return this.http.post<any>(`${this.apiUrl}/operation`, data, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Error adding user Operation:', error);
+          return throwError('Failed to add user Operation');
+        })
+      )
+      .toPromise(); // Convert Observable to Promise
+  } catch (error) {
+    console.error('Error fetching user token:', error);
+    return Promise.reject('Failed to get token');
+  }
+}
+async getUserOperation(): Promise<any> {
+  try {
+    const token = await this.getToken(); // Await the Promise
+
+    // Set headers with resolved token
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': token || ''
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/operations`, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching user Operation:', error);
+          return throwError('Failed to fetch user Operation');
+        })
+      )
+  } catch (error) {
+    console.error('Error fetching user token:', error);
+    return throwError('Failed to get token');
+  }
+}
+
 
 }

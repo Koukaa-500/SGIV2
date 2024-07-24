@@ -51,7 +51,7 @@
       </div>
       <div class="wallet-info">
         <h2>Totale Portfeuille</h2>
-        <p class="currencies">Date: {{ currentDate }}</p>
+        <p class="currencies">Date: {{ today | date: 'yyyy-MM-dd' }}</p>
         <p class="currencies">Solde: {{ selectedAccount.solde | number:'1.2-2' }}</p>
         <p class="currencies">Espèce: {{ espece | number:'1.2-2' }}</p>
         <p class="currencies">Portfeuille Titre: {{ titre | number:'1.2-2' }}</p>
@@ -96,7 +96,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{ currentDate }}</td>
+            <td>{{ today | date: 'yyyy-MM-dd' }}</td>
             <td>{{ selectedStockDetails.quantity }}</td>
             <td>{{ selectedStockDetails.validity }}</td>
             <td>{{ selectedStockDetails.price * selectedStockDetails.quantity | currency }}</td>
@@ -134,7 +134,31 @@
         </ion-content>
       </div>
     </div>
-    
+ 
     
   </div>
+  
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="footer-content">
+      <div class="footer-row status-row">
+        <span [ngClass]="{'disponible': availabilityStatus === 'Disponible', 'Non-Disponible': availabilityStatus === 'Non-Disponible'}">{{ availabilityStatus }}</span>
+      </div>
+      <div class="footer-row date-row">
+        <div class="date-column date-op">
+          Op Non Denou<br>
+          <span> 0 </span>
+        </div>
+        <div class="date-column date-be">
+          Vers Non Denou<br>
+          <span>0</span>
+        </div>
+        <div class="date-column date-rev">
+          Lig Reservée<br>
+          <span> 25 618</span>
+        </div>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

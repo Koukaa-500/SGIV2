@@ -1,29 +1,4 @@
 const mongoose = require('mongoose');
-
-const historySchema = new mongoose.Schema({
-    symbol: {
-      type: String, // Stock symbol or order identifier
-    },
-    price: {
-      type: Number, // Price of the stock
-    },
-    quantityOrdered: {
-      type: Number, // Quantity of stocks ordered
-    },
-    status: {
-      type: String, // Status of the order
-    },
-    orderType: {
-      type: String, // Type of the order (buy/sell)
-    },
-    date: {
-      type: Date, // Date of the order
-    }
-  });
-  
-
-
-
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -49,7 +24,6 @@ const productSchema = new mongoose.Schema({
     },
     change:Number
 });
-
 const accountSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -61,6 +35,52 @@ const accountSchema = new mongoose.Schema({
     },
     solde: { type: Number, required: true }
 });
+
+const historySchema = new mongoose.Schema({
+    symbol: {
+      type: String, // Stock symbol or order identifier
+    },
+    price: {
+      type: Number, // Price of the stock
+    },
+    quantityOrdered: {
+      type: Number, // Quantity of stocks ordered
+    },
+    status: {
+      type: String, // Status of the order
+    },
+    orderType: {
+      type: String, // Type of the order (buy/sell)
+    },
+    date: {
+      type: Date, // Date of the order
+    }
+  });
+  
+const operationSchema = new mongoose.Schema({
+    symbol: {
+        type: String, // Stock symbol or order identifier
+      },
+      price: {
+        type: Number, // Price of the stock
+      },
+      quantityOrdered: {
+        type: Number, // Quantity of stocks ordered
+      },
+      date: {
+        type: Date, // Date of the order
+      },
+      change:{
+        type:Number,
+      },
+      owner:{
+        type:String,
+      }
+})
+
+
+
+
 
 const notificationSchema = new mongoose.Schema({
     message: {
@@ -98,6 +118,7 @@ const userSchema = new mongoose.Schema({
     favoriteStocks: [String],
     notifications: [notificationSchema],
     history: [historySchema],
+    operation:[operationSchema]
     
 });
 

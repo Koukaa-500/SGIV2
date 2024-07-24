@@ -129,3 +129,24 @@ tfoot td {
   width: 2rem;
   height: 2rem;
 }
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px; /* Adjust spacing between rows */
+}
+
+.detail-item {
+  flex: 1;
+  margin-right: 8px; /* Adjust spacing between items */
+}
+
+.detail-item:last-child {
+  margin-right: 0; /* Remove margin for the last item in a row */
+}
+
+.sub-heading {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+}

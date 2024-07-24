@@ -23,13 +23,16 @@
           (click)="toggleSearch()" 
           style="font-size: 24px; color: white;">
         </ion-icon>
-        <div class="search-bar" [class.expanded]="isSearchExpanded">
-          <ion-searchbar 
-            [(ngModel)]="searchTerm" 
-            (ionInput)="filterStock()" 
-            placeholder="Search stocks">
-          </ion-searchbar>
+        <div class="search-bar-container">
+          <div class="search-bar" [class.expanded]="isSearchExpanded">
+            <ion-searchbar 
+              [(ngModel)]="searchTerm" 
+              (ionInput)="filterStock()" 
+              placeholder="Search stocks">
+            </ion-searchbar>
+          </div>
         </div>
+        
       </div>
         <button (click)="filterStocks('priceHighToLow')" class="filter-button">
           <ion-icon name="trending-up-outline" fill="clear" style="font-size: 24px;color: white;"></ion-icon>
@@ -112,7 +115,9 @@
       <div class="footer-section date-section">
         <span>{{ today | date: 'yyyy-MM-dd' }}</span>
         <br>
-        <span [ngClass]="{'disponible': availabilityStatus === 'Disponible', 'non-disponible': availabilityStatus === 'Non Disponible'}">{{ availabilityStatus }}</span>
+        <span [ngClass]="{'Disponible': availabilityStatus === 'Disponible', 'Non-Disponible': availabilityStatus === 'Non-Disponible'}">
+          {{ availabilityStatus }}
+        </span>
       </div>
       <div class="footer-section volume-section">
         Volume <br>

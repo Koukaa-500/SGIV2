@@ -8,7 +8,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class RelevePage implements OnInit {
 
-  title: string = "Carnet d'ordre";
+  title: string = "Relevé d'operation";
   orders: any[] = [];
 
   constructor(private AuthService: AuthenticationService) { }
@@ -18,7 +18,7 @@ export class RelevePage implements OnInit {
   }
 
   async loadOrders() {
-    (await this.AuthService.getUserHistory()).subscribe(
+    (await this.AuthService.getUserOperation()).subscribe(
       (orders: any[]) => {
         this.orders = orders;
       },

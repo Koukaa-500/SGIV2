@@ -1,16 +1,1 @@
-https://ionicframework.com/docs/api/badge
-npm install @ionic/storage-angular @capacitor/core
-npm install bcryptjs
-npm install mongoose
-npm init
-npm install express
-
-
-
-//////////Marché///////////////
-
-awel 3 lazem ywaliw ydourou ( najmou naamlou duplication lihom mothel : a b c a b c a b c w yab9aw ydourou dima)
-kol 7aja bech tkoun f carte : achat w vent 2 bouton / k tenzel 3la el carte tet7l page (intraday) feha donnée w kol w m3aha courbe w f le5er fama 3 bouton kol wahda lien loula intraday , thenya ... w theltha transaction kol wahda feha données ) 
-behi el but mta3na howua ta7sin design w integration ta3 api lel données edhoukom 
-ana hani lgit template flutter ne5dem 3leha n7awlou ne5dmou 3leha haw lien : https://app.flutterflow.io/code/sgip-nxjnvs?page=MY_profilePage
-bceeh ne5dhou 7ajet ne5dmou 3lehom menha w bien sur ionic w nodejs
+ionic capacitor run android -l --external

@@ -22,6 +22,10 @@ export class PortfolioPage implements OnInit {
   filteredStocks: any[] = [];
   stocks: any[] = [];
   showChart: boolean = false;
+  today: Date = new Date();
+  totalChange: number = 0;
+  totalSA: number = 0;
+  availabilityStatus: string = '';
   isChartVisible = false; // Add this property
   pieChartOptions: ChartOptions<'pie'> = {
     responsive: true,
@@ -64,7 +68,7 @@ export class PortfolioPage implements OnInit {
     this.getAccounts();
     this.user = this.accountsService.getUserData();
     console.log(this.user);
-    
+    // this.updateAvailabilityStatus()
   }
 
   async getAccounts() {
@@ -168,5 +172,18 @@ export class PortfolioPage implements OnInit {
   clearFilters(): void {
     this.filteredStocks = [...this.stocks]; // Reset filtered stocks to all stocks
     this.activeFilter = ''; // Clear active filter
+  }
+
+ 
+
+  updateAvailabilityStatus(): void {
+    const currentHour = new Date().getHours();
+    this.availabilityStatus = (currentHour > 6 && currentHour < 20) ? 'Disponible' : 'Non-Disponible';
+   
+  }
+  formatChange(change: number): string {
+    const prefix = change > 0 ? '+' : (change < 0 ? '-' : '');
+    const color = change > 0 ? 'green' : (change < 0 ? 'red' : '');
+    return `${color}${prefix}${Math.abs(change).toFixed(2)}%`;
   }
 }

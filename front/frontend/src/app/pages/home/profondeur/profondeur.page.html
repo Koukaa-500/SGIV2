@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar style="background-color: #1e1e1e;">
     <div class="title-and-icons">
-      <div class="title"><ion-title>{{ stock.symbol }} Intraday</ion-title></div>
+      <div class="title"><ion-title>{{ stock.symbol }} Profondeur</ion-title></div>
       <div class="filter-buttons"> <ion-icon class="icon1" name="star-outline" style="margin-right: 10px;"
           [ngClass]="{'favorite': stock.favorite}" (click)="toggleFavorite($event, stock)"></ion-icon>
         <div class="filter-buttons" style=" padding: 0 0 0 10px;
@@ -26,7 +26,47 @@
   <ion-content class="container">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{ symbol }} Profondeur</ion-card-title>
+        <ion-card-title [ngStyle]="{'color': stock.color}">{{ stock.symbol }} Profondeur</ion-card-title>
+        <div class="item-details">
+          <div class="detail-row">
+            
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}"><h2 class="budget-amount">{{ stock.price | currency }}<span class="per-month"></span></h2>
+            </span>
+            </div>
+          </div>
+          <div class="budget-header">
+          <div class="detail-row">
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">SA: {{ stock.price | currency }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">SP: {{ stock.price | currency }}</span>
+            </div>
+          </div>
+        </div>
+          <div class="detail-row">
+            <div class="detail-item" style="display: flex; align-items: center;">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">
+                +B {{ stock.change | number:'1.2-2' }}%
+              </span>
+              <ion-icon 
+                style="margin-left: 5px; font-size: 16px;" 
+                [name]="stock.change === 0 ? 'remove-circle' : (stock.change > 0 ? 'arrow-up-circle' : 'arrow-down-circle')"
+                [ngStyle]="{'color': stock.change === 0 ? 'gray' : (stock.change > 0 ? 'green' : 'red')}">
+              </ion-icon>
+            </div>
+            
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">Qte: {{ stock.quantity }}</span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-item">
+              <span class="sub-heading" [ngStyle]="{'color': stock.color}">{{ stock.status }}</span>
+            </div>
+          </div>
+        </div>
       </ion-card-header>
   
       <ion-card-content>

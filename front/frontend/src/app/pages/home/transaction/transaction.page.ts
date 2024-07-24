@@ -31,7 +31,7 @@ export class TransactionPage implements OnInit {
   }
 
   fetchTransactionData() {
-    const apiUrl = `http://192.168.1.149:3000/product/history/${this.symbol}`;
+    const apiUrl = `http://192.168.1.199:3000/product/history/${this.symbol}`;
     this.http.get<any[]>(apiUrl).subscribe(
       data => {
         this.stocks = data;
