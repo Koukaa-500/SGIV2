@@ -91,7 +91,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let stock of selectedStocks" (click)="showStockDetails(stock)" class="stock-row">
+          <tr *ngFor="let stock of filteredStocks" (click)="showStockDetails(stock)" class="stock-row">
             <td>{{ stock.symbol }}</td>
             <td>{{ stock.price | currency }}</td>
             <td>{{ stock.change | number:'1.2-2' }}</td>

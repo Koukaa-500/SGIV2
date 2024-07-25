@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class AccountsService {
 
-  private apiUrl = 'http://192.168.43.253:3000/account/accounts';
+  private apiUrl = 'http://192.168.1.199:3000/account/accounts';
 
   constructor(private http: HttpClient, private storage: Storage) {
     this.init();
@@ -26,7 +26,7 @@ export class AccountsService {
         'token': `${token}`
       });
 
-      return this.http.post<any>('http://192.168.43.253:3000/account/add-account', accountData, { headers }).pipe(
+      return this.http.post<any>('http://192.168.1.199:3000/account/add-account', accountData, { headers }).pipe(
         catchError((error) => {
           console.error('Error adding account:', error);
           return throwError('Something went wrong');
@@ -44,7 +44,7 @@ export class AccountsService {
       'Content-Type': 'application/json',
       'token': `${token}`
     });
-    return this.http.post('http://192.168.43.253:3000/account/buy-stock', payload, {headers}).toPromise();
+    return this.http.post('http://192.168.1.199:3000/account/buy-stock', payload, {headers}).toPromise();
   }
 
 
@@ -54,7 +54,7 @@ export class AccountsService {
       'Content-Type': 'application/json',
       'token': `${token}`
     });
-    return this.http.post('http://192.168.43.253:3000/account//sell-stock', payload, {headers}).toPromise();
+    return this.http.post('http://192.168.1.199:3000/account//sell-stock', payload, {headers}).toPromise();
   }
 
 

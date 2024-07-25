@@ -12,6 +12,7 @@ export class PortfolioPage implements OnInit {
   accounts: any[] = [];
   selectedAccount: any = null;
   selectedStocks: any[] = [];
+  filteredStocks: any[] = [];
   selectedStockDetails: any = null;
   user: any;
   currentDate: string | undefined;
@@ -19,7 +20,6 @@ export class PortfolioPage implements OnInit {
   espece: number = 0;
   titre: number = 0;
   activeFilter: string = '';
-  filteredStocks: any[] = [];
   stocks: any[] = [];
   showChart: boolean = false;
   today: Date = new Date();
@@ -28,18 +28,18 @@ export class PortfolioPage implements OnInit {
   availabilityStatus: string = '';
   searchTerm: string = '';
   isSearchExpanded: boolean = false;
-  isChartVisible = false; // Add this property
+  isChartVisible = false;
+
   pieChartOptions: ChartOptions<'pie'> = {
     responsive: true,
     plugins: {
       legend: {
-        display: true, // This ensures the legend is displayed
-        position: 'top', // Adjust position if needed (top, bottom, left, right)
+        display: true,
+        position: 'top',
       },
       tooltip: {
         callbacks: {
           label: function(tooltipItem) {
-            // Customize tooltips if needed
             return `${tooltipItem.label}: ${tooltipItem.formattedValue}`;
           }
         }
@@ -47,30 +47,27 @@ export class PortfolioPage implements OnInit {
     }
   };
 
-
-
-  // Define other properties used in the template
   pieChartLegend = true;
   pieChartPlugins = [];
   
   public pieChartLabels: string[] = [];
   public pieChartData: ChartData<'pie'> = {
-    labels: [], // These will be set dynamically
+    labels: [],
     datasets: [{
-      data: [], // These will be set dynamically
-      backgroundColor: [], // Array of colors for each segment
+      data: [],
+      backgroundColor: [],
     }]
   };
   
   public pieChartType: ChartType = 'pie';
 
-  constructor(private accountsService: AccountsService,private elementRef: ElementRef, ) { }
+  constructor(private accountsService: AccountsService, private elementRef: ElementRef) { }
 
   ngOnInit() {
     this.getAccounts();
     this.user = this.accountsService.getUserData();
     console.log(this.user);
-    this.updateAvailabilityStatus()
+    this.updateAvailabilityStatus();
   }
 
   async getAccounts() {
@@ -92,6 +89,7 @@ export class PortfolioPage implements OnInit {
   selectAccount(account: any) {
     this.selectedAccount = account;
     this.selectedStocks = account.stock;
+    this.filteredStocks = [...this.selectedStocks];
     this.calculateEspece();
     this.calculateTitre();
     this.updatePieChart();
@@ -102,11 +100,13 @@ export class PortfolioPage implements OnInit {
     this.selectedAccount = this.accounts.find(account => account._id === accountId);
     if (this.selectedAccount) {
       this.selectedStocks = this.selectedAccount.stock;
+      this.filteredStocks = [...this.selectedStocks];
       this.calculateEspece();
       this.calculateTitre();
       this.updatePieChart();
     } else {
       this.selectedStocks = [];
+      this.filteredStocks = [];
       this.espece = 0;
       this.titre = 0;
     }
@@ -119,8 +119,6 @@ export class PortfolioPage implements OnInit {
   calculateTitre() {
     this.titre = this.selectedAccount.solde + this.espece;
   }
-
- 
 
   updatePieChart() {
     if (this.selectedStocks && this.selectedStocks.length > 0) {
@@ -142,7 +140,6 @@ export class PortfolioPage implements OnInit {
     }
     return colors;
   }
-  
 
   showStockDetails(stock: any) {
     this.selectedStockDetails = stock;
@@ -157,9 +154,9 @@ export class PortfolioPage implements OnInit {
       case 'priceHighToLow':
         this.filteredStocks = [...this.selectedStocks.sort((a, b) => b.price - a.price)];
         break;
-        case 'alphabetical':
-          this.filteredStocks = [...this.selectedStocks.sort((a, b) => a.symbol.localeCompare(b.symbol))];
-          break;
+      case 'alphabetical':
+        this.filteredStocks = [...this.selectedStocks.sort((a, b) => a.symbol.localeCompare(b.symbol))];
+        break;
       case 'favorites':
         this.filteredStocks = this.selectedStocks.filter(stock => stock.favorite);
         break;
@@ -168,22 +165,25 @@ export class PortfolioPage implements OnInit {
         break;
     }
     
-    this.activeFilter = option; // Set active filter
+    this.activeFilter = option;
   }
+
   filterStock() {
     if (this.searchTerm.trim() === '') {
-      this.filteredStocks = this.selectedStocks; // Reset to all stocks when search term is empty
+      this.filteredStocks = [...this.selectedStocks];
     } else {
       this.filteredStocks = this.selectedStocks.filter(stock =>
         stock.symbol.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
   }
+
   clearFilters(): void {
-    this.filteredStocks = [...this.stocks]; // Reset filtered stocks to all stocks
-    this.activeFilter = ''; // Clear active filter
-    this.isSearchExpanded=false
+    this.filteredStocks = [...this.selectedStocks];
+    this.activeFilter = '';
+    this.isSearchExpanded = false;
   }
+
   toggleSearch() {
     this.isSearchExpanded = !this.isSearchExpanded;
     if (this.isSearchExpanded) {
@@ -192,19 +192,17 @@ export class PortfolioPage implements OnInit {
         if (searchInput) {
           searchInput.focus();
         }
-      }, 300); // Delay to ensure expansion transition completes
+      }, 300);
     }
   }
- 
 
-  updateAvailabilityStatus(): void {
-    const currentHour = new Date().getHours();
-    this.availabilityStatus = (currentHour > 6 && currentHour < 20) ? 'Disponible' : 'Non-Disponible';
-   
-  }
-  formatChange(change: number): string {
-    const prefix = change > 0 ? '+' : (change < 0 ? '-' : '');
-    const color = change > 0 ? 'green' : (change < 0 ? 'red' : '');
-    return `${color}${prefix}${Math.abs(change).toFixed(2)}%`;
+  updateAvailabilityStatus() {
+    const dayOfWeek = this.today.getDay();
+    const hourOfDay = this.today.getHours();
+    if (dayOfWeek === 0 || dayOfWeek === 6 || (dayOfWeek === 5 && hourOfDay >= 18) || (dayOfWeek === 1 && hourOfDay < 9)) {
+      this.availabilityStatus = 'Closed';
+    } else {
+      this.availabilityStatus = 'Open';
+    }
   }
 }

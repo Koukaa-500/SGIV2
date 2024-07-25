@@ -39,6 +39,7 @@ export class ProfondeurPage implements OnInit {
       const response = await this.productService.getProfondeurBySymbol(this.symbol).toPromise();
       this.profondeurData = response;
       console.log('Profondeur data:', this.profondeurData);
+      this.stock.color = this.stock.change > 0 ? 'green' : (this.stock.change < 0 ? 'red' : '#E1A624');
     } catch (error) {
       console.error('Error loading profondeur data:', error);
     }
